@@ -11,7 +11,7 @@ import com.meter.thorclient.utils.StringUtils;
  */
 public class Address {
     public static Address NULL_ADDRESS = new NULLAddress();
-    public static Address MTRG_Address = Address.fromHexString( "0x0000000000000000000000000000456e65726779" );
+    public static Address MTRG_Address = Address.fromHexString( "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3" );
 
     private  static final int ADDRESS_SIZE = 20;
     private String sanitizeHexAddress;
