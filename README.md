@@ -1,7 +1,7 @@
 # Thor Java Client SDK
 [![Build Status](https://travis-ci.org/meter/thor-client-sdk4j.svg?branch=master)](https://travis-ci.org/meter/thor-client-sdk4j.svg?branch=master)
 
-A SDK toolkit for client to call Meter Restful API based on thor-client-sdk4j.
+A SDK toolkit for client to call Meter Restful API and Websocket based on thor-client-sdk4j.
 
 - - - -
 Requires JDK8.
