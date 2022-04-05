@@ -36,21 +36,21 @@ public class Account implements Serializable {
     }
 
     /**
-     * Get VET token {@link Balance} object
+     * Get MTR token {@link Balance} object
      * @return
      */
-    public Amount VETBalance(){
-        Amount balance = Amount.createFromToken( AbstractToken.VET );
+    public Amount MTRBalance(){
+        Amount balance = Amount.createFromToken( AbstractToken.MTR );
         balance.setHexAmount( this.balance );
         return balance;
     }
 
     /**
-     * On meter mainnet, it has two native currencies, one is VET, the other is VTHO
+     * On meter mainnet, it has two native currencies, one is MTR, the other is MTRG
      * @return
      */
     public Amount energyBalance(){
-        Amount balance = Amount.createFromToken( ERC20Token.VTHO );
+        Amount balance = Amount.createFromToken( ERC20Token.MTRG );
         balance.setHexAmount( this.energy );
         return balance;
     }

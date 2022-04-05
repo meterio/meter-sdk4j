@@ -197,7 +197,7 @@ public class TransactionClient extends AbstractClient {
 	 * @param data      {@link ToData} some comments maybe.
 	 * @return {@link ToClause} to clause.
 	 */
-	public static ToClause buildVETToClause(Address toAddress, Amount amount, ToData data) {
+	public static ToClause buildMTRToClause(Address toAddress, Amount amount, ToData data) {
 		if (toAddress == null) {
 			throw ClientArgumentException.exception("toAddress is null");
 		}

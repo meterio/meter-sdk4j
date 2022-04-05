@@ -6,7 +6,7 @@ public class TransactionAttributes implements Serializable {
 
     public enum TransactionType {
 
-        VET("VET"), VTHO("VTHO");
+        MTR("MTR"), MTRG("MTRG");
 
         private String value;
 

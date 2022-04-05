@@ -65,7 +65,7 @@ public class TransactionConsole {
 			System.out.println("You have input invalid parameters.");
 			System.exit(0);
 		}
-		String result = ConsoleUtils.sendRawVETTx(args[2]);
+		String result = ConsoleUtils.sendRawMTRTx(args[2]);
 		System.out.println("Send Result:");
 		System.out.println(result);
 	}
@@ -78,7 +78,7 @@ public class TransactionConsole {
 		File file = new File(args[3]);
 		if (file.isFile()) {
 			List<String[]> transactionList = ConsoleUtils.readExcelFile(args[3]);
-			String result = ConsoleUtils.doSignVETTx(transactionList, privateKey, true);
+			String result = ConsoleUtils.doSignMTRTx(transactionList, privateKey, true);
 			System.out.println("Send Result:");
 			System.out.println(result);
 		} else {
@@ -86,7 +86,7 @@ public class TransactionConsole {
 		}
 	}
 
-	public static void signVETTxn(String[] args) throws Exception {
+	public static void signMTRTxn(String[] args) throws Exception {
 		String privateKey;// args=sign filePath privateKey
 		if (args.length < 3 || StringUtils.isBlank(args[2])) {
 			System.out.println("You have input invalid parameters.");
@@ -96,7 +96,7 @@ public class TransactionConsole {
 		File file = new File(args[1]);
 		if (file.isFile()) {
 			List<String[]> transactionList = ConsoleUtils.readExcelFile(args[1]);
-			String rawTransaction = ConsoleUtils.doSignVETTx(transactionList, privateKey, false);
+			String rawTransaction = ConsoleUtils.doSignMTRTx(transactionList, privateKey, false);
 			System.out.println("Raw Transaction:");
 			System.out.println(rawTransaction);
 		} else {
@@ -104,7 +104,7 @@ public class TransactionConsole {
 		}
 	}
 
-	public static void signVTHOTxn(String[] args) throws Exception {
+	public static void signMTRGTxn(String[] args) throws Exception {
 		String privateKey;// args=sign filePath privateKey
 		if (args.length < 3 || StringUtils.isBlank(args[2])) {
 			System.out.println("You have input invalid parameters.");
@@ -114,7 +114,7 @@ public class TransactionConsole {
 		File file = new File(args[1]);
 		if (file.isFile()) {
 			List<String[]> transactionList = ConsoleUtils.readExcelFile(args[1]);
-			String rawTransaction = ConsoleUtils.doSignVTHOTx(transactionList, privateKey, false);
+			String rawTransaction = ConsoleUtils.doSignMTRGTx(transactionList, privateKey, false);
 			System.out.println("Raw Transaction:");
 			System.out.println(rawTransaction);
 		} else {
@@ -123,13 +123,13 @@ public class TransactionConsole {
 	}
 
 	/**
-	 * transferVet
+	 * transferMTR
 	 * 
 	 * @param args
 	 *            server-url to amount chainTag privateKey
 	 * @throws Exception
 	 */
-	public static void transferVet(String[] args) throws Exception {
+	public static void transferMTR(String[] args) throws Exception {
 		String privateKey;
 		if (args.length < 6) {
 			System.out.println("You have input invalid parameters.");
@@ -144,19 +144,19 @@ public class TransactionConsole {
 		tranfs[2] = args[4];
 		tranfs[3] = null;
 		transactionList.add(tranfs);
-		String result = ConsoleUtils.doSignVETTx(transactionList, privateKey, true);
+		String result = ConsoleUtils.doSignMTRTx(transactionList, privateKey, true);
 		System.out.println(result);
 
 	}
 
 	/**
-	 * transferVet
+	 * transferMTR
 	 * 
 	 * @param args
 	 *            server-url to amount chainTag privateKey gaslimit(options)
 	 * @throws Exception
 	 */
-	public static void transferVtho(String[] args) throws Exception {
+	public static void transferMTRG(String[] args) throws Exception {
 		String privateKey;
 		if (args.length < 6) {
 			System.out.println("You have input invalid parameters.");
@@ -171,7 +171,7 @@ public class TransactionConsole {
 		tranfs[2] = args[4];
 		tranfs[3] = null;
 		transactionList.add(tranfs);
-		String result = ConsoleUtils.doSignVTHOTx(transactionList, privateKey, true,
+		String result = ConsoleUtils.doSignMTRGTx(transactionList, privateKey, true,
 				tranfs.length > 6 ? Integer.parseInt(tranfs[6]) : null);
 		System.out.println(result);
 	}

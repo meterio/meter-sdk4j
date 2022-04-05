@@ -22,9 +22,9 @@ public class ERC20ContractClientTest extends BaseTest {
 	@Test
 	public void testERC20GetBalance() throws IOException {
 		Address address = Address.fromHexString(fromAddress);
-		Amount balance = ERC20ContractClient.getERC20Balance(address, ERC20Token.VTHO, null);
+		Amount balance = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
 		if (balance != null) {
-			logger.info("Get vtho:" + balance.getAmount());
+			logger.info("Get MTRG:" + balance.getAmount());
 		}
 
 		Assert.assertNotNull(balance);
@@ -35,12 +35,12 @@ public class ERC20ContractClientTest extends BaseTest {
 		String toAmount = "10000000";
 		String toAddress = "0x733b7269443c70de16bbf9b0615307884bcc5636";
 		Address address = Address.fromHexString(toAddress);
-		Amount balance = ERC20ContractClient.getERC20Balance(address, ERC20Token.VTHO, null);
+		Amount balance = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
 		if (balance != null) {
-			logger.info("Get vtho before:" + balance.getAmount());
+			logger.info("Get MTRG before:" + balance.getAmount());
 		}
 
-		Amount amount = Amount.VTHO();
+		Amount amount = Amount.MTRG();
 		amount.setDecimalAmount(toAmount);
 		TransferResult result = ERC20ContractClient.transferERC20Token(
 				new Address[] { Address.fromHexString(toAddress) }, new Amount[] { amount }, 1000000, (byte) 0x0, 720,
@@ -55,9 +55,9 @@ public class ERC20ContractClientTest extends BaseTest {
 		Receipt receipt = TransactionClient.getTransactionReceipt(result.getId(), null);
 		logger.info("Receipt:" + JSON.toJSONString(receipt));
 
-		Amount balance2 = ERC20ContractClient.getERC20Balance(address, ERC20Token.VTHO, null);
+		Amount balance2 = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
 		if (balance2 != null) {
-			logger.info("Get vtho after:" + balance2.getAmount());
+			logger.info("Get MTRG after:" + balance2.getAmount());
 		}
 		Assert.assertEquals(0,
 				amount.getAmount().subtract(balance2.getAmount().subtract(balance.getAmount())).longValue());

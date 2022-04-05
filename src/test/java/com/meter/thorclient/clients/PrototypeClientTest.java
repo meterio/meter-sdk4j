@@ -57,7 +57,7 @@ public class PrototypeClientTest extends BaseTest {
 
 		Address address = Address.fromHexString(MasterAddress2);
 		Account account = AccountClient.getAccountInfo(address, null);
-		logger.info("VET:" + account.VETBalance().getAmount() + " Energy:" + account.energyBalance().getAmount());
+		logger.info("MTR:" + account.MTRBalance().getAmount() + " Energy:" + account.energyBalance().getAmount());
 
 		TransferResult transferResult = ProtoTypeContractClient.addUsers(
 				new Address[] { Address.fromHexString(fromAddress) },
@@ -73,16 +73,16 @@ public class PrototypeClientTest extends BaseTest {
 		logger.info("Add user Receipt:" + JSON.toJSONString(receipt));
 
 		account = AccountClient.getAccountInfo(address, null);
-		logger.info("VET:" + account.VETBalance().getAmount() + " Energy:" + account.energyBalance().getAmount());
+		logger.info("MTR:" + account.MTRBalance().getAmount() + " Energy:" + account.energyBalance().getAmount());
 
 		ContractCallResult isUserResult = ProtoTypeContractClient.isUser(Address.fromHexString(fromAddress),
 				Address.fromHexString(UserAddress), Revision.BEST);
 		logger.info("Get isUser result:" + JSON.toJSONString(isUserResult));
 		Assert.assertNotNull(isUserResult);
 
-		Amount credit = Amount.VTHO();
+		Amount credit = Amount.MTRG();
 		credit.setDecimalAmount("0.1");
-		Amount recovery = Amount.VTHO();
+		Amount recovery = Amount.MTRG();
 		recovery.setDecimalAmount("0.00001");
 
 		TransferResult setCreditPlansResult = ProtoTypeContractClient.setCreditPlans(
@@ -100,7 +100,7 @@ public class PrototypeClientTest extends BaseTest {
 				.getUserCredit(Address.fromHexString(fromAddress), Address.fromHexString(UserAddress), Revision.BEST);
 		logger.info("Get user plan result:" + JSON.toJSONString(getUserCreditCallResult));
 
-		Amount aAmount = Amount.VTHO();
+		Amount aAmount = Amount.MTRG();
 		aAmount.setHexAmount(getUserCreditCallResult.getData());
 		Assert.assertEquals(true, aAmount.getAmount().toString().startsWith("0.1"));
 
@@ -112,7 +112,7 @@ public class PrototypeClientTest extends BaseTest {
 		logger.info("Remove user:" + JSON.toJSONString(removeUserResult));
 
 		account = AccountClient.getAccountInfo(address, null);
-		logger.info("VET:" + account.VETBalance().getAmount() + " Energy:" + account.energyBalance().getAmount());
+		logger.info("MTR:" + account.MTRBalance().getAmount() + " Energy:" + account.energyBalance().getAmount());
 
 		try {
 			Thread.sleep(10000);
@@ -189,9 +189,9 @@ public class PrototypeClientTest extends BaseTest {
 
 	@Test
 	public void testSetUserPlan() throws IOException {
-		Amount credit = Amount.VTHO();
+		Amount credit = Amount.MTRG();
 		credit.setDecimalAmount("0.1");
-		Amount recovery = Amount.VTHO();
+		Amount recovery = Amount.MTRG();
 		recovery.setDecimalAmount("0.00001");
 
 		TransferResult result = ProtoTypeContractClient.setCreditPlans(
@@ -318,9 +318,9 @@ public class PrototypeClientTest extends BaseTest {
 		}
 
 		start = System.currentTimeMillis();
-		Amount credit = Amount.VTHO();
+		Amount credit = Amount.MTRG();
 		credit.setDecimalAmount("100.00");
-		Amount recovery = Amount.VTHO();
+		Amount recovery = Amount.MTRG();
 		recovery.setDecimalAmount("0.00001");
 
 		TransferResult setUserPlansResult = ProtoTypeContractClient.setCreditPlans(
@@ -376,9 +376,9 @@ public class PrototypeClientTest extends BaseTest {
 		}
 
 		start = System.currentTimeMillis();
-		Amount credit = Amount.VTHO();
+		Amount credit = Amount.MTRG();
 		credit.setDecimalAmount("100.00");
-		Amount recovery = Amount.VTHO();
+		Amount recovery = Amount.MTRG();
 		recovery.setDecimalAmount("0.00001");
 
 		TransferResult setUserPlansResult = ProtoTypeContractClient.setCreditPlans(

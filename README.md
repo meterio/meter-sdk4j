@@ -89,7 +89,7 @@ Get address: walletInfo.getKeyPair().getHexAddress());
 
 User can use this client :
 
-#### Get Account information: VET balance and VTHO balance
+#### Get Account information: MTR balance and MTRG balance
 
 ```
 Address address = Address.fromHexString(fromAddress);
@@ -113,7 +113,7 @@ account info:
 #### Get code on a address：
 
 ```
-Address tokenAddr = Address.VTHO_Address;
+Address tokenAddr = Address.MTRG_Address;
 AccountCode code = AccountClient.getAccountCode(tokenAddr, null);
 logger.info("code:" + JSON.toJSONString(code));
 code:
@@ -125,15 +125,15 @@ code:
 ### TransactionClient
 
 
-#### Sign VET transaction:
+#### Sign MTR transaction:
 
 
 ```
 byte chainTag = BlockchainClient.getChainTag();
 byte[] blockRef = BlockchainClient.getBlockRef(Revision.BEST).toByteArray();
-Amount amount = Amount.createFromToken(AbstractToken.VET);
+Amount amount = Amount.createFromToken(AbstractToken.MTR);
 amount.setDecimalAmount("1.12");
-ToClause clause = TransactionClient.buildVETToClause(Address.fromHexString("0xD3EF28DF6b553eD2fc47259E8134319cB1121A2A"), amount, ToData.ZERO);
+ToClause clause = TransactionClient.buildMTRToClause(Address.fromHexString("0xD3EF28DF6b553eD2fc47259E8134319cB1121A2A"), amount, ToData.ZERO);
 RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef, 720, 21000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
 	
 
@@ -144,7 +144,7 @@ logger.info("raw=" + raw);
 raw=0xf902d6819a8702288058b9af928202d0f90273e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f800008001830616988088ff9198c817655decc0b841bd61e198f126adddb169eebf5cd3da25ae3a3f07102e574bcd1368440d1e307c4c47884364e2abc66ef6940c4953758dd1c57f8255025639702104ce83e9a3b501
 
 TransferResult result = TransactionClient.signThenTransfer(rawTransaction, ECKeyPair.create(privateKey));
-logger.info("SendVET result:" + JSON.toJSONString(result));
+logger.info("SendMTR result:" + JSON.toJSONString(result));
 Assert.assertNotNull(result);
 // you can generate transaction id local and verify transfer result
 String hexAddress = ECKeyPair.create(privateKey).getHexAddress();
@@ -154,15 +154,15 @@ Assert.assertEquals(txIdHex, result.getId());
 	
 ```
 
-#### Sign VTHO transaction:
+#### Sign MTRG transaction:
 
 ```
 
 byte chainTag = BlockchainClient.getChainTag();
 byte[] blockRef = BlockClient.getBlock(null).blockRef().toByteArray();
-Amount amount = Amount.createFromToken(ERC20Token.VTHO);
+Amount amount = Amount.createFromToken(ERC20Token.MTRG);
 amount.setDecimalAmount("11.12");
-ToClause clause = ERC20Contract.buildTranferToClause(ERC20Token.VTHO, Address.fromHexString("0xc71ADC46c5891a8963Ea5A5eeAF578E0A2959779"), amount);
+ToClause clause = ERC20Contract.buildTranferToClause(ERC20Token.MTRG, Address.fromHexString("0xc71ADC46c5891a8963Ea5A5eeAF578E0A2959779"), amount);
 RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef, 720, 80000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
 
 String raw = BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX);
@@ -172,7 +172,7 @@ logger.info("raw=" + raw);
 raw=0xf902d6819a8702288058b9af928202d0f90273e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f800008001830616988088ff9198c817655decc0b841bd61e198f126adddb169eebf5cd3da25ae3a3f07102e574bcd1368440d1e307c4c47884364e2abc66ef6940c4953758dd1c57f8255025639702104ce83e9a3b501
 
 TransferResult result = TransactionClient.signThenTransfer(rawTransaction, ECKeyPair.create(privateKey));
-logger.info("SendVTHO Result:" + JSON.toJSONString(result));
+logger.info("SendMTRG Result:" + JSON.toJSONString(result));
 Assert.assertNotNull(result);
 // you can generate transaction id local and verify transfer result
 String hexAddress = ECKeyPair.create(privateKey).getHexAddress();
@@ -182,14 +182,14 @@ Assert.assertEquals(txIdHex, result.getId());
 
 ```
 
-#### Send VET to account：
+#### Send MTR to account：
 
 ```
 byte chainTag = BlockchainClient.getChainTag();
 byte[] blockRef = BlockchainClient.getBlockRef( Revision.BEST).toByteArray();
-Amount amount = Amount.createFromToken( AbstractToken.VET);
+Amount amount = Amount.createFromToken( AbstractToken.MTR);
 amount.setDecimalAmount( "21.12" );
-ToClause clause = TransactionClient.buildVETToClause(
+ToClause clause = TransactionClient.buildMTRToClause(
         Address.fromHexString( "0xc71ADC46c5891a8963Ea5A5eeAF578E0A2959779" ),  // reveiver address
         amount,                                                                 // transfer amount
         ToData.ZERO );                                                          // The default brotherValue ToData.ZERO
@@ -204,23 +204,23 @@ raw=0xf902d6819a8702288058b9af928202d0f90273e094d3ef28df6b553ed2fc47259e8134319c
 
 ```
 
-#### Send VTHO to account:
+#### Send MTRG to account:
 
 ```
 byte chainTag = BlockchainClient.getChainTag();
 // null means the best block
 byte[] blockRef = BlockClient.getBlock( null ).blockRef().toByteArray();
-Amount amount = Amount.createFromToken( ERC20Token.VTHO);
+Amount amount = Amount.createFromToken( ERC20Token.MTRG);
 amount.setDecimalAmount( "11.12" );
 // construct transaction clause
 ToClause clause = ERC20Contract.buildTranferToClause( 
-        ERC20Token.VTHO,                                                        // the default ERC20Token.VTHO
+        ERC20Token.MTRG,                                                        // the default ERC20Token.MTRG
         Address.fromHexString("0xc71ADC46c5891a8963Ea5A5eeAF578E0A2959779"),    // receiver address
         amount);                                                                // transfer amount
 RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction( chainTag, blockRef, 720, 80000, (byte)0x0, CryptoUtils.generateTxNonce(), clause);
 
 TransferResult result = TransactionClient.signThenTransfer( rawTransaction, ECKeyPair.create( privateKey ) );
-logger.info( "transfer vethor result:" + JSON.toJSONString( result ) );
+logger.info( "transfer MTRhor result:" + JSON.toJSONString( result ) );
 result:{"id":"0xbae8e1cf5d61e6d8a9765dd21cdf35abe919fefc8335d9f9ead13aa3e7f12c83"}
 
 ```
@@ -229,7 +229,7 @@ result:{"id":"0xbae8e1cf5d61e6d8a9765dd21cdf35abe919fefc8335d9f9ead13aa3e7f12c83
 
 ```
 
-Address contractAddr = ERC20Token.VTHO.getContractAddress();
+Address contractAddr = ERC20Token.MTRG.getContractAddress();
 Address address = Address.fromHexString(fromAddress);
 Revision currRevision = Revision.BEST;
 AbiDefinition abiDefinition = ERC20Contract.defaultERC20Contract.findAbiDefinition("balanceOf");
@@ -400,7 +400,7 @@ String abiMethodHexString = BytesUtils.toHexString( abiDefinition.getBytesMethod
 // filter even logs by topics
 filter.addTopicSet( abiMethodHexString, "0x000000000000000000000000866a849122133888214ac9fc59550077adf14975", null, null, null );
 filter.addTopicSet( abiMethodHexString, null, "0x000000000000000000000000866a849122133888214ac9fc59550077adf14975", null, null );
-ArrayList<?> filteredEvents = LogsClient.filterEvents(filter, Order.DESC, Address.VTHO_Address);
+ArrayList<?> filteredEvents = LogsClient.filterEvents(filter, Order.DESC, Address.MTRG_Address);
 filteredEvents:
 [
   {
@@ -721,9 +721,9 @@ transferResult:{"id":"0x1eb2927e48d497d70f4530471abe62aa5700086e54af75ad8523d080
 #### Set Credit Plan:
 
 ```
-Amount credit = Amount.VTHO();
+Amount credit = Amount.MTRG();
 credit.setDecimalAmount("10.00");
-Amount recovery = Amount.VTHO();
+Amount recovery = Amount.MTRG();
 recovery.setDecimalAmount("0.00001");
 
 TransferResult setCreditPlansResult = ProtoTypeContractClient.setCreditPlans(
@@ -800,9 +800,9 @@ if (transferResult != null) {
 }
 
 start = System.currentTimeMillis();
-Amount credit = Amount.VTHO();
+Amount credit = Amount.MTRG();
 credit.setDecimalAmount("100.00");
-Amount recovery = Amount.VTHO();
+Amount recovery = Amount.MTRG();
 recovery.setDecimalAmount("0.00001");
 //set user plan 
 TransferResult setUserPlansResult = ProtoTypeContractClient.setUserPlans(
@@ -1025,12 +1025,12 @@ Raw Transaction:
 0xf8a3819a8702819f5cfc12d38202d0f842e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f80000808082a4108088f06f91293e58610dc0b84173346fba62605d510895a0d240b89a38e0b87fd8a58df2ce17075cd493e8e316528b4ed0f049cef1710936bbd4bd3af23eb3ffb3740dc0fb59db585714dbeaa001
   
 ```
-#### Sign VTHO transactions: 
+#### Sign MTRG transactions: 
 
 ```
-java -jar thor-client-sdk4j-0.0.10.jar signVTHO {your-file-path} {privateKey}
+java -jar thor-client-sdk4j-0.0.10.jar signMTRG {your-file-path} {privateKey}
 
-eg. java -jar thor-client-sdk4j-0.0.10.jar signVTHO src/main/resources/exchange_example.xlsx 0xdce1443bd2ef0c2631adc1c67e5c93f13dc23a41c18b536effbbdcbcdb96fb65
+eg. java -jar thor-client-sdk4j-0.0.10.jar signMTRG src/main/resources/exchange_example.xlsx 0xdce1443bd2ef0c2631adc1c67e5c93f13dc23a41c18b536effbbdcbcdb96fb65
   
 Raw Transaction:
 0xf9011d81c787015e41be43bb958202d0f8bcf85c940000000000000000000000000000456e6572677980b844a9059cbb000000000000000000000000d3ef28df6b553ed2fc47259e8134319cb1121a2a0000000000000000000000000000000000000000000027cf801b9d4f7d800000f85c940000000000000000000000000000456e6572677980b844a9059cbb000000000000000000000000f881a94423f22ee9a0e3e1442f515f43c966b7ed0000000000000000000000000000000000000000000027cf801b9d4f7d8000008082a41080887650b326b78e0c57c0b841fe27b8866d8a658a66a2d8241a310d1ef72e2954d397fc52aa5b4295f9686d0f6705301acc9a0aac6e9e0f93e3aa6fe0a07ff48e4e3287d0db45905d8a0756eb01

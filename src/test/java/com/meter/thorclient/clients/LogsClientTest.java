@@ -44,9 +44,9 @@ public class LogsClientTest extends BaseTest {
 				Options.create(0, 10));
 		logFilter.setOrder(Order.DESC.getValue());
 
-		logFilter.addTopicSet(Address.VTHO_Address.toHexString(null), abiMethodHexString,
+		logFilter.addTopicSet(Address.MTRG_Address.toHexString(null), abiMethodHexString,
 				"0x000000000000000000000000" + fromAddress.substring(2), null, null, null);
-		logFilter.addTopicSet(Address.VTHO_Address.toHexString(null), abiMethodHexString, null,
+		logFilter.addTopicSet(Address.MTRG_Address.toHexString(null), abiMethodHexString, null,
 				"0x000000000000000000000000" + fromAddress.substring(2), null, null);
 
 		ArrayList<FilteredLogEvent> filteredEvents = LogsClient.getFilteredLogEvents(logFilter);

@@ -14,5 +14,5 @@ public interface SlatKeys {
 
     final String FROM_ADDRESS       = "fromAddress";
 
-    final String VTHO_TOKEN_ADDRESS = "tokenAddress";
+    final String MTRG_TOKEN_ADDRESS = "tokenAddress";
 }

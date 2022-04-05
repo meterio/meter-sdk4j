@@ -36,21 +36,21 @@ public class Amount {
 	}
 
 	/**
-	 * Create a VET amount
+	 * Create a MTR amount
 	 * 
 	 * @return {@link Amount}
 	 */
-	public static Amount VET() {
-		return Amount.createFromToken(AbstractToken.VET);
+	public static Amount MTR() {
+		return Amount.createFromToken(AbstractToken.MTR);
 	}
 
 	/**
-	 * Create a VTHO amount
+	 * Create a MTRG amount
 	 * 
 	 * @return {@link Amount}
 	 */
-	public static Amount VTHO() {
-		return Amount.createFromToken(ERC20Token.VTHO);
+	public static Amount MTRG() {
+		return Amount.createFromToken(ERC20Token.MTRG);
 	}
 
 	private Amount() {

@@ -74,7 +74,7 @@ public class RLPTest extends BaseTest {
         for(RawClause rawClause : rawClauses){
             byte[] addressBytes = rawClause.getTo();
             byte[] valueBytes = rawClause.getValue();
-            Amount amount = Amount.VET();
+            Amount amount = Amount.MTR();
             amount.setHexAmount( BytesUtils.toHexString( valueBytes, Prefix.ZeroLowerX ) );
             logger.info( index +".-----------------start------------------------------------" );
             logger.info( "Address:" + BytesUtils.toHexString( addressBytes, Prefix.ZeroLowerX ) );

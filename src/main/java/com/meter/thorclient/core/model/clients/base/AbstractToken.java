@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  */
 public class AbstractToken {
 
-	public static final AbstractToken VET = new AbstractToken("VET", 18);
+	public static final AbstractToken MTR = new AbstractToken("MTR", 18);
 
 	protected String name;
 	protected BigDecimal precision;

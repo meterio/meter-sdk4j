@@ -11,9 +11,9 @@ public class Main {
 
 	private static final String SEND = "signAndSend";
 
-	private static final String TRANSFER_VET = "transferVet";
+	private static final String TRANSFER_MTR = "transferMTR";
 
-	private static final String TRANSFER_VTHO = "transferVtho";
+	private static final String TRANSFER_MTRG = "transferMTRG";
 
 	private static final String CHAIN_TAG = "getChainTag";
 
@@ -27,7 +27,7 @@ public class Main {
 
 	private static final String SEND_RAW = "sendRaw";
 
-	private static final String SIGN_VTHO = "signVTHO";
+	private static final String SIGN_MTRG = "signMTRG";
 
 	private static final String PARSE = "parse";
 
@@ -49,13 +49,13 @@ public class Main {
 				// args=getTransaction txId providerUrl
 				TransactionConsole.getTransactionRecipient(args);
 			} else if (args[0].equals(SIGN)) {
-				TransactionConsole.signVETTxn(args);
-			} else if (args[0].equals(SIGN_VTHO)) {
-				TransactionConsole.signVTHOTxn(args);
-			} else if (args[0].equals(TRANSFER_VET)) {
-				TransactionConsole.transferVet(args);
-			} else if (args[0].equals(TRANSFER_VTHO)) {
-				TransactionConsole.transferVtho(args);
+				TransactionConsole.signMTRTxn(args);
+			} else if (args[0].equals(SIGN_MTRG)) {
+				TransactionConsole.signMTRGTxn(args);
+			} else if (args[0].equals(TRANSFER_MTR)) {
+				TransactionConsole.transferMTR(args);
+			} else if (args[0].equals(TRANSFER_MTRG)) {
+				TransactionConsole.transferMTRG(args);
 			} else if (args[0].equals(BALANCE)) {
 				TransactionConsole.getBalance(args);
 			} else if (args[0].equals(CHAIN_TAG)) {
@@ -67,10 +67,10 @@ public class Main {
 			} else if (args[0].equals(CREATE_WALLET)) {
 				WalletConsole.createWalletToKeystoreFile(args);
 			} else if (args[0].equals(SEND)) {
-				// args=signAndSendVET {providerUrl} {privateKey} {filePath}
+				// args=signAndSendMTR {providerUrl} {privateKey} {filePath}
 				TransactionConsole.sendTransactionFromCSVFile(args, privateKey);
 			} else if (args[0].equals(SEND_RAW)) {
-				// args=sendVETRaw {providerUrl} {rawTransaction}
+				// args=sendMTRRaw {providerUrl} {rawTransaction}
 				TransactionConsole.sendRawTransaction(args);
 			} else if (args[0].equals(PARSE)) {
 				ParserConsole.parse(args);
@@ -93,7 +93,7 @@ public class Main {
 		String privateKey = null;
 		String nodeProviderUrl = null;
 		if (args[0].equals(CHAIN_TAG) || args[0].equals(BLOCK_REF) || args[0].equals(GET_BLOCK) || args[0].equals(SEND)
-				|| args[0].equals(SEND_RAW) || args[0].equals(TRANSFER_VET) || args[0].equals(TRANSFER_VTHO)
+				|| args[0].equals(SEND_RAW) || args[0].equals(TRANSFER_MTR) || args[0].equals(TRANSFER_MTRG)
 				|| args[0].equals(BALANCE)) {
 
 			if (args.length > 1 && !StringUtils.isBlank(args[1]) && args[1].startsWith("http")) {

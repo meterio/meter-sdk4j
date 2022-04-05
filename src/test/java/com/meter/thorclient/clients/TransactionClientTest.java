@@ -73,19 +73,19 @@ public class TransactionClientTest extends BaseTest {
 	}
 
 	@Test
-	public void testSendVTHOTransaction() throws ClientIOException {
+	public void testSendMTRGTransaction() throws ClientIOException {
 		byte chainTag = BlockchainClient.getChainTag();
 		byte[] blockRef = BlockClient.getBlock(null).blockRef().toByteArray();
-		Amount amount = Amount.createFromToken(ERC20Token.VTHO);
+		Amount amount = Amount.createFromToken(ERC20Token.MTRG);
 		amount.setDecimalAmount("10000");
 
-		ToClause clause = ERC20Contract.buildTranferToClause(ERC20Token.VTHO,
+		ToClause clause = ERC20Contract.buildTranferToClause(ERC20Token.MTRG,
 				Address.fromHexString("0x000000002beadb038203be21ed5ce7c9b1bff602"), amount);
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
 				720, 80000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
-		logger.info("SendVTHO Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
+		logger.info("SendMTRG Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
 		TransferResult result = TransactionClient.signThenTransfer(rawTransaction, ECKeyPair.create(privateKey));
-		logger.info("SendVTHO Result:" + JSON.toJSONString(result));
+		logger.info("SendMTRG Result:" + JSON.toJSONString(result));
 		Assert.assertNotNull(result);
 		String txIdHex = BlockchainUtils.generateTransactionId(rawTransaction,
 				Address.fromHexString(ECKeyPair.create(privateKey).getHexAddress()));
@@ -107,14 +107,14 @@ public class TransactionClientTest extends BaseTest {
 			k64[i]=(byte)0xff;
 		}
 		toData.setData( BytesUtils.toHexString( k64, Prefix.ZeroLowerX ) );
-		ToClause clause = TransactionClient.buildVETToClause(
+		ToClause clause = TransactionClient.buildMTRToClause(
 				Address.fromHexString("0x391ba4c2d5212871130f8e05bf9459064d6ccf5b"), Amount.ZERO, toData);
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
 				720, 4000000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
-		logger.info("SendVET Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
+		logger.info("SendMTR Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
 		logger.info( "SignHash raw:" +  BytesUtils.toHexString( CryptoUtils.blake2b( rawTransaction.encode()) , Prefix.ZeroLowerX));
 		TransferResult result = TransactionClient.signThenTransfer(rawTransaction, ECKeyPair.create(privateKey));
-		logger.info("SendVET result:" + JSON.toJSONString(result));
+		logger.info("SendMTR result:" + JSON.toJSONString(result));
 		Assert.assertNotNull(result);
 		String hexAddress = ECKeyPair.create(privateKey).getHexAddress();
 		String txIdHex = BlockchainUtils.generateTransactionId(rawTransaction, Address.fromHexString(hexAddress));
@@ -125,19 +125,19 @@ public class TransactionClientTest extends BaseTest {
 
 
 	@Test
-	public void testSendVETTransaction() throws ClientIOException {
+	public void testSendMTRTransaction() throws ClientIOException {
 		byte chainTag = BlockchainClient.getChainTag();
 		byte[] blockRef = BlockchainClient.getBlockRef(Revision.BEST).toByteArray();
-		Amount amount = Amount.createFromToken(AbstractToken.VET);
+		Amount amount = Amount.createFromToken(AbstractToken.MTR);
 		amount.setDecimalAmount("100");
-		ToClause clause = TransactionClient.buildVETToClause(
+		ToClause clause = TransactionClient.buildMTRToClause(
 				Address.fromHexString("0x391ba4c2d5212871130f8e05bf9459064d6ccf5b"), amount, ToData.ZERO);
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
 				720, 21000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
-		logger.info("SendVET Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
+		logger.info("SendMTR Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
 		logger.info( "SignHash raw:" +  BytesUtils.toHexString( CryptoUtils.blake2b( rawTransaction.encode()) , Prefix.ZeroLowerX));
 		TransferResult result = TransactionClient.signThenTransfer(rawTransaction, ECKeyPair.create(privateKey));
-		logger.info("SendVET result:" + JSON.toJSONString(result));
+		logger.info("SendMTR result:" + JSON.toJSONString(result));
 		Assert.assertNotNull(result);
 		String hexAddress = ECKeyPair.create(privateKey).getHexAddress();
 		String txIdHex = BlockchainUtils.generateTransactionId(rawTransaction, Address.fromHexString(hexAddress));
@@ -146,24 +146,24 @@ public class TransactionClientTest extends BaseTest {
 		hexId = result.getId();
 	}
 
-	private static RawTransaction generatingVETRawTxn() {
+	private static RawTransaction generatingMTRRawTxn() {
 		byte chainTag = BlockchainClient.getChainTag();
 		byte[] blockRef = BlockchainClient.getBlockRef(Revision.BEST).toByteArray();
-		Amount amount = Amount.createFromToken(AbstractToken.VET);
+		Amount amount = Amount.createFromToken(AbstractToken.MTR);
 		amount.setDecimalAmount("100");
-		ToClause clause = TransactionClient.buildVETToClause(
+		ToClause clause = TransactionClient.buildMTRToClause(
 				Address.fromHexString("0x000000002beadb038203be21ed5ce7c9b1bff602"), amount, ToData.ZERO);
 		return RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef, 720, 31000, (byte) 0x0,
 				CryptoUtils.generateTxNonce(), clause);
 	}
 
-	private static RawTransaction generatingVethorRawTxn() {
+	private static RawTransaction generatingMTRhorRawTxn() {
 		byte chainTag = BlockchainClient.getChainTag();
 		byte[] blockRef = BlockClient.getBlock(null).blockRef().toByteArray();
-		Amount amount = Amount.createFromToken(ERC20Token.VTHO);
+		Amount amount = Amount.createFromToken(ERC20Token.MTRG);
 		amount.setDecimalAmount("10000");
 
-		ToClause clause = ERC20Contract.buildTranferToClause(ERC20Token.VTHO,
+		ToClause clause = ERC20Contract.buildTranferToClause(ERC20Token.MTRG,
 				Address.fromHexString("0x000000002beadb038203be21ed5ce7c9b1bff602"), amount);
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
 				720, 80000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
@@ -178,7 +178,7 @@ public class TransactionClientTest extends BaseTest {
 	@Test
 	public void testRecoverAddressAndCalcTxId() throws ClientIOException {
 
-		RawTransaction rawTransaction = generatingVETRawTxn();
+		RawTransaction rawTransaction = generatingMTRRawTxn();
 		RawTransaction signedRawTxn = TransactionClient.sign(rawTransaction, ECKeyPair.create(privateKey));
 		String rawTxHex = rlpEncodedRawTxHex(signedRawTxn);
 		logger.info("Tx raw hex:" + rawTxHex);
@@ -191,7 +191,7 @@ public class TransactionClientTest extends BaseTest {
 		String txIdHex = BlockchainUtils.generateTransactionId(newRawTransaction, Address.fromHexString(hexAddress));
 		TransferResult transferResult = TransactionClient.transfer(rawTxHex);
 		logger.info("Calculate transaction TxId:" + txIdHex);
-		logger.info("SendVET result:" + JSON.toJSONString(transferResult));
+		logger.info("SendMTR result:" + JSON.toJSONString(transferResult));
 		Assert.assertNotNull(transferResult);
 		Assert.assertEquals(txIdHex, transferResult.getId());
 
@@ -200,7 +200,7 @@ public class TransactionClientTest extends BaseTest {
 	@Test
 	public void testRecoverAddressAndCalcTxId2() throws ClientIOException {
 
-		RawTransaction rawTransaction = generatingVethorRawTxn();
+		RawTransaction rawTransaction = generatingMTRhorRawTxn();
 		RawTransaction signedRawTxn = TransactionClient.sign(rawTransaction, ECKeyPair.create(privateKey));
 		String rawTxHex = rlpEncodedRawTxHex(signedRawTxn);
 		logger.info("Tx raw hex:" + rawTxHex);
@@ -215,7 +215,7 @@ public class TransactionClientTest extends BaseTest {
 		String txIdHex = BlockchainUtils.generateTransactionId(newRawTransaction, Address.fromHexString(hexAddress));
 		TransferResult transferResult = TransactionClient.transfer(rawTxHex);
 		logger.info("Calculate transaction TxId:" + txIdHex);
-		logger.info("Send Vethor result:" + JSON.toJSONString(transferResult));
+		logger.info("Send MTRhor result:" + JSON.toJSONString(transferResult));
 		Assert.assertNotNull(transferResult);
 		Assert.assertEquals(txIdHex, transferResult.getId());
 
@@ -223,7 +223,7 @@ public class TransactionClientTest extends BaseTest {
 
 	@Test
 	public void testDelegatorSignAndTransfer() throws ClientIOException{
-		RawTransaction rawTransaction = generatingVETRawTxn();
+		RawTransaction rawTransaction = generatingMTRRawTxn();
 		TransactionReserved reserved = new TransactionReserved();
 		reserved.setDelegationFeature(true);
 		rawTransaction.setReserved(reserved);

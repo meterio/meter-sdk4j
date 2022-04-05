@@ -12,20 +12,20 @@ import com.meter.thorclient.utils.RLPUtils;
 public class ParserConsole {
     public static void parse(String[] args) throws Exception {
         if(args.length != 3){
-            System.out.println( "parse [vet|erc20] [raw transaction hex string]" );
+            System.out.println( "parse [MTR|erc20] [raw transaction hex string]" );
             return;
         }
-        if(args[1].equalsIgnoreCase( "vet" )){
-            parseVET(args[2]);
-        }else if(args[1].equalsIgnoreCase( "erc20" )||args[1].equalsIgnoreCase( "vtho" )){
+        if(args[1].equalsIgnoreCase( "MTR" )){
+            parseMTR(args[2]);
+        }else if(args[1].equalsIgnoreCase( "erc20" )||args[1].equalsIgnoreCase( "MTRG" )){
             parseERC20(args[2]);
         }else{
-            System.out.println( "parse [vet|erc20] [raw transaction hex string]" );
+            System.out.println( "parse [MTR|erc20] [raw transaction hex string]" );
             throw new Exception( "un-support tx type" );
         }
     }
 
-    public static void parseVET(String hexRawTxn) {
+    public static void parseMTR(String hexRawTxn) {
         RawTransaction rawTransaction =  RLPUtils.decode(hexRawTxn );
         RawClause[] rawClauses = rawTransaction.getClauses();
         int index = 1;
@@ -37,7 +37,7 @@ public class ParserConsole {
         for(RawClause rawClause : rawClauses){
             byte[] addressBytes = rawClause.getTo();
             byte[] valueBytes = rawClause.getValue();
-            Amount amount = Amount.VET();
+            Amount amount = Amount.MTR();
             if (valueBytes == null || valueBytes.length == 0){
                 amount.setHexAmount( "0x00" );
             }else{
@@ -82,7 +82,7 @@ public class ParserConsole {
             if(!methodIdHex.equalsIgnoreCase( transferMethodId)){
                 throw new Exception( "the method id is not transfer" );
             }
-            Amount erc2Amount = Amount.VTHO();
+            Amount erc2Amount = Amount.MTRG();
             erc2Amount.setHexAmount( BytesUtils.toHexString( value, Prefix.ZeroLowerX ) );
             System.out.println( "ERC20 Contract:" + BytesUtils.toHexString( addressBytes, Prefix.ZeroLowerX ) );
             System.out.println( "To Address:" + BytesUtils.toHexString( address, Prefix.ZeroLowerX ) );

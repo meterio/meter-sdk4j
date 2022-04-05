@@ -32,7 +32,7 @@ import com.meter.thorclient.utils.crypto.ECKeyPair;
 
 public class ConsoleUtils {
 
-	public static String doSignVETTx(List<String[]> transactions, String privateKey, boolean isSend)
+	public static String doSignMTRTx(List<String[]> transactions, String privateKey, boolean isSend)
 			throws IOException {
 
 		byte chainTag = 0;
@@ -40,9 +40,9 @@ public class ConsoleUtils {
 
 		List<ToClause> clauses = new ArrayList<ToClause>();
 		for (String[] transaction : transactions) {
-			Amount amount = Amount.createFromToken(AbstractToken.VET);
+			Amount amount = Amount.createFromToken(AbstractToken.MTR);
 			amount.setDecimalAmount(transaction[1]);
-			clauses.add(TransactionClient.buildVETToClause(Address.fromHexString(transaction[0]), amount, ToData.ZERO));
+			clauses.add(TransactionClient.buildMTRToClause(Address.fromHexString(transaction[0]), amount, ToData.ZERO));
 			chainTag = BytesUtils.toByteArray(transaction[2])[0];
 			if (transaction[3] == null) {
 				blockRef = BlockchainClient.getBlockRef(null).toByteArray();
@@ -62,7 +62,7 @@ public class ConsoleUtils {
 		}
 	}
 
-	public static String sendRawVETTx(String rawTransaction) throws IOException {
+	public static String sendRawMTRTx(String rawTransaction) throws IOException {
 		TransferResult result = TransactionClient.transfer(rawTransaction);
 		return JSON.toJSONString(result);
 	}
@@ -94,12 +94,12 @@ public class ConsoleUtils {
 		return results;
 	}
 
-	public static String doSignVTHOTx(List<String[]> transactions, String privateKey, boolean isSend)
+	public static String doSignMTRGTx(List<String[]> transactions, String privateKey, boolean isSend)
 			throws IOException {
-		return doSignVTHOTx(transactions, privateKey, isSend, null);
+		return doSignMTRGTx(transactions, privateKey, isSend, null);
 	}
 
-	public static String doSignVTHOTx(List<String[]> transactions, String privateKey, boolean isSend, Integer gasLimit)
+	public static String doSignMTRGTx(List<String[]> transactions, String privateKey, boolean isSend, Integer gasLimit)
 			throws IOException {
 
 		byte chainTag = 0;
@@ -107,10 +107,10 @@ public class ConsoleUtils {
 
 		List<ToClause> clauses = new ArrayList<ToClause>();
 		for (String[] transaction : transactions) {
-			Amount amount = Amount.VTHO();
+			Amount amount = Amount.MTRG();
 			amount.setDecimalAmount(transaction[1]);
 			clauses.add(
-					ERC20Contract.buildTranferToClause(ERC20Token.VTHO, Address.fromHexString(transaction[0]), amount));
+					ERC20Contract.buildTranferToClause(ERC20Token.MTRG, Address.fromHexString(transaction[0]), amount));
 			chainTag = BytesUtils.toByteArray(transaction[2])[0];
 			if (transaction[3] == null) {
 				blockRef = BlockchainClient.getBlockRef(null).toByteArray();

@@ -19,7 +19,7 @@ function updateTabs(type)
         var sNode = document.getElementById(tabs[value][0]);
         var spanNode = sNode.firstChild;
         if (value == type) {
-            sNode.className = activeTableTab;
+            sNode.className = actiMTRableTab;
             spanNode.innerHTML = tabs[value][1];
         }
         else {

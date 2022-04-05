@@ -8,7 +8,7 @@ Overall document style
 body {
     background-color:#ffffff;
     color:#353833;
-    font-family:'DejaVu Sans', Arial, Helvetica, sans-serif;
+    font-family:'DejaVu Sans', Arial, HelMTRica, sans-serif;
     font-size:14px;
     margin:0;
 }
@@ -404,7 +404,7 @@ Table styles
     border: none;
     height:16px;
 }
-.memberSummary caption span.activeTableTab span {
+.memberSummary caption span.actiMTRableTab span {
     white-space:nowrap;
     padding-top:5px;
     padding-left:12px;
@@ -426,7 +426,7 @@ Table styles
     background-color:#4D7A97;
     height:16px;
 }
-.memberSummary caption span.tableTab, .memberSummary caption span.activeTableTab {
+.memberSummary caption span.tableTab, .memberSummary caption span.actiMTRableTab {
     padding-top:0px;
     padding-left:0px;
     padding-right:0px;
@@ -442,7 +442,7 @@ Table styles
     float:left;
     background-color:#F8981D;
 }
-.memberSummary .activeTableTab .tabEnd {
+.memberSummary .actiMTRableTab .tabEnd {
     display:none;
     width:5px;
     margin-right:3px;

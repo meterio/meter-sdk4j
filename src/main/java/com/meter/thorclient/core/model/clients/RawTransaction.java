@@ -12,7 +12,7 @@ public class RawTransaction {
     // 1-255 used baseprice 255 used 2x base price
     private byte gasPriceCoef;
 
-    // gas limit the max gas for VET 21000 for VTHO 80000
+    // gas limit the max gas for MTR 21000 for MTRG 80000
     private byte[] gas;//64 bytes
     private byte[] dependsOn;
     private byte[] nonce;    //8 bytes
