@@ -192,6 +192,7 @@
 							</descriptorRefs>
 							<archive>
 								<manifest>
+								    <addClasspath>true</addClasspath>
 									<mainClass>com.meter.thorclient.console.Main</mainClass>
 								</manifest>
 							</archive>
@@ -210,6 +211,18 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-dependency-plugin</artifactId>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies2</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifest>
+								    <addClasspath>true</addClasspath>
+									<mainClass>com.meter.thorclient.console.Main</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
 						<executions>
 							<execution>
 								<id>copy-dependencies</id>
@@ -224,6 +237,7 @@
 								</configuration>
 							</execution>
 						</executions>
+				
 					</plugin>
 				</plugins>
 			</build>

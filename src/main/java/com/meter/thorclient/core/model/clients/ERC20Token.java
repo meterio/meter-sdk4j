@@ -32,6 +32,7 @@ public final class ERC20Token extends AbstractToken {
 		super(name, unit);
 		this.contractAddress = address;
 	}
+	
 
 	public Address getContractAddress() {
 		return contractAddress;

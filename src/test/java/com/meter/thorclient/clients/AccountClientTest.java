@@ -22,28 +22,28 @@ public class AccountClientTest extends BaseTest {
 
     @Test
     public void testGetAccountInfo() throws IOException {
-        Address address = Address.fromHexString("0x3831Fc6ecF6C88D171e6eF3E2F291fE100925617");
-        Account account = AccountClient.getAccountInfo(address, Revision.create( 296759 ));
+        Address address = Address.fromHexString(fromAddress);
+        Account account = AccountClient.getAccountInfo(address, Revision.create( 22673346 ));
         logger.info("account info:" + JSON.toJSONString(account));
         logger.info("MTR:" + account.MTRBalance().getAmount() + " Energy:" + account.energyBalance().getAmount());
         Assert.assertNotNull(account);
     }
 
-    @Test
-    public void testGetStorageAt() throws IOException {
-        byte[] address = BytesUtils.toByteArray(fromAddress);
-        StorageKey key = StorageKey.create(4, address);
-        StorageData data = AccountClient.getStorageAt(Address.MTRG_Address, key, null);
-        logger.info("Storage At:" + JSON.toJSONString(data));
-        Assert.assertNotNull(data);
-    }
+    // @Test
+    // public void testGetStorageAt() throws IOException {
+    //     byte[] address = BytesUtils.toByteArray(fromAddress);
+    //     StorageKey key = StorageKey.create(4, address);
+    //     StorageData data = AccountClient.getStorageAt(Address.MTRG_Address, key, null);
+    //     logger.info("Storage At:" + JSON.toJSONString(data));
+    //     Assert.assertNotNull(data);
+    // }
 
-    @Test
-    public void testGetCodeTest() throws IOException {
-        Address tokenAddr = Address.MTRG_Address;
-        AccountCode code = AccountClient.getAccountCode(tokenAddr, null);
-        logger.info("code:" + JSON.toJSONString(code));
-        Assert.assertNotNull(code);
-    }
+    // @Test
+    // public void testGetCodeTest() throws IOException {
+    //     Address tokenAddr = Address.MTRG_Address;
+    //     AccountCode code = AccountClient.getAccountCode(tokenAddr, null);
+    //     logger.info("code:" + JSON.toJSONString(code));
+    //     Assert.assertNotNull(code);
+    // }
 
 }

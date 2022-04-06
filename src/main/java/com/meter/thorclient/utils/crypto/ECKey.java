@@ -6,7 +6,7 @@ import org.bouncycastle.crypto.ec.CustomNamedCurves;
 import org.bouncycastle.crypto.params.ECDomainParameters;
 import org.bouncycastle.crypto.params.ECPublicKeyParameters;
 import org.bouncycastle.crypto.signers.ECDSASigner;
-import org.bouncycastle.jce.ECNamedCurMTRable;
+import org.bouncycastle.jce.ECNamedCurveTable;
 import org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
 import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.math.ec.FixedPointCombMultiplier;
@@ -35,7 +35,7 @@ public abstract class ECKey implements Key{
      */
     public static byte[] pointBytesToPublicKey(byte[] encodedPublicKeyPoint, boolean toCompressed) {
         if (encodedPublicKeyPoint.length == 65 || encodedPublicKeyPoint.length == 33) {
-            final ECNamedCurveParameterSpec curveParameterSpec = ECNamedCurMTRable.getParameterSpec( SECP256K1 );
+            final ECNamedCurveParameterSpec curveParameterSpec = ECNamedCurveTable.getParameterSpec( SECP256K1 );
             final ECPoint decodedPoint = curveParameterSpec.getCurve().decodePoint( encodedPublicKeyPoint );
             final BigInteger x = decodedPoint.getXCoord().toBigInteger();
             final BigInteger y = decodedPoint.getYCoord().toBigInteger();
@@ -52,7 +52,7 @@ public abstract class ECKey implements Key{
      * @return
      */
     public static java.security.spec.ECPoint decodeECPoint(byte[] publicKey){
-        final ECNamedCurveParameterSpec curveParameterSpec = ECNamedCurMTRable.getParameterSpec(SECP256K1);
+        final ECNamedCurveParameterSpec curveParameterSpec = ECNamedCurveTable.getParameterSpec(SECP256K1);
         ECPoint bcECPoint = curveParameterSpec.getCurve().decodePoint(publicKey);
         return new java.security.spec.ECPoint(bcECPoint.getXCoord().toBigInteger(), bcECPoint.getYCoord().toBigInteger()  );
 

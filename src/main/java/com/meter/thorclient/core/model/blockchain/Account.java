@@ -4,6 +4,7 @@ import com.meter.thorclient.core.model.clients.Amount;
 import com.meter.thorclient.core.model.clients.base.AbstractToken;
 import com.meter.thorclient.core.model.clients.ERC20Token;
 
+
 import java.io.Serializable;
 
 /**
@@ -35,13 +36,15 @@ public class Account implements Serializable {
         this.hasCode = hasCode;
     }
 
+    
+
     /**
      * Get MTR token {@link Balance} object
      * @return
      */
     public Amount MTRBalance(){
         Amount balance = Amount.createFromToken( AbstractToken.MTR );
-        balance.setHexAmount( this.balance );
+        balance.setHexAmount( this.energy );
         return balance;
     }
 

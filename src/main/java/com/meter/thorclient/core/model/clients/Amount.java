@@ -36,7 +36,7 @@ public class Amount {
 	}
 
 	/**
-	 * Create a MTR amount
+	 * Create a VET amount
 	 * 
 	 * @return {@link Amount}
 	 */
