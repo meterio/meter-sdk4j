@@ -15,7 +15,7 @@ public class BlockClient extends AbstractClient{
      * @return Block {@link Block} can be null.
      * @throws ClientIOException
      */
-    public static Block getBlock(Revision revision) throws ClientIOException {
+    public static Block getBlock(Revision revision) {
         Revision currentRevision = revision;
         if( revision == null){
             currentRevision =  Revision.BEST;

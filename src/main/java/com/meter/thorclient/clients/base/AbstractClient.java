@@ -113,7 +113,7 @@ public abstract class AbstractClient {
 		String getURL = URLUtils.urlComposite(rawURL, uriParams, queryParams);
 		HttpResponse<String> jsonNode = null;
 		try {
-			jsonNode = Unirest.get(getURL).asString();
+			jsonNode = com.mashape.unirest.http.Unirest.get(getURL).asString();
 		} catch (UnirestException e) {
 			throw new ClientIOException(e);
 		}
