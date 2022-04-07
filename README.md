@@ -21,14 +21,14 @@ Set blockchain nodes sample as follows
 
 ```
 NodeProvider nodeProvider = NodeProvider.getNodeProvider();
-nodeProvider.setProvider("http://localhost:8669");
+nodeProvider.setProvider("https://rpc.meter.io");
 nodeProvider.setTimeout(10000);
 ```
 
 ## Set blockchain nodes provider (websocket)
 ```
 NodeProvider nodeProvider = NodeProvider.getNodeProvider();
-nodeProvider.setProvider("ws://localhost:8669");
+nodeProvider.setProvider("wss://ws.meter.io");
 nodeProvider.setTimeout(10000);
 ```
 
@@ -38,6 +38,109 @@ nodeProvider.setTimeout(10000);
 There are some SDK specifications <a href="https://github.com/meter/thor-client-sdk4j/blob/dev/doc"> sdk4j doc </a>
 
 For JUnit Test example: there are some required parameters in config.properties file to support JUnit Test running. 
+
+
+
+
+### Get Events
+
+Subscribe to all Events from node:
+
+```
+
+SubscribingCallback<EventSubscribingResponse> callback = new SubscribingCallback<EventSubscribingResponse>() {
+            @Override
+            public void onClose(int statusCode, String reason) {
+                logger.info( "on close:" + statusCode + " reason:" + reason );
+            }
+
+            @Override
+            public void onConnect(Session session) {
+                logger.info( "On connect:" + session.toString() );
+            }
+
+            @Override
+            public Class<EventSubscribingResponse> responseClass() {
+                return EventSubscribingResponse.class;
+            }
+
+            @Override
+            public void onSubscribe(EventSubscribingResponse response) {
+                logger.info( "Event Response :" + JSON.toJSONString(response) );
+            }
+        };
+        SubscribeSocket socket = SubscribeClient.subscribeEvent( null,  callback);
+        Thread.sleep( 20000 );
+        socket.close( 0, "user close" );
+
+
+Event Response :{
+  "address": "0x0d7365300e85fc87ef4da53ab05f1637dd4f73cc",
+  "data": "0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000029a2241af62c0000000000000000000000000000000000000000000000000000227861fff7a67d430000000000000000000000000000000000000000000000000000000000000000",
+  "meta": {
+    "blockID": "0x0159b0840446f85ce591c0cc060df058151ad624cb380af826d86b9d7aa82990",
+    "blockNumber": 22655108,
+    "blockTimestamp": 1649181660,
+    "txID": "0xe5d1afb3a84a3fd861b61f8bb716bed4d49662c65306b69d7fe046c0952ab06f",
+    "txOrigin": "0xc1a39d256959aa5e97784200f91ce63501dbd990"
+  },
+  "obsolete": false,
+  "topics": [
+    "0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822",
+    "0x000000000000000000000000c6e88363ea74f31f514b56e979413b3ee8d76f39",
+    "0x000000000000000000000000c1a39d256959aa5e97784200f91ce63501dbd990"
+  ]
+}
+
+```
+
+Subscribe to Transfer Events from node:
+
+```
+
+ SubscribingCallback<TransferSubscribingResponse> callback = new SubscribingCallback<TransferSubscribingResponse>() {
+            @Override
+            public void onClose(int statusCode, String reason) {
+                logger.info( "on close:" + statusCode + " reason:" + reason );
+            }
+
+            @Override
+            public void onConnect(Session session) {
+                logger.info( "On connect:" + session.toString() );
+            }
+
+            @Override
+            public Class<TransferSubscribingResponse> responseClass() {
+                return TransferSubscribingResponse.class;
+            }
+
+            @Override
+            public void onSubscribe(TransferSubscribingResponse response) {
+                logger.info( "Transfer Response :" + JSON.toJSONString(response) );
+            }
+        };
+        SubscribeSocket socket = SubscribeClient.subscribeTransfer( null,  callback);
+        Thread.sleep( 20000 );
+        socket.close( 0, "user close" );
+    }
+
+Transfer Response : {
+    "amount": "0x16345785d8a0000",
+    "meta": {
+        "blockID": "0x0159abba6c731cf0746e3ce45dd753aacb13b12af7a2a5562b9b3004f8a050a4",
+        "blockNumber": 22653882,
+        "blockTimestamp": 1649178326,
+        "txID": "0x3917d573e68671dfdfff9d67161ba7ace33d04c1a0fa6ebe63ba48df02c7da7a",
+        "txOrigin": "0xc1a39d256959aa5e97784200f91ce63501dbd990"
+    },
+    "obsolete": false,
+    "recipient": "0x67e37c1896fe00284d7dcc7fdfc61810c10c004f",
+    "sender": "0xc1a39d256959aa5e97784200f91ce63501dbd990",
+    "token": "0"
+}
+
+```
+
 
 
 
@@ -879,7 +982,7 @@ There is a example transaction file in src/main/resources/exchange_example.xlsx,
  
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getChainTag {blockchain-server-url}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getChainTag http://localhost:8669
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getChainTag https://rpc.meter.io
 
 ChainTag:
 0x27
@@ -892,7 +995,7 @@ ChainTag:
 ```
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlockRef {blockchain-server-url}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlockRef http://localhost:8669
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlockRef https://rpc.meter.io
 
 BlockRef:
 0x0000695540f491a5
@@ -944,7 +1047,7 @@ The wallet created successfully and the key store is:
 ```
  java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlock {blockchain-server-url}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlock http://localhost:8669
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlock https://rpc.meter.io
 
 Block:
 {
@@ -975,7 +1078,7 @@ Block:
   
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransaction {transaction-id} {blockchain-server-url}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransaction 0x19dd77d28ef70be8c924319a6c08b996dd456fa36f29f2427dbda90087a8a897 http://localhost:8669
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransaction 0x19dd77d28ef70be8c924319a6c08b996dd456fa36f29f2427dbda90087a8a897 https://rpc.meter.io
 
 Transaction:
 {
@@ -1000,7 +1103,7 @@ Transaction:
   
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransactionReceipt {transaction-id} {blockchain-server-url}
   
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransactionReceipt 0x6b99c0f1ebfa3b9d93dcfc503f468104ac74271728841551aaa44115d080f5b5 http://localhost:8669
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransactionReceipt 0x6b99c0f1ebfa3b9d93dcfc503f468104ac74271728841551aaa44115d080f5b5 https://rpc.meter.io
   
 Receipt:
 {
@@ -1040,7 +1143,7 @@ Subscribe to all Events from node:
 
 ```
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents ws://localhost:8669
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents wss://ws.meter.io
 
 Event Response :{
   "address": "0x0d7365300e85fc87ef4da53ab05f1637dd4f73cc",
@@ -1066,7 +1169,7 @@ Subscribe to Transfer Events from node:
 
 ```
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfers {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfers ws://localhost:8669
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfers wss://ws.meter.io
 
 Transfer Response : {
     "amount": "0x16345785d8a0000",
@@ -1113,7 +1216,7 @@ Raw Transaction:
   
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signAndSend {blockchain-server-url} {privateKey} {your-file-path}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signAndSend http://localhost:8669 0xe0b80216ba7b880d85966b38fcd8f7253882bb1386b68b33a8e0b60775e947c0 src/main/resources/exchange_example.xlsx
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signAndSend https://rpc.meter.io 0xe0b80216ba7b880d85966b38fcd8f7253882bb1386b68b33a8e0b60775e947c0 src/main/resources/exchange_example.xlsx
   
 Send Result:
 {"id":"0xd751c50b81c1f13ebd86f4fcd0028a501b6c792fa8b5bbf64028b924a6b2efc9"}
@@ -1128,7 +1231,7 @@ Send Result:
   
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar sendRaw {blockchain-server-url} {raw}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar sendRaw http://localhost:8669 0xf8a3819a8702819f5cfc12d38202d0f842e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f80000808082a4108088f06f91293e58610dc0b84173346fba62605d510895a0d240b89a38e0b87fd8a58df2ce17075cd493e8e316528b4ed0f049cef1710936bbd4bd3af23eb3ffb3740dc0fb59db585714dbeaa001
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar sendRaw https://rpc.meter.io 0xf8a3819a8702819f5cfc12d38202d0f842e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f80000808082a4108088f06f91293e58610dc0b84173346fba62605d510895a0d240b89a38e0b87fd8a58df2ce17075cd493e8e316528b4ed0f049cef1710936bbd4bd3af23eb3ffb3740dc0fb59db585714dbeaa001
   
 Send Result:
 {"id":"0xd751c50b81c1f13ebd86f4fcd0028a501b6c792fa8b5bbf64028b924a6b2efc9"}

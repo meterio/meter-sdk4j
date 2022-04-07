@@ -35,12 +35,14 @@ public class SubscribeClientConsole {
                 return EventSubscribingResponse.class;
             }
 
-           
+            private String returnData(String data){
+                return data;
+            }
 
             @Override
             public void onSubscribe(EventSubscribingResponse response) {
                 System.out.println( "Event Response :" + JSON.toJSONString(response) );
-                
+                returnData(JSON.toJSONString(response));
                 
             }
 
@@ -78,12 +80,11 @@ public class SubscribeClientConsole {
             public Class<TransferSubscribingResponse> responseClass() {
                 return TransferSubscribingResponse.class;
             }
-          
+            
 
             @Override
             public void onSubscribe(TransferSubscribingResponse response) {
                 System.out.println( "Transfer Response :" + JSON.toJSONString(response) );
-               
             }
         };
         SubscribeSocket socket;

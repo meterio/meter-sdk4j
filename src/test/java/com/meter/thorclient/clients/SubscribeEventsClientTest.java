@@ -6,13 +6,13 @@ import com.meter.thorclient.base.BaseTest;
 import com.meter.thorclient.clients.base.SubscribeSocket;
 import com.meter.thorclient.clients.base.SubscribingCallback;
 import com.meter.thorclient.core.model.blockchain.EventSubscribingResponse;
-import org.eclipse.jetty.websocket.api.CloseStatus;
+
 import org.eclipse.jetty.websocket.api.Session;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.lang.reflect.Type;
+
 
 
 @RunWith(JUnit4.class)
