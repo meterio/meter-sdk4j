@@ -34,6 +34,10 @@ public class Main {
 
 	private static final String BALANCE = "balance";
 
+	private static final String SUBCRIBE_EVENTS = "subscribeEvents";
+
+	private static final String SUBCRIBE_TRANSFERS = "subscribeTransfers";
+
 	public static void main(String[] args) throws Exception {
 
 		try {
@@ -75,7 +79,16 @@ public class Main {
 				TransactionConsole.sendRawTransaction(args);
 			} else if (args[0].equals(PARSE)) {
 				ParserConsole.parse(args);
-			} else {
+			}
+			else if (args[0].equals(SUBCRIBE_EVENTS)) {
+				// events subscription
+				SubscribeClientConsole.subcribeEvents();
+			}
+			else if (args[0].equals(SUBCRIBE_TRANSFERS)) {
+				// transfers subscription
+				SubscribeClientConsole.subcribeTransfers();
+			}
+			else {
 				System.out.println("不支持的操作命令");
 			}
 		} catch (Exception e) {
@@ -93,6 +106,7 @@ public class Main {
 	private static String processConsoleArguments(String[] args) {
 		String privateKey = null;
 		String nodeProviderUrl = null;
+		String wsProviderUrl = null;
 		if (args[0].equals(CHAIN_TAG) || args[0].equals(BLOCK_REF) || args[0].equals(GET_BLOCK) || args[0].equals(SEND)
 				|| args[0].equals(SEND_RAW) || args[0].equals(TRANSFER_MTR) || args[0].equals(TRANSFER_MTRG)
 				|| args[0].equals(BALANCE)) {
@@ -116,6 +130,19 @@ public class Main {
 			}
 			NodeProvider nodeProvider = NodeProvider.getNodeProvider();
 			nodeProvider.setProvider(nodeProviderUrl);
+			nodeProvider.setSocketTimeout(5000);
+		}
+
+		if (args[0].equals(SUBCRIBE_EVENTS) || args[0].equals(SUBCRIBE_TRANSFERS)){
+			NodeProvider nodeProvider = NodeProvider.getNodeProvider();
+			if (args.length > 1 && !StringUtils.isBlank(args[1]) && args[1].startsWith("ws")) {
+				wsProviderUrl = args[1];
+			}
+			if (StringUtils.isBlank(wsProviderUrl)) {
+				System.out.println("You have input invalid parameters.");
+				System.exit(0);
+			}
+			nodeProvider.setWsProvider(wsProviderUrl);
 			nodeProvider.setSocketTimeout(5000);
 		}
 		return privateKey;

@@ -16,12 +16,19 @@ default package jar without dependencies,use -Pall to build all in one jar
 Thor Java Client SDK is licensed under the MIT LICENSE, also included in LICENSE file in the repository.
 - - - -
 
-## Set blockchain nodes provider
+## Set blockchain nodes provider (http)
 Set blockchain nodes sample as follows
 
 ```
 NodeProvider nodeProvider = NodeProvider.getNodeProvider();
 nodeProvider.setProvider("http://localhost:8669");
+nodeProvider.setTimeout(10000);
+```
+
+## Set blockchain nodes provider (websocket)
+```
+NodeProvider nodeProvider = NodeProvider.getNodeProvider();
+nodeProvider.setProvider("ws://localhost:8669");
 nodeProvider.setTimeout(10000);
 ```
 
@@ -31,6 +38,8 @@ nodeProvider.setTimeout(10000);
 There are some SDK specifications <a href="https://github.com/meter/thor-client-sdk4j/blob/dev/doc"> sdk4j doc </a>
 
 For JUnit Test example: there are some required parameters in config.properties file to support JUnit Test running. 
+
+
 
 ### WalletUtils
 
@@ -1024,6 +1033,39 @@ Receipt:
 }
   
 ```
+
+### Get Events
+
+Subscribe to all Events from node:
+
+```
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents {blockchain-websocket-url}
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents ws://localhost:8669
+
+Event Response :{"address":"0x0d7365300e85fc87ef4da53ab05f1637dd4f73cc","data":"0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000029a2241af62c0000000000000000000000000000000000000000000000000000227861fff7a67d430000000000000000000000000000000000000000000000000000000000000000","meta":{"blockID":"0x0159b0840446f85ce591c0cc060df058151ad624cb380af826d86b9d7aa82990","blockNumber":22655108,"blockTimestamp":1649181660,"txID":"0xe5d1afb3a84a3fd861b61f8bb716bed4d49662c65306b69d7fe046c0952ab06f","txOrigin":"0xc1a39d256959aa5e97784200f91ce63501dbd990"},"obsolete":false,"topics":["0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822","0x000000000000000000000000c6e88363ea74f31f514b56e979413b3ee8d76f39","0x000000000000000000000000c1a39d256959aa5e97784200f91ce63501dbd990"]}
+
+
+Subscribe to Transfer Events from node:
+
+```
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfers {blockchain-websocket-url}
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfers ws://localhost:8669
+
+Transfer Response : {
+    "amount": "0x16345785d8a0000",
+    "meta": {
+        "blockID": "0x0159abba6c731cf0746e3ce45dd753aacb13b12af7a2a5562b9b3004f8a050a4",
+        "blockNumber": 22653882,
+        "blockTimestamp": 1649178326,
+        "txID": "0x3917d573e68671dfdfff9d67161ba7ace33d04c1a0fa6ebe63ba48df02c7da7a",
+        "txOrigin": "0xc1a39d256959aa5e97784200f91ce63501dbd990"
+    },
+    "obsolete": false,
+    "recipient": "0x67e37c1896fe00284d7dcc7fdfc61810c10c004f",
+    "sender": "0xc1a39d256959aa5e97784200f91ce63501dbd990",
+    "token": "0"
+}
+
 
 #### Sign transactions: 
 
