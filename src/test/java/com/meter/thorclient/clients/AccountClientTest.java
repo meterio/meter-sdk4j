@@ -25,7 +25,7 @@ public class AccountClientTest extends BaseTest {
         Address address = Address.fromHexString(fromAddress);
         Account account = AccountClient.getAccountInfo(address, Revision.create( 22673346 ));
         logger.info("account info:" + JSON.toJSONString(account));
-        logger.info("MTR:" + account.MTRBalance().getAmount() + " Energy:" + account.energyBalance().getAmount());
+        logger.info("MTRG:" + account.MTRGBalance().getAmount() + " Energy:" + account.energyBalance().getAmount());
         Assert.assertNotNull(account);
     }
 

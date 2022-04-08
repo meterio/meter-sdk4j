@@ -48,6 +48,12 @@ public class Account implements Serializable {
         return balance;
     }
 
+    public Amount MTRGBalance(){
+        Amount balance = Amount.createFromToken( ERC20Token.MTRG );
+        balance.setHexAmount( this.balance );
+        return balance;
+    }
+
     /**
      * On meter mainnet, it has two native currencies, one is MTR, the other is MTRG
      * @return
