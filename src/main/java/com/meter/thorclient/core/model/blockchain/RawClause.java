@@ -10,16 +10,19 @@ public class RawClause  implements Serializable {
 
 	private byte[]	data;
 
+	private byte[] token;
+
 	public RawClause() {
 		to = new byte[] {};
 		value = new byte[] {};
 		data = new byte[] {};
 	}
 
-	public RawClause(byte[] to, byte[] value, byte[] data) {
+	public RawClause(byte[] to, byte[] value, byte[] data, byte[] token) {
 		this.to = to;
 		this.value = value;
 		this.data = data;
+		this.token = token;
 	}
 
 	public byte[] getTo() {
@@ -44,5 +47,13 @@ public class RawClause  implements Serializable {
 
 	public void setData(byte[] data) {
 		this.data = data;
+	}
+
+	public byte[] getToken() {
+		return token;
+	}
+
+	public void setToken(byte[] token) {
+		this.token = token;
 	}
 }

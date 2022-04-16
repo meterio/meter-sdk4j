@@ -319,21 +319,37 @@ raw=0xf902d6819a8702288058b9af928202d0f90273e094d3ef28df6b553ed2fc47259e8134319c
 #### Send MTRG to account:
 
 ```
-byte chainTag = BlockchainClient.getChainTag();
-// null means the best block
-byte[] blockRef = BlockClient.getBlock( null ).blockRef().toByteArray();
-Amount amount = Amount.createFromToken( ERC20Token.MTRG);
-amount.setDecimalAmount( "11.12" );
-// construct transaction clause
-ToClause clause = ERC20Contract.buildTranferToClause( 
-        ERC20Token.MTRG,                                                        // the default ERC20Token.MTRG
-        Address.fromHexString("0xc71ADC46c5891a8963Ea5A5eeAF578E0A2959779"),    // receiver address
-        amount);                                                                // transfer amount
-RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction( chainTag, blockRef, 720, 80000, (byte)0x0, CryptoUtils.generateTxNonce(), clause);
+    String toAmount = "0.1";
+		int gas = 1000000; // gasLimit
+		int expiration = 720;
+		byte gasCoef = (byte) 0x0;
+		String toAddress = "0x67E37c1896Fe00284D7dcC7fDfc61810C10C004F";
+		Address address = Address.fromHexString(toAddress);
+		Amount balance = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
+		if (balance != null) {
+			logger.info("Get MTRG before:" + balance.getAmount());
+		}
 
-TransferResult result = TransactionClient.signThenTransfer( rawTransaction, ECKeyPair.create( privateKey ) );
-logger.info( "transfer MTRhor result:" + JSON.toJSONString( result ) );
-result:{"id":"0xbae8e1cf5d61e6d8a9765dd21cdf35abe919fefc8335d9f9ead13aa3e7f12c83"}
+		Amount amount = Amount.MTRG();
+		amount.setDecimalAmount(toAmount);
+		TransferResult result = ERC20ContractClient.transferERC20Token(
+				new Address[] { Address.fromHexString(toAddress) }, new Amount[] { amount }, gas, gasCoef, expiration,
+				ECKeyPair.create(privateKey));
+		logger.info("sendERC20Token: " + JSON.toJSONString(result));
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+		}
+
+		Receipt receipt = TransactionClient.getTransactionReceipt(result.getId(), null);
+		logger.info("Receipt:" + JSON.toJSONString(receipt));
+
+		Amount balance2 = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
+		if (balance2 != null) {
+			logger.info("Get MTRG after:" + balance2.getAmount());
+		}
+		Assert.assertEquals(0,amount.getAmount().subtract(balance2.getAmount().subtract(balance.getAmount())).longValue());
 
 ```
 

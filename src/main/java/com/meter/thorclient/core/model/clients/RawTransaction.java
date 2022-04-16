@@ -3,6 +3,7 @@ package com.meter.thorclient.core.model.clients;
 import com.meter.thorclient.core.model.blockchain.RawClause;
 import com.meter.thorclient.utils.RLPUtils;
 
+
 public class RawTransaction {
     private byte chainTag; // 1 bytes
     private byte[] blockRef; //8 bytes

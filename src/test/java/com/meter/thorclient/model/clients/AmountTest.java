@@ -13,7 +13,7 @@ public class AmountTest extends BaseTest {
     public void testAmount(){
         String hex = "0x000000000000000000000000000000000000000000000000a688906bd8b00000";
         Amount amount = Amount.MTRG();
-        amount.setHexAmount( hex );
+        amount.setDecimalAmount( hex );
         logger.info( "Decimal amount:" + amount.getAmount().toString() );
     }
 

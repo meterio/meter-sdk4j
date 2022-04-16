@@ -57,6 +57,7 @@ public class RlpDecoder {
      * @return recursive RLP structure
      */
     public static RlpList decode(byte[] rlpEncoded) {
+      
         RlpList rlpList = new RlpList(new ArrayList<>());
         traverse(rlpEncoded, 0, rlpEncoded.length, rlpList);
         return rlpList;

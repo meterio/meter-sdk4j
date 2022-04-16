@@ -187,6 +187,10 @@ public class ERC20Contract extends AbstractContract {
         super(ERC20ABIString);
     }
 
+
+
+    
+
     /**
      * Build transfer to clause.
      * @param token required token to transfer.
@@ -213,7 +217,11 @@ public class ERC20Contract extends AbstractContract {
 
         ToData toData = new ToData();
         toData.setData( data );
-        return new ToClause(token.contractAddress, Amount.ZERO, toData);
+        
+      
+    
+     
+        return new ToClause(toAddress, amount, toData, Token.MTRG_TOKEN);
     }
 
 

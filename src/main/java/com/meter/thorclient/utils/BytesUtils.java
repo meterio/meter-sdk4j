@@ -139,7 +139,7 @@ public class BytesUtils {
     /**
      * Convert {@link BigInteger} value to {@link BigDecimal} value.
      * @param bgInt {@link BigInteger} value
-     * @param precision  the precision value for MTR and MTRhor it is 18, means 10 power 18
+     * @param precision  the precision value for VET and VeThor it is 18, means 10 power 18
      * @param scale the remain digits number of fractional part.
      * @return {@link BigDecimal} value.
      */

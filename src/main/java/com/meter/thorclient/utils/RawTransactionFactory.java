@@ -65,6 +65,7 @@ public class RawTransactionFactory {
 			rawClauses[index] = new RawClause();
 			rawClauses[index].setTo(clause.getTo().toByteArray());
 			rawClauses[index].setValue(clause.getValue().toByteArray());
+			rawClauses[index].setToken(clause.getToken().toByteArray());
 			rawClauses[index].setData(clause.getData().toByteArray());
 			index++;
 		}

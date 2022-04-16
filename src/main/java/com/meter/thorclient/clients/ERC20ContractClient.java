@@ -83,7 +83,7 @@ public class ERC20ContractClient extends TransactionClient {
 			}
 			ERC20Token token = (ERC20Token) amounts[index].getAbstractToken();
 			clauses[index] = ProtoTypeContract.buildToClause(token.getContractAddress(), abi,
-					receivers[index].toHexString(Prefix.ZeroLowerX), amounts[index].toBigInteger());
+			receivers[index].toHexString(Prefix.ZeroLowerX), amounts[index].toBigInteger());
 
 		}
 		return invokeContractMethod(clauses, gas, gasCoef, expiration, keyPair);

@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.meter.thorclient.clients.BlockchainClient;
 import com.meter.thorclient.clients.TransactionClient;
 import com.meter.thorclient.core.model.blockchain.TransferResult;
+import com.meter.thorclient.core.model.clients.Token;
 import com.meter.thorclient.core.model.clients.Address;
 import com.meter.thorclient.core.model.clients.Amount;
 import com.meter.thorclient.core.model.clients.ERC20Contract;

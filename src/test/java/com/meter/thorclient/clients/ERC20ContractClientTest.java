@@ -32,8 +32,8 @@ public class ERC20ContractClientTest extends BaseTest {
 
 	@Test
 	public void sendERC20Token() {
-		String toAmount = "1";
-		String toAddress = "0x733b7269443c70de16bbf9b0615307884bcc5636";
+		String toAmount = "0.01";
+		String toAddress = "0x67E37c1896Fe00284D7dcC7fDfc61810C10C004F";
 		Address address = Address.fromHexString(toAddress);
 		Amount balance = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
 		if (balance != null) {

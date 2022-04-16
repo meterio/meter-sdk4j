@@ -26,7 +26,8 @@ public class RLPUtils {
 
     private final static int To = 0;
     private final static int Value = 1;
-    private final static int Data = 2;
+    private final static int Token = 2;
+    private final static int Data = 3;
 
 
     public static byte[] encodeRawTransaction(RawTransaction rawTransaction){
@@ -77,6 +78,7 @@ public class RLPUtils {
             throw new IllegalArgumentException("getNonce is null");
         }
         result.add(RlpString.create(rawTransaction.getNonce()));
+       
 
         if(rawTransaction.getReserved() == null) {
             List<RlpType> reservedRlp = new ArrayList<>();
@@ -115,6 +117,12 @@ public class RLPUtils {
                 rlpClause.add(RlpString.create(RlpString.EMPTY ));
             }else {
                 rlpClause.add( RlpString.create( clause.getValue() ) );
+            }
+
+            if(clause.getToken() == null){
+                rlpClause.add(RlpString.create(RlpString.EMPTY ));
+            }else {
+                rlpClause.add( RlpString.create( clause.getToken() ) );
             }
 
             if(clause.getData() == null){
@@ -245,6 +253,9 @@ public class RLPUtils {
                     break;
                 case Value:
                     rawClause[clauseIndex].setValue( clause.getBytes() );
+                    break;
+                case Token:
+                    rawClause[clauseIndex].setToken( clause.getBytes() );
                     break;
                 case Data:
                     rawClause[clauseIndex].setData( clause.getBytes() );

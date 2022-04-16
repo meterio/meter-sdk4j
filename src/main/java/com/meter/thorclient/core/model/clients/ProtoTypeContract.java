@@ -6,7 +6,7 @@ import com.meter.thorclient.core.model.clients.base.AbstractContract;
  * Created by albertma on 2018/6/23.
  */
 public class ProtoTypeContract extends AbstractContract{
-    public  static final Address ContractAddress = Address.fromHexString( "0x000000000000000000000050726f746f74797065" );
+    public  static final Address ContractAddress = Address.fromHexString( "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3" );
 
 
     public static ProtoTypeContract defaultContract = new ProtoTypeContract();

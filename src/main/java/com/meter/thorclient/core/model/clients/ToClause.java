@@ -19,6 +19,13 @@ public class ToClause {
      */
     private  ToData data;
 
+      /**
+     * {@link Token} a token instance for to-clause to use.
+     */
+    private  Token token;
+
+
+
 
     public Address getTo() {
         return to;
@@ -44,16 +51,26 @@ public class ToClause {
         this.data = data;
     }
 
+    public Token getToken() {
+        return token;
+    }
+
+    public void setToken(Token token) {
+        this.token = token;
+    }
+
     /**
      * Constructor to new a instance.
      * @param to {@link Address}
      * @param value {@link Amount}
      * @param data {@link ToData}
+     * @param token {@link Token}
      */
-    public ToClause(Address to, Amount value, ToData data){
+    public ToClause(Address to, Amount value, ToData data, Token token){
         this.to = to;
         this.value = value;
         this.data = data;
+        this.token = token;
     }
 
 

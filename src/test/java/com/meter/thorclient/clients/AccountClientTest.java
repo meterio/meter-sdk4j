@@ -25,25 +25,25 @@ public class AccountClientTest extends BaseTest {
         Address address = Address.fromHexString(fromAddress);
         Account account = AccountClient.getAccountInfo(address, Revision.create( 22673346 ));
         logger.info("account info:" + JSON.toJSONString(account));
-        logger.info("MTRG:" + account.MTRGBalance().getAmount() + " Energy:" + account.energyBalance().getAmount());
+        logger.info("MTRG:" + account.MTRGBalance().getAmount() + " MTR:" + account.MTRBalance().getAmount());
         Assert.assertNotNull(account);
     }
 
-    // @Test
-    // public void testGetStorageAt() throws IOException {
-    //     byte[] address = BytesUtils.toByteArray(fromAddress);
-    //     StorageKey key = StorageKey.create(4, address);
-    //     StorageData data = AccountClient.getStorageAt(Address.MTRG_Address, key, null);
-    //     logger.info("Storage At:" + JSON.toJSONString(data));
-    //     Assert.assertNotNull(data);
-    // }
+    @Test
+    public void testGetStorageAt() throws IOException {
+        byte[] address = BytesUtils.toByteArray(fromAddress);
+        StorageKey key = StorageKey.create(4, address);
+        StorageData data = AccountClient.getStorageAt(Address.MTRG_Address, key, null);
+        logger.info("Storage At:" + JSON.toJSONString(data));
+        Assert.assertNotNull(data);
+    }
 
-    // @Test
-    // public void testGetCodeTest() throws IOException {
-    //     Address tokenAddr = Address.MTRG_Address;
-    //     AccountCode code = AccountClient.getAccountCode(tokenAddr, null);
-    //     logger.info("code:" + JSON.toJSONString(code));
-    //     Assert.assertNotNull(code);
-    // }
+    @Test
+    public void testGetCodeTest() throws IOException {
+        Address tokenAddr = Address.MTRG_Address;
+        AccountCode code = AccountClient.getAccountCode(tokenAddr, null);
+        logger.info("code:" + JSON.toJSONString(code));
+        Assert.assertNotNull(code);
+    }
 
 }

@@ -11,6 +11,7 @@ import com.meter.thorclient.core.model.clients.Address;
 import com.meter.thorclient.core.model.clients.Amount;
 import com.meter.thorclient.core.model.clients.ToClause;
 import com.meter.thorclient.core.model.clients.ToData;
+import com.meter.thorclient.core.model.clients.Token;
 import com.meter.thorclient.utils.ContractParamEncoder;
 import com.meter.thorclient.utils.StringUtils;
 
@@ -121,7 +122,7 @@ public class AbstractContract {
 		ToData toData = new ToData();
 		String data = buildData(abiDefinition, hexArguments);
 		toData.setData(data);
-		return new ToClause(toAddress, Amount.ZERO, toData);
+		return new ToClause(toAddress, Amount.ZERO, toData, Token.MTRG_TOKEN);
 	}
 
 	/**

@@ -17,6 +17,7 @@ public class Clause implements Serializable {
         this.value = value;
         this.data = data;
         this.token = token;
+      
     }
 
     public String getTo() {
@@ -50,5 +51,6 @@ public class Clause implements Serializable {
     public void setToken(String token) {
         this.token = token;
     }
+
 
 }

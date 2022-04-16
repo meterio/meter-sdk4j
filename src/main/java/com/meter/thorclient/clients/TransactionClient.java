@@ -14,6 +14,7 @@ import com.meter.thorclient.core.model.clients.RawTransaction;
 import com.meter.thorclient.core.model.clients.Revision;
 import com.meter.thorclient.core.model.clients.ToClause;
 import com.meter.thorclient.core.model.clients.ToData;
+import com.meter.thorclient.core.model.clients.Token;
 import com.meter.thorclient.core.model.exception.ClientArgumentException;
 import com.meter.thorclient.core.model.exception.ClientIOException;
 import com.meter.thorclient.utils.BlockchainUtils;
@@ -207,7 +208,9 @@ public class TransactionClient extends AbstractClient {
 		if (data == null) {
 			throw ClientArgumentException.exception("data is null");
 		}
-		return new ToClause(toAddress, amount, data);
+		Token token =  Token.fromHexString("0x");
+		
+		return new ToClause(toAddress, amount, data, token);
 	}
 
 	/**
@@ -222,7 +225,8 @@ public class TransactionClient extends AbstractClient {
 		}
 		ToData toData = new ToData();
 		toData.setData(contractHex);
-		return new ToClause(Address.NULL_ADDRESS, Amount.ZERO, toData);
+		Token token = Token.fromHexString("0x");
+		return new ToClause(Address.NULL_ADDRESS, Amount.ZERO, toData, token);
 	}
 
 	/**

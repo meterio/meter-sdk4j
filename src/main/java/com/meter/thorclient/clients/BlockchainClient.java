@@ -8,6 +8,7 @@ import com.meter.thorclient.core.model.clients.BlockRef;
 import com.meter.thorclient.core.model.clients.Revision;
 import com.meter.thorclient.core.model.exception.ClientIOException;
 import com.meter.thorclient.utils.BlockchainUtils;
+import com.meter.thorclient.core.model.clients.Revision;
 import com.meter.thorclient.utils.BytesUtils;
 
 /**
@@ -33,6 +34,10 @@ public class BlockchainClient extends AbstractClient{
         if(bytesId == null || bytesId.length != 32){
             throw new RuntimeException( " Genesis block id converted error" );
         }
+
+        Byte n = new Byte("82");
+
+       
         return bytesId[31];
     }
 
