@@ -12,6 +12,7 @@ public class MTRGEventSubscribingResponse {
     private String sender;
     private String recipient;
     private String amount;
+    private ArrayList<String> topics;
     private int token;
 
    
@@ -63,5 +64,13 @@ public class MTRGEventSubscribingResponse {
 
     public void setToken(int token) {
         this.token = token;
+    }
+
+    public ArrayList<String> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(ArrayList<String> topics) {
+        this.topics = topics;
     }
 }

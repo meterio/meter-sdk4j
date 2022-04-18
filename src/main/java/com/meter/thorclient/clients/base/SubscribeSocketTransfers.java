@@ -26,35 +26,15 @@ import com.alibaba.fastjson.serializer.ValueFilter;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 
- class EventTx  implements Serializable{
-    
-  
-
-    @JSONField(name = "txID")
-    private String txID;
-
-	
-	public String getTX() {
-	  return txID;
-	}
-
-	public String setTX(String tx) {
-		return this.txID = tx;
-	  }
-
-    public EventTx( String txID) {
-        super();
-        this.txID = txID;
-    }
-
-    // standard getters & setters
-}
 
 
 @WebSocket(maxTextMessageSize = 16 * 1024 * 1024)
 public class SubscribeSocketTransfers<T> {
 
 	private static Logger logger = LoggerFactory.getLogger(SubscribeSocket.class);
+
+	private static String MTRG_ADDRESS = "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3";
+	private static String TranferMethodAddress = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
 	private SubscribingCallback callback;
 	@SuppressWarnings("unused")
 	private Session session;
@@ -105,11 +85,13 @@ public class SubscribeSocketTransfers<T> {
 
 				public Object process(Object source, String name, Object value) {
 					if (name.equals("address")) {
-						return "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3";
+						return MTRG_ADDRESS;
 					}
 					return value;
 				}
 			};
+
+
 
 
 			
@@ -129,11 +111,29 @@ public class SubscribeSocketTransfers<T> {
 			
 
 			MTRGEventSubscribingResponse eventRes = JSON.parseObject(out.toString(), MTRGEventSubscribingResponse.class);
+          
+			 // check if it's a transfer event
+			if (eventRes.getTopics().get(0).toString().equals(TranferMethodAddress)){
+				logger.info("TXID : {} ", eventRes.getMeta().getTxID());
+				String hexId= eventRes.getMeta().getTxID();
+				String sender = eventRes.getMeta().getTxOrigin();
+				Transaction transaction = TransactionClient.getTransaction(hexId, false, null);
+				String dataHex = transaction.getClauses().get(0).getData();
+				
+            
+            	String recipient = HexUtils.getToAddress(dataHex);
+				String amount = HexUtils.getAmount(dataHex);
+				eventRes.setAmount(amount);
+				eventRes.setSender(sender);
+				eventRes.setRecipient(recipient);
+				eventRes.setToken(1);
+				eventRes.setTopics(null);
+				logger.info("Event Response :" + JSON.toJSONString(eventRes));
+			    //Object obj = JSONObject.parseObject(eventRes.toString(), callback.responseClass());
+			    callback.onSubscribe(eventRes);
+			}
 
-			logger.info("TXID : {} ", eventRes.getMeta().getTxID());
-			String hexId= eventRes.getMeta().getTxID();
-			String sender = eventRes.getMeta().getTxOrigin();
-			Transaction transaction = TransactionClient.getTransaction(hexId, false, null);
+			
 
 			//int clauseLength = transaction.getClauses().size();
 			// if (clauseLength > 1){
@@ -146,15 +146,7 @@ public class SubscribeSocketTransfers<T> {
 			
 
 			
-			String dataHex = transaction.getClauses().get(0).getData();
-				
-            
-            String recipient = HexUtils.getToAddress(dataHex);
-			String amount = HexUtils.getAmount(dataHex);
-			eventRes.setAmount(amount);
-			eventRes.setSender(sender);
-			eventRes.setRecipient(recipient);
-			eventRes.setToken(1);
+			
 				
 		
 			// logger.info("Data Hex :" + JSON.toJSONString(dataHex));
@@ -168,9 +160,7 @@ public class SubscribeSocketTransfers<T> {
 			// logger.info("Data Hex :" + JSON.toJSONString(dataHex));
 			// logger.info("Sender :" + JSON.toJSONString(sender));
 			// logger.info("Amount :" + JSON.toJSONString(amount));
-		    logger.info("Event Response :" + JSON.toJSONString(eventRes));
-			//Object obj = JSONObject.parseObject(eventRes.toString(), callback.responseClass());
-			callback.onSubscribe(eventRes);
+		    
 		}
 	}
 

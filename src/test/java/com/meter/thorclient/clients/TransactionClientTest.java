@@ -145,7 +145,7 @@ public class TransactionClientTest extends BaseTest {
 		byte chainTag = BlockchainClient.getChainTag();
 		byte[] blockRef = BlockchainClient.getBlockRef(Revision.BEST).toByteArray();
 		Amount amount = Amount.createFromToken(AbstractToken.MTR);
-		amount.setDecimalAmount("1");
+		amount.setDecimalAmount("0.1");
 		
 		
 		ToClause clause = TransactionClient.buildMTRToClause(

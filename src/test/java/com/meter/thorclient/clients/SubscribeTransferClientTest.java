@@ -70,7 +70,7 @@ public class SubscribeTransferClientTest extends BaseTest {
 
             @Override
             public void onSubscribe(MTRGEventSubscribingResponse response) {
-                logger.info( "MTRG Transfer Event :" + JSON.toJSONString(response) );
+                logger.info( "MTRG Transfer Response :" + JSON.toJSONString(response) );
             }
         };
         SubscribeSocketTransfers socket = SubscribeClient.subscribeMTRGTransfer( null,  callback);
