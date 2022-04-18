@@ -1205,7 +1205,7 @@ Subscribe to all Events from node:
 
 ```
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvent wss://ws.meter.io
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents wss://ws.meter.io
 
 Event Response :{
   "address": "0x0d7365300e85fc87ef4da53ab05f1637dd4f73cc",
@@ -1232,7 +1232,7 @@ Subscribe to ERC20 MTRG Transfers Events from node:
 
 ```
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeMTRGTransfers {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeMTRGTransfer wss://ws.meter.io
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeMTRGTransfers wss://ws.meter.io
 
 MTRG Transfer Response : {
     "amount": "0x38d7ea4c68000",
