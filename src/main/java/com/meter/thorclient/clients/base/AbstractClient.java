@@ -207,6 +207,48 @@ public abstract class AbstractClient {
 		return subscribeSocket;
 	}
 
+
+		/**
+	 * Make connection for subscription.
+	 * 
+	 * @param url      long live connection url.
+	 * @param callback {@link SubscribeSocket}
+	 * @return {@link SubscribeSocket}
+	 * @throws Exception
+	 */
+	public static SubscribeSocketTransfers subscribeSocketTransferConnect(String url, SubscribingCallback<?> callback) throws Exception {
+		if (StringUtils.isBlank(url) || callback == null) {
+			throw new ClientIOException("Invalid arguments ");
+		}
+		WebSocketClient client = new WebSocketClient();
+		SubscribeSocketTransfers subscribeSocket = new SubscribeSocketTransfers(client, callback);
+		try {
+			logger.info("subscribeSocketConnect start connect ... {}", url);
+			client.start();
+			URI subUri = new URI(url);
+			ClientUpgradeRequest request = new ClientUpgradeRequest();
+			Future<Session> f = client.connect(subscribeSocket, subUri, request);
+			logger.info("subscribeSocketConnect end connect...");
+			Session s = f.get(10, TimeUnit.SECONDS);
+			if (s.isOpen()) {
+				logger.info("subscribeSocketConnect success:{}", s.getRemoteAddress().toString());
+			} else {
+				logger.error("subscribeSocketConnect failed:{}", s.isOpen());
+			}
+		} catch (Exception e) {
+			logger.error("SubscribeSocket error", e);
+		} finally {
+			if (!subscribeSocket.isConnected()) {
+				logger.info("subscribeSocketConnect stop...");
+				try {
+					subscribeSocket.close(0, "WebSocket can't connect to: " + url);
+				} catch (Exception e) {
+					logger.error("SubscribeSocket stop error", e);
+				}
+			}
+		}
+		return subscribeSocket;
+	}
 	protected static HashMap<String, String> parameters(String[] keys, String[] values) {
 		if (keys == null || values == null || keys.length != values.length) {
 			throw ClientArgumentException.exception("Parameters creating failed");

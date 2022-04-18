@@ -12,6 +12,8 @@ public class Transaction implements Serializable {
     private long expiration;
     private ArrayList<Clause> clauses;
 
+    private String value;
+
     private int gasPriceCoef;
 
     private long gas;
@@ -114,6 +116,14 @@ public class Transaction implements Serializable {
 
     public void setOrigin(String origin) {
         this.origin = origin;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public TxMeta getMeta() {

@@ -8,6 +8,10 @@ public class EventSubscribingResponse {
     private String data;
     private boolean obsolete;
     private LogMeta meta;
+    private String sender;
+    private String recipient;
+    private String amount;
+    private int token;
 
     public ArrayList<String> getTopics() {
         return topics;
@@ -47,5 +51,37 @@ public class EventSubscribingResponse {
 
     public void setObsolete(boolean obsolete) {
         this.obsolete = obsolete;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public String getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public int getToken() {
+        return token;
+    }
+
+    public void setToken(int token) {
+        this.token = token;
     }
 }

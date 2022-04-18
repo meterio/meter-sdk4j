@@ -38,6 +38,8 @@ public class Main {
 
 	private static final String SUBCRIBE_TRANSFERS = "subscribeTransfers";
 
+	private static final String SUBCRIBE_MTRG_TRANSFERS = "subscribeMTRGTransfers";
+
 	public static void main(String[] args) throws Exception {
 
 		try {
@@ -82,11 +84,15 @@ public class Main {
 			}
 			else if (args[0].equals(SUBCRIBE_EVENTS)) {
 				// events subscription
-				SubscribeClientConsole.subcribeEvents();
+				SubscribeClientConsole.subcribeEvent();
 			}
 			else if (args[0].equals(SUBCRIBE_TRANSFERS)) {
 				// transfers subscription
-				SubscribeClientConsole.subcribeTransfers();
+				SubscribeClientConsole.subcribeTransfer();
+			}
+			else if (args[0].equals(SUBCRIBE_MTRG_TRANSFERS)) {
+				// transfers subscription
+				SubscribeClientConsole.subscribeMTRGTransfer();
 			}
 			else {
 				System.out.println("不支持的操作命令");
@@ -133,7 +139,7 @@ public class Main {
 			nodeProvider.setSocketTimeout(5000);
 		}
 
-		if (args[0].equals(SUBCRIBE_EVENTS) || args[0].equals(SUBCRIBE_TRANSFERS)){
+		if (args[0].equals(SUBCRIBE_EVENTS) || args[0].equals(SUBCRIBE_TRANSFERS) || args[0].equals(SUBCRIBE_MTRG_TRANSFERS)){
 			NodeProvider nodeProvider = NodeProvider.getNodeProvider();
 			if (args.length > 1 && !StringUtils.isBlank(args[1]) && args[1].startsWith("ws")) {
 				wsProviderUrl = args[1];

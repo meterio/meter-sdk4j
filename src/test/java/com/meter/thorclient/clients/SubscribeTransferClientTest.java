@@ -5,6 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.meter.thorclient.base.BaseTest;
 import com.meter.thorclient.clients.base.SubscribeSocket;
 import com.meter.thorclient.clients.base.SubscribingCallback;
+
+import com.meter.thorclient.core.model.blockchain.MTRGEventSubscribingResponse;
+import com.meter.thorclient.clients.base.SubscribeSocketTransfers;
 import com.meter.thorclient.core.model.blockchain.TransferSubscribingResponse;
 
 import org.eclipse.jetty.websocket.api.Session;
@@ -46,4 +49,32 @@ public class SubscribeTransferClientTest extends BaseTest {
         socket.close( 0, "user close" );
     }
     
+
+    @Test
+    public void testSubscribeMTRGTransfer() throws Exception {
+        SubscribingCallback<MTRGEventSubscribingResponse> callback = new SubscribingCallback<MTRGEventSubscribingResponse>() {
+            @Override
+            public void onClose(int statusCode, String reason) {
+                logger.info( "on close:" + statusCode + " reason:" + reason );
+            }
+
+            @Override
+            public void onConnect(Session session) {
+                logger.info( "On connect:" + session.toString() );
+            }
+
+            @Override
+            public Class<MTRGEventSubscribingResponse> responseClass() {
+                return MTRGEventSubscribingResponse.class;
+            }
+
+            @Override
+            public void onSubscribe(MTRGEventSubscribingResponse response) {
+                logger.info( "MTRG Transfer Event :" + JSON.toJSONString(response) );
+            }
+        };
+        SubscribeSocketTransfers socket = SubscribeClient.subscribeMTRGTransfer( null,  callback);
+        Thread.sleep( 20000 );
+        socket.close( 0, "user close" );
+    }
 }

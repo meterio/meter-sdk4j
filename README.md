@@ -94,7 +94,7 @@ Event Response :{
 
 ```
 
-Subscribe to Transfer Events from node:
+Subscribe to Native (MTR) Transfer Events from node :
 
 ```
 
@@ -136,9 +136,55 @@ Transfer Response : {
     "obsolete": false,
     "recipient": "0x67e37c1896fe00284d7dcc7fdfc61810c10c004f",
     "sender": "0xc1a39d256959aa5e97784200f91ce63501dbd990",
-    "token": "0"
+    "token": 0
 }
 
+```
+
+Subscribe to ERC20 (MTRG) Transfer Events from node :
+
+```
+
+ SubscribingCallback<MTRGEventSubscribingResponse> callback = new SubscribingCallback<MTRGEventSubscribingResponse>() {
+            @Override
+            public void onClose(int statusCode, String reason) {
+                logger.info( "on close:" + statusCode + " reason:" + reason );
+            }
+
+            @Override
+            public void onConnect(Session session) {
+                logger.info( "On connect:" + session.toString() );
+            }
+
+            @Override
+            public Class<MTRGEventSubscribingResponse> responseClass() {
+                return MTRGEventSubscribingResponse.class;
+            }
+
+            @Override
+            public void onSubscribe(MTRGEventSubscribingResponse response) {
+                logger.info( "MTRG Transfer Response :" + JSON.toJSONString(response) );
+            }
+        };
+        SubscribeSocketTransfers socket = SubscribeClient.subscribeMTRGTransfer( null,  callback);
+        Thread.sleep( 20000 );
+        socket.close( 0, "user close" );
+    }
+
+MTRG Transfer Response : {
+    "amount": "0x38d7ea4c68000",
+    "meta": {
+        "blockID": "0x015fac0e480ea4801c5c6e222935e72db72fedacf7cc229d2aa16b430957f030",
+        "blockNumber": 23047182,
+        "blockTimestamp": 1650276632,
+        "txID": "0x897f7fbccfd50e6fe5be13fc89ff3e17c2ef469f275f1c05a013de4c313d49a7",
+        "txOrigin": "0xc1a39d256959aa5e97784200f91ce63501dbd990"
+    },
+    "obsolete": false,
+    "recipient": "0x67e37c1896fe00284d7dcc7fdfc61810c10c004f",
+    "sender": "0xc1a39d256959aa5e97784200f91ce63501dbd990",
+    "token": 1
+}
 ```
 
 
@@ -1158,8 +1204,8 @@ Receipt:
 Subscribe to all Events from node:
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents wss://ws.meter.io
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvent {blockchain-websocket-url}
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvent wss://ws.meter.io
 
 Event Response :{
   "address": "0x0d7365300e85fc87ef4da53ab05f1637dd4f73cc",
@@ -1179,13 +1225,36 @@ Event Response :{
   ]
 }
 
-```
-
-Subscribe to Transfer Events from node:
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfers {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfers wss://ws.meter.io
+
+Subscribe to ERC20 MTRG Transfers Events from node:
+
+```
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeMTRGTransfer {blockchain-websocket-url}
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeMTRGTransfer wss://ws.meter.io
+
+MTRG Transfer Response : {
+    "amount": "0x38d7ea4c68000",
+    "meta": {
+        "blockID": "0x015fac0e480ea4801c5c6e222935e72db72fedacf7cc229d2aa16b430957f030",
+        "blockNumber": 23047182,
+        "blockTimestamp": 1650276632,
+        "txID": "0x897f7fbccfd50e6fe5be13fc89ff3e17c2ef469f275f1c05a013de4c313d49a7",
+        "txOrigin": "0xc1a39d256959aa5e97784200f91ce63501dbd990"
+    },
+    "obsolete": false,
+    "recipient": "0x67e37c1896fe00284d7dcc7fdfc61810c10c004f",
+    "sender": "0xc1a39d256959aa5e97784200f91ce63501dbd990",
+    "token": 1
+}
+```
+
+Subscribe to Native MTR Transfers Events from node:
+
+```
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfer {blockchain-websocket-url}
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfer wss://ws.meter.io
 
 Transfer Response : {
     "amount": "0x16345785d8a0000",
@@ -1199,7 +1268,7 @@ Transfer Response : {
     "obsolete": false,
     "recipient": "0x67e37c1896fe00284d7dcc7fdfc61810c10c004f",
     "sender": "0xc1a39d256959aa5e97784200f91ce63501dbd990",
-    "token": "0"
+    "token": 0
 }
 ```
 

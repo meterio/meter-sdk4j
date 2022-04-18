@@ -46,9 +46,7 @@ public class LogsClientTest extends BaseTest {
 
 		logFilter.addTopicSet(Address.MTRG_Address.toHexString(null), abiMethodHexString,
 				"0x000000000000000000000000" + fromAddress.substring(2), null, null, null);
-		logFilter.addTopicSet(Address.MTRG_Address.toHexString(null), abiMethodHexString, null,
-				"0x000000000000000000000000" + fromAddress.substring(2), null, null);
-
+		
 		ArrayList<FilteredLogEvent> filteredEvents = LogsClient.getFilteredLogEvents(logFilter);
 		for (FilteredLogEvent filteredTransferEvent : filteredEvents) {
 			logger.info("filteredTransferEvent:{}", JSONObject.toJSONString(filteredTransferEvent));
@@ -57,15 +55,16 @@ public class LogsClientTest extends BaseTest {
 
 	@Test
 	public void testTransferLogs() throws ClientArgumentException {
+
+		
 		Block block = BlockClient.getBlock(null);
 
 		TransferredFilter transferredFilter = TransferredFilter
 				.createFilter(Range.createBlockRange(0, Long.parseLong(block.getNumber())), Options.create(0, 10));
 
-		transferredFilter.addTransferCriteria(null, Address.fromHexString("0x733b7269443c70de16bbf9b0615307884bcc5636"),
-				null);
 		transferredFilter.addTransferCriteria(null, null,
-				Address.fromHexString("0x90840190af69dbaac6d1398e521cfb64b2f33fac"));
+				null);
+		
 		transferredFilter.setOrder(Order.DESC.getValue());
 		ArrayList<FilteredTransferEvent> transferLogs = LogsClient.getFilteredTransferLogs(transferredFilter);
 		logger.info("transferLogs:{}", JSONObject.toJSONString(transferLogs));

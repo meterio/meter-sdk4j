@@ -16,7 +16,7 @@ import org.junit.runners.JUnit4;
 
 
 @RunWith(JUnit4.class)
-public class SubscribeEventsClientTest extends BaseTest {
+public class SubscribeEventClientTest extends BaseTest {
 
     @Test
     public void testSubscribeEvent() throws Exception {
