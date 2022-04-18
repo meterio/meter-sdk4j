@@ -38,7 +38,7 @@ public class Main {
 
 	private static final String SUBCRIBE_TRANSFERS = "subscribeTransfers";
 
-	private static final String SUBCRIBE_MTRG_TRANSFERS = "subscribeMTRGTransfers";
+	private static final String SUBCRIBE_SYS_CONTRACT_TRANSFERS = "subscribeSysContractTransfers";
 
 	public static void main(String[] args) throws Exception {
 
@@ -90,15 +90,15 @@ public class Main {
 				// transfers subscription
 				SubscribeClientConsole.subcribeTransfer();
 			}
-			else if (args[0].equals(SUBCRIBE_MTRG_TRANSFERS)) {
+			else if (args[0].equals(SUBCRIBE_SYS_CONTRACT_TRANSFERS)) {
 				// transfers subscription
-				SubscribeClientConsole.subscribeMTRGTransfer();
+				SubscribeClientConsole.subscribeSysContractTransfer();
 			}
 			else {
-				System.out.println("不支持的操作命令");
+				System.out.println("Incorrect Command");
 			}
 		} catch (Exception e) {
-			System.out.println("操作失败 " + e.getMessage());
+			System.out.println("Incorrect command " + e.getMessage());
 		}
 	}
 
@@ -139,7 +139,7 @@ public class Main {
 			nodeProvider.setSocketTimeout(5000);
 		}
 
-		if (args[0].equals(SUBCRIBE_EVENTS) || args[0].equals(SUBCRIBE_TRANSFERS) || args[0].equals(SUBCRIBE_MTRG_TRANSFERS)){
+		if (args[0].equals(SUBCRIBE_EVENTS) || args[0].equals(SUBCRIBE_TRANSFERS) || args[0].equals(SUBCRIBE_SYS_CONTRACT_TRANSFERS)){
 			NodeProvider nodeProvider = NodeProvider.getNodeProvider();
 			if (args.length > 1 && !StringUtils.isBlank(args[1]) && args[1].startsWith("ws")) {
 				wsProviderUrl = args[1];

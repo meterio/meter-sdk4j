@@ -27,6 +27,9 @@ import com.meter.thorclient.utils.Prefix;
 import com.meter.thorclient.utils.StringUtils;
 import com.meter.thorclient.utils.URLUtils;
 
+
+
+
 public abstract class AbstractClient {
 
 	private static Logger logger = LoggerFactory.getLogger(AbstractClient.class);
@@ -174,6 +177,8 @@ public abstract class AbstractClient {
 	 * @throws Exception
 	 */
 	public static SubscribeSocket subscribeSocketConnect(String url, SubscribingCallback<?> callback) throws Exception {
+		System.setProperty("org.eclipse.jetty.util.log.class", "org.eclipse.jetty.util.log.StdErrLog");
+        System.setProperty("org.eclipse.jetty.LEVEL", "OFF");
 		if (StringUtils.isBlank(url) || callback == null) {
 			throw new ClientIOException("Invalid arguments ");
 		}
@@ -216,12 +221,14 @@ public abstract class AbstractClient {
 	 * @return {@link SubscribeSocket}
 	 * @throws Exception
 	 */
-	public static SubscribeSocketTransfers subscribeSocketTransferConnect(String url, SubscribingCallback<?> callback) throws Exception {
+	public static SubscribeSysContractSocket subscribeSocketTransferConnect(String url, SubscribingCallback<?> callback) throws Exception {
+		System.setProperty("org.eclipse.jetty.util.log.class", "org.eclipse.jetty.util.log.StdErrLog");
+        System.setProperty("org.eclipse.jetty.LEVEL", "OFF");
 		if (StringUtils.isBlank(url) || callback == null) {
 			throw new ClientIOException("Invalid arguments ");
 		}
 		WebSocketClient client = new WebSocketClient();
-		SubscribeSocketTransfers subscribeSocket = new SubscribeSocketTransfers(client, callback);
+		SubscribeSysContractSocket subscribeSocket = new SubscribeSysContractSocket(client, callback);
 		try {
 			logger.info("subscribeSocketConnect start connect ... {}", url);
 			client.start();

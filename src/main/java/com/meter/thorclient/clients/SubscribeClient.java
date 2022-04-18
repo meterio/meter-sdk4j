@@ -3,7 +3,7 @@ package com.meter.thorclient.clients;
 import com.meter.thorclient.clients.base.AbstractClient;
 import com.meter.thorclient.clients.base.SubscribeSocket;
 
-import com.meter.thorclient.clients.base.SubscribeSocketTransfers;
+import com.meter.thorclient.clients.base.SubscribeSysContractSocket;
 import com.meter.thorclient.clients.base.SubscribingCallback;
 
 import com.meter.thorclient.core.model.blockchain.*;
@@ -45,7 +45,7 @@ public class SubscribeClient extends AbstractClient {
      * @param callback the callback instance.
      * @return
      */
-    public static SubscribeSocketTransfers subscribeMTRGTransfer(EventSubscribingRequest request, SubscribingCallback<MTRGEventSubscribingResponse> callback) throws Exception {
+    public static SubscribeSysContractSocket subscribeSysContractTransfer(EventSubscribingRequest request, SubscribingCallback<SysContractSubscribingResponse> callback) throws Exception {
         String url = compositeSubscribeURI(Path.GetSubEventPath.getPath(), request);
         return subscribeSocketTransferConnect( url, callback );
     }

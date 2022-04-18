@@ -94,7 +94,7 @@ Event Response :{
 
 ```
 
-Subscribe to Native (MTR) Transfer Events from node :
+Subscribe to Native Transfer Events from node :
 
 ```
 
@@ -141,37 +141,37 @@ Transfer Response : {
 
 ```
 
-Subscribe to ERC20 (MTRG) Transfer Events from node :
+Subscribe to ERC20 System Contract Transfer Events from node :
 
 ```
 
- SubscribingCallback<MTRGEventSubscribingResponse> callback = new SubscribingCallback<MTRGEventSubscribingResponse>() {
+  SubscribingCallback<SysContractSubscribingResponse> callback = new SubscribingCallback<SysContractSubscribingResponse>() {
             @Override
             public void onClose(int statusCode, String reason) {
-                logger.info( "on close:" + statusCode + " reason:" + reason );
+                System.out.println( "Closed :" + statusCode);
             }
 
             @Override
             public void onConnect(Session session) {
-                logger.info( "On connect:" + session.toString() );
+                System.out.println( "Connected");
             }
 
             @Override
-            public Class<MTRGEventSubscribingResponse> responseClass() {
-                return MTRGEventSubscribingResponse.class;
+            public Class<SysContractSubscribingResponse> responseClass() {
+                return SysContractSubscribingResponse.class;
             }
 
             @Override
-            public void onSubscribe(MTRGEventSubscribingResponse response) {
-                logger.info( "MTRG Transfer Response :" + JSON.toJSONString(response) );
+            public void onSubscribe(SysContractSubscribingResponse response) {
+                System.out.println( "Transfer Response :" + JSON.toJSONString(response) );
             }
         };
-        SubscribeSocketTransfers socket = SubscribeClient.subscribeMTRGTransfer( null,  callback);
+        SubscribeSysContractSocket socket = SubscribeClient.subscribeSysContractTransfer( null,  callback);
         Thread.sleep( 20000 );
         socket.close( 0, "user close" );
     }
 
-MTRG Transfer Response : {
+Transfer Response : {
     "amount": "0x38d7ea4c68000",
     "meta": {
         "blockID": "0x015fac0e480ea4801c5c6e222935e72db72fedacf7cc229d2aa16b430957f030",
@@ -1228,13 +1228,13 @@ Event Response :{
 
 ```
 
-Subscribe to ERC20 MTRG Transfers Events from node:
+Subscribe to ERC20 System Contract Transfer Events from node:
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeMTRGTransfers {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeMTRGTransfers wss://ws.meter.io
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfers {blockchain-websocket-url}
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfers wss://ws.meter.io
 
-MTRG Transfer Response : {
+ Transfer Response : {
     "amount": "0x38d7ea4c68000",
     "meta": {
         "blockID": "0x015fac0e480ea4801c5c6e222935e72db72fedacf7cc229d2aa16b430957f030",
@@ -1250,7 +1250,7 @@ MTRG Transfer Response : {
 }
 ```
 
-Subscribe to Native MTR Transfers Events from node:
+Subscribe to Native Transfers Events from node:
 
 ```
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfers {blockchain-websocket-url}

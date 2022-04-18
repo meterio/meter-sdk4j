@@ -24,7 +24,7 @@ import java.lang.reflect.Array;
 @RunWith(JUnit4.class)
 public class TransactionClientTest extends BaseTest {
 
-	static String hexId = "0x13337e07a3c4f9321b0fdb24c646ff19771d2980d8aaee2e857ff5e76a6f0f19";
+	static String hexId = "0x30d4ca21549a62516ed7572aa7a2a6dad2ed934aaecad8324072ad5fadaf79d6";
 	static String addUserTxId = "0x652b5c0f68d03fed86625969ad38e0634993f8da950126518b0c02e6e630d3de";
 	static String removeUserTxId = "0x3bec812d64615584414595e050bb52be9c0807cb1c05dc2ea9286a1e7c6a4da0";
 	static String setUserPlanTxId = "0x9dbdd7dc102eafe882f9e084ca01671ae8eebe59751ffcfbd1abfeb5cb687846";

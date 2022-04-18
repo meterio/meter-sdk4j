@@ -2,11 +2,11 @@ package com.meter.thorclient.console;
 import com.alibaba.fastjson.JSON;
 
 import com.meter.thorclient.clients.base.SubscribeSocket;
-import com.meter.thorclient.clients.base.SubscribeSocketTransfers;
+import com.meter.thorclient.clients.base.SubscribeSysContractSocket;
 import com.meter.thorclient.clients.base.SubscribingCallback;
 import com.meter.thorclient.clients.SubscribeClient;
 import com.meter.thorclient.core.model.blockchain.EventSubscribingResponse;
-import com.meter.thorclient.core.model.blockchain.MTRGEventSubscribingResponse;
+import com.meter.thorclient.core.model.blockchain.SysContractSubscribingResponse;
 import com.meter.thorclient.core.model.blockchain.TransferSubscribingResponse;
 
 import org.eclipse.jetty.websocket.api.Session;
@@ -24,12 +24,12 @@ public class SubscribeClientConsole {
         SubscribingCallback<EventSubscribingResponse> callback = new SubscribingCallback<EventSubscribingResponse>() {
             @Override
             public void onClose(int statusCode, String reason) {
-            System.out.println( "on close:" + statusCode + " reason:" + reason );
+            System.out.println( "Closed: " + statusCode );
             }
 
             @Override
             public void onConnect(Session session) {
-                System.out.println( "On connect:" + session.toString() );
+                System.out.println( "Connected");
             }
 
             @Override
@@ -70,12 +70,12 @@ public class SubscribeClientConsole {
         SubscribingCallback<TransferSubscribingResponse> callback = new SubscribingCallback<TransferSubscribingResponse>() {
             @Override
             public void onClose(int statusCode, String reason) {
-                System.out.println( "on close:" + statusCode + " reason:" + reason );
+                System.out.println( "Closed: " + statusCode );
             }
 
             @Override
             public void onConnect(Session session) {
-                System.out.println( "On connect:" + session.toString() );
+                System.out.println( "Connected");
             }
 
             @Override
@@ -104,29 +104,29 @@ public class SubscribeClientConsole {
     }	
 
     
-    public static void subscribeMTRGTransfer() throws Exception {
-        SubscribingCallback<MTRGEventSubscribingResponse> callback = new SubscribingCallback<MTRGEventSubscribingResponse>() {
+    public static void subscribeSysContractTransfer() throws Exception {
+        SubscribingCallback<SysContractSubscribingResponse> callback = new SubscribingCallback<SysContractSubscribingResponse>() {
             @Override
             public void onClose(int statusCode, String reason) {
-                System.out.println( "on close:" + statusCode + " reason:" + reason );
+                System.out.println( "Closed :" + statusCode);
             }
 
             @Override
             public void onConnect(Session session) {
-                System.out.println( "On connect:" + session.toString() );
+                System.out.println( "Connected");
             }
 
             @Override
-            public Class<MTRGEventSubscribingResponse> responseClass() {
-                return MTRGEventSubscribingResponse.class;
+            public Class<SysContractSubscribingResponse> responseClass() {
+                return SysContractSubscribingResponse.class;
             }
 
             @Override
-            public void onSubscribe(MTRGEventSubscribingResponse response) {
-                System.out.println( "MTRG Transfer Response :" + JSON.toJSONString(response) );
+            public void onSubscribe(SysContractSubscribingResponse response) {
+                System.out.println( "Transfer Response :" + JSON.toJSONString(response) );
             }
         };
-        SubscribeSocketTransfers socket = SubscribeClient.subscribeMTRGTransfer( null,  callback);
+        SubscribeSysContractSocket socket = SubscribeClient.subscribeSysContractTransfer( null,  callback);
         Thread.sleep( 20000 );
         socket.close( 0, "user close" );
     }

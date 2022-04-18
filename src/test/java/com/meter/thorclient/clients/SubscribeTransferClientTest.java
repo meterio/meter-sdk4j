@@ -6,8 +6,8 @@ import com.meter.thorclient.base.BaseTest;
 import com.meter.thorclient.clients.base.SubscribeSocket;
 import com.meter.thorclient.clients.base.SubscribingCallback;
 
-import com.meter.thorclient.core.model.blockchain.MTRGEventSubscribingResponse;
-import com.meter.thorclient.clients.base.SubscribeSocketTransfers;
+import com.meter.thorclient.core.model.blockchain.SysContractSubscribingResponse;
+import com.meter.thorclient.clients.base.SubscribeSysContractSocket;
 import com.meter.thorclient.core.model.blockchain.TransferSubscribingResponse;
 
 import org.eclipse.jetty.websocket.api.Session;
@@ -51,8 +51,8 @@ public class SubscribeTransferClientTest extends BaseTest {
     
 
     @Test
-    public void testSubscribeMTRGTransfer() throws Exception {
-        SubscribingCallback<MTRGEventSubscribingResponse> callback = new SubscribingCallback<MTRGEventSubscribingResponse>() {
+    public void testSubscribeSysContractTransfer() throws Exception {
+        SubscribingCallback<SysContractSubscribingResponse> callback = new SubscribingCallback<SysContractSubscribingResponse>() {
             @Override
             public void onClose(int statusCode, String reason) {
                 logger.info( "on close:" + statusCode + " reason:" + reason );
@@ -64,16 +64,16 @@ public class SubscribeTransferClientTest extends BaseTest {
             }
 
             @Override
-            public Class<MTRGEventSubscribingResponse> responseClass() {
-                return MTRGEventSubscribingResponse.class;
+            public Class<SysContractSubscribingResponse> responseClass() {
+                return SysContractSubscribingResponse.class;
             }
 
             @Override
-            public void onSubscribe(MTRGEventSubscribingResponse response) {
-                logger.info( "MTRG Transfer Response :" + JSON.toJSONString(response) );
+            public void onSubscribe(SysContractSubscribingResponse response) {
+                logger.info( "Transfer Response :" + JSON.toJSONString(response) );
             }
         };
-        SubscribeSocketTransfers socket = SubscribeClient.subscribeMTRGTransfer( null,  callback);
+        SubscribeSysContractSocket socket = SubscribeClient.subscribeSysContractTransfer( null,  callback);
         Thread.sleep( 20000 );
         socket.close( 0, "user close" );
     }

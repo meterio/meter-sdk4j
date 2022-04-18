@@ -23,12 +23,12 @@ public class SubscribeEventClientTest extends BaseTest {
         SubscribingCallback<EventSubscribingResponse> callback = new SubscribingCallback<EventSubscribingResponse>() {
             @Override
             public void onClose(int statusCode, String reason) {
-                logger.info( "on close:" + statusCode + " reason:" + reason );
+                logger.info( "Closed: " + statusCode);
             }
 
             @Override
             public void onConnect(Session session) {
-                logger.info( "On connect:" + session.toString() );
+                logger.info( "Connected" );
             }
 
             @Override

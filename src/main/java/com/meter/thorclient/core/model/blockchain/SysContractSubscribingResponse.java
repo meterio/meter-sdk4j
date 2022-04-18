@@ -3,7 +3,7 @@ package com.meter.thorclient.core.model.blockchain;
 
 import java.util.ArrayList;
 
-public class MTRGEventSubscribingResponse {
+public class SysContractSubscribingResponse {
   
  
   
@@ -14,8 +14,17 @@ public class MTRGEventSubscribingResponse {
     private String amount;
     private ArrayList<String> topics;
     private int token;
+    private String address;
 
    
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public LogMeta getMeta() {
         return meta;
