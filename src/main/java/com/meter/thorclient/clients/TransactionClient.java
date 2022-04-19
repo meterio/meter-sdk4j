@@ -28,7 +28,7 @@ import com.meter.thorclient.utils.crypto.ECKeyPair;
 
 public class TransactionClient extends AbstractClient {
 
-	public final static int ContractGasLimit = 21000;
+	public final static int ContractGasLimit = 30000;
 
 	/**
 	 * Get transaction by transaction Id.

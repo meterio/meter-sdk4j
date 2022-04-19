@@ -172,18 +172,21 @@ Subscribe to ERC20 System Contract Transfer Events from node :
     }
 
 Transfer Response : {
-    "amount": "0x38d7ea4c68000",
+    "address": "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3",
     "meta": {
-        "blockID": "0x015fac0e480ea4801c5c6e222935e72db72fedacf7cc229d2aa16b430957f030",
-        "blockNumber": 23047182,
-        "blockTimestamp": 1650276632,
-        "txID": "0x897f7fbccfd50e6fe5be13fc89ff3e17c2ef469f275f1c05a013de4c313d49a7",
+        "blockID": "0x01603797bce503321075059149496d4820067d1884c8efc1d77459daeaf78d6c",
+        "blockNumber": 23082903,
+        "blockTimestamp": 1650380078,
+        "txID": "0x189372b40bba374d57a66377d23dbbeb5305e5578090ea0778bd145164731349",
         "txOrigin": "0xc1a39d256959aa5e97784200f91ce63501dbd990"
     },
     "obsolete": false,
-    "recipient": "0x67e37c1896fe00284d7dcc7fdfc61810c10c004f",
-    "sender": "0xc1a39d256959aa5e97784200f91ce63501dbd990",
-    "token": 1
+    "token": 0,
+    "topics": [
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+        "0x000000000000000000000000c1a39d256959aa5e97784200f91ce63501dbd990",
+        "0x00000000000000000000000067e37c1896fe00284d7dcc7fdfc61810c10c004f"
+    ]
 }
 ```
 
@@ -1235,18 +1238,21 @@ java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContrac
 e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfers wss://ws.meter.io
 
  Transfer Response : {
-    "amount": "0x38d7ea4c68000",
+    "address": "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3",
     "meta": {
-        "blockID": "0x015fac0e480ea4801c5c6e222935e72db72fedacf7cc229d2aa16b430957f030",
-        "blockNumber": 23047182,
-        "blockTimestamp": 1650276632,
-        "txID": "0x897f7fbccfd50e6fe5be13fc89ff3e17c2ef469f275f1c05a013de4c313d49a7",
+        "blockID": "0x01603797bce503321075059149496d4820067d1884c8efc1d77459daeaf78d6c",
+        "blockNumber": 23082903,
+        "blockTimestamp": 1650380078,
+        "txID": "0x189372b40bba374d57a66377d23dbbeb5305e5578090ea0778bd145164731349",
         "txOrigin": "0xc1a39d256959aa5e97784200f91ce63501dbd990"
     },
     "obsolete": false,
-    "recipient": "0x67e37c1896fe00284d7dcc7fdfc61810c10c004f",
-    "sender": "0xc1a39d256959aa5e97784200f91ce63501dbd990",
-    "token": 1
+    "token": 0,
+    "topics": [
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+        "0x000000000000000000000000c1a39d256959aa5e97784200f91ce63501dbd990",
+        "0x00000000000000000000000067e37c1896fe00284d7dcc7fdfc61810c10c004f"
+    ]
 }
 ```
 

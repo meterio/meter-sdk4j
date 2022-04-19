@@ -151,7 +151,7 @@ public class TransactionClientTest extends BaseTest {
 		ToClause clause = TransactionClient.buildMTRToClause(
 				Address.fromHexString("0x67E37c1896Fe00284D7dcC7fDfc61810C10C004F"), amount, ToData.ZERO);
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
-				720, 21000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
+				720, 30000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
 		logger.info("SendMTR Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
 		logger.info( "SignHash raw:" +  BytesUtils.toHexString( CryptoUtils.blake2b( rawTransaction.encode()) , Prefix.ZeroLowerX));
 		

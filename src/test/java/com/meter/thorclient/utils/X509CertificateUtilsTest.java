@@ -144,7 +144,7 @@ public class X509CertificateUtilsTest extends BaseTest {
 		ToClause clause = TransactionClient.buildMTRToClause(
 				Address.fromHexString("0x7567d83b7b8d80addcb281a71d54fc7b3364ffed"), amount, ToData.ZERO);
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
-				720, 21000, (byte) 0x0, "222".getBytes(), clause);
+				720, 30000, (byte) 0x0, "222".getBytes(), clause);
 
 		String privateKey = "380481fbd888d0c27bc75d6deb0576cc7e31e91cd98078e9bde6294171c70b88";
 		String txHash = BytesUtils.toHexString(CryptoUtils.blake2b((rawTransaction).encode()), null);

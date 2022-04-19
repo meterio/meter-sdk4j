@@ -50,7 +50,7 @@ public class RawTransactionBuilderTest extends BaseTest {
         byte[] nonce = CryptoUtils.generateTxNonce();
         builder.update(nonce, "nonce");
 
-        byte[] gas = BytesUtils.longToBytes(21000);
+        byte[] gas = BytesUtils.longToBytes(30000);
         builder.update(gas, "gas");
 
 
