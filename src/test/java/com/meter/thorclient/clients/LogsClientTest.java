@@ -62,10 +62,13 @@ public class LogsClientTest extends BaseTest {
 		TransferredFilter transferredFilter = TransferredFilter
 				.createFilter(Range.createBlockRange(0, Long.parseLong(block.getNumber())), Options.create(0, 10));
 
-		transferredFilter.addTransferCriteria(null, null,
+				transferredFilter.addTransferCriteria(null, Address.fromHexString("0x733b7269443c70de16bbf9b0615307884bcc5636"),
 				null);
-		
+		transferredFilter.addTransferCriteria(null, null,
+				Address.fromHexString("0x90840190af69dbaac6d1398e521cfb64b2f33fac"));
 		transferredFilter.setOrder(Order.DESC.getValue());
+		
+		
 		ArrayList<FilteredTransferEvent> transferLogs = LogsClient.getFilteredTransferLogs(transferredFilter);
 		logger.info("transferLogs:{}", JSONObject.toJSONString(transferLogs));
 	}
