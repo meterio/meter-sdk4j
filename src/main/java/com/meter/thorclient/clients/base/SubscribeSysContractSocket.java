@@ -35,6 +35,7 @@ public class SubscribeSysContractSocket<T> {
 
 	private static String MTRG_SYS_CONTRACT_ADDRESS = "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3";
 	private static String MTR_SYS_CONTRACT_ADDRESS = "0x687a6294d0d6d63e751a059bf1ca68e4ae7b13e2";
+	private static String TRANSFER_METHOD_ID = "0xa9059cbb";
 	private static String TranferMethodAddress = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
 	private SubscribingCallback callback;
 	@SuppressWarnings("unused")
@@ -87,10 +88,15 @@ public class SubscribeSysContractSocket<T> {
 				logger.info("TXID : {} ", eventRes.getMeta().getTxID());
 				String hexId= eventRes.getMeta().getTxID();
 				String sender = eventRes.getMeta().getTxOrigin();
+				
 				Transaction transaction = TransactionClient.getTransaction(hexId, false, null);
 				String dataHex = transaction.getClauses().get(0).getData();
+				logger.info("Transaction : {} ", JSON.toJSONString(transaction));
 
 			
+				String methodID = dataHex.substring(0,10);
+				logger.info("MethodID : {} ", JSON.toJSONString(methodID));
+				if (methodID.equals(TRANSFER_METHOD_ID)){
             	String recipient = HexUtils.getToAddress(dataHex);
 				String amount = HexUtils.getAmount(dataHex);
 				eventRes.setAmount(amount);
@@ -106,14 +112,16 @@ public class SubscribeSysContractSocket<T> {
 				
 				eventRes.setAddress(null);
 				eventRes.setTopics(null);
-				logger.info("Event Response :" + JSON.toJSONString(eventRes));
+				
 			    //Object obj = JSONObject.parseObject(eventRes.toString(), callback.responseClass());
 			    callback.onSubscribe(eventRes);
-			 }
+			    }
+			}
+		}
 			
 		
 		    
-		}
+		
 	}
 
 	public boolean isConnected() {
