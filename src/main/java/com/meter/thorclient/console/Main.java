@@ -34,11 +34,11 @@ public class Main {
 
 	private static final String BALANCE = "balance";
 
-	private static final String SUBCRIBE_EVENTS = "subscribeEvents";
+	private static final String SUBCRIBE_EVENTS = "subscribeEvent";
 
-	private static final String SUBCRIBE_TRANSFERS = "subscribeTransfers";
+	private static final String SUBCRIBE_TRANSFERS = "subscribeTransfer";
 
-	private static final String SUBCRIBE_SYS_CONTRACT_TRANSFERS = "subscribeSysContractTransfers";
+	private static final String SUBCRIBE_SYS_CONTRACT_TRANSFERS = "subscribeSysContractTransfer";
 
 	public static void main(String[] args) throws Exception {
 

@@ -1207,8 +1207,8 @@ Receipt:
 Subscribe to all Events from node:
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvents wss://ws.meter.io
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvent {blockchain-websocket-url}
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvent wss://ws.meter.io
 
 Event Response :{
   "address": "0x0d7365300e85fc87ef4da53ab05f1637dd4f73cc",
@@ -1234,8 +1234,8 @@ Event Response :{
 Subscribe to ERC20 System Contract Transfer Events from node:
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfers {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfers wss://ws.meter.io
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfer {blockchain-websocket-url}
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfer wss://ws.meter.io
 
  Transfer Response : {
     "address": "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3",
@@ -1259,8 +1259,8 @@ e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysCon
 Subscribe to Native Transfers Events from node:
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfers {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfers wss://ws.meter.io
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfer {blockchain-websocket-url}
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfer wss://ws.meter.io
 
 Transfer Response : {
     "amount": "0x16345785d8a0000",
