@@ -81,10 +81,8 @@ public class SubscribeSysContractSocket<T> {
 			if (eventRes.getTopics().get(0).toString().equals(TRANSFER_METHOD_TOPIC)
 			){
 
-				// check if it's erc20 MTR or MTRG transfer
-				if (eventRes.getAddress().equals(MTRG_SYS_CONTRACT_ADDRESS) || eventRes.getAddress().equals(MTR_SYS_CONTRACT_ADDRESS)){
 					callback.onSubscribe(eventRes);
-				}
+				
 
 			    
 			}
