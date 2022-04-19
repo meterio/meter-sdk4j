@@ -36,8 +36,10 @@ public class SubscribeSysContractSocket<T> {
 	private static String MTRG_SYS_CONTRACT_ADDRESS = "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3";
 	private static String MTR_SYS_CONTRACT_ADDRESS = "0x687a6294d0d6d63e751a059bf1ca68e4ae7b13e2";
 	private static String TRANSFER_METHOD_ID = "0xa9059cbb";
-	private static String TranferMethodAddress = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
+	private static String TRANSFER_METHOD_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
+
 	private SubscribingCallback callback;
+	
 	@SuppressWarnings("unused")
 	private Session session;
 	private WebSocketClient client;
@@ -84,18 +86,18 @@ public class SubscribeSysContractSocket<T> {
 			SysContractSubscribingResponse eventRes = JSON.parseObject(msg.toString(), SysContractSubscribingResponse.class);
           
 			 // check if it's a transfer event
-			if (eventRes.getTopics().get(0).toString().equals(TranferMethodAddress)){
-				logger.info("TXID : {} ", eventRes.getMeta().getTxID());
+			if (eventRes.getTopics().get(0).toString().equals(TRANSFER_METHOD_TOPIC)){
+				
 				String hexId= eventRes.getMeta().getTxID();
 				String sender = eventRes.getMeta().getTxOrigin();
 				
 				Transaction transaction = TransactionClient.getTransaction(hexId, false, null);
 				String dataHex = transaction.getClauses().get(0).getData();
-				logger.info("Transaction : {} ", JSON.toJSONString(transaction));
+			
 
 			
 				String methodID = dataHex.substring(0,10);
-				logger.info("MethodID : {} ", JSON.toJSONString(methodID));
+				
 				if (methodID.equals(TRANSFER_METHOD_ID)){
             	String recipient = HexUtils.getToAddress(dataHex);
 				String amount = HexUtils.getAmount(dataHex);
