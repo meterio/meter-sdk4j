@@ -12,7 +12,7 @@ import com.meter.sdk.utils.RLPUtils;
 public class ParserConsole {
 
     public static boolean validateToken(String token) {
-        return token == "0" || token == "1";
+        return token.equals("0") || token.equals("1");
 
     }
 

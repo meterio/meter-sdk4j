@@ -88,7 +88,7 @@ public class TransactionConsole {
 		}
 
 		if (!validateToken(args[4])) {
-			System.out.println("Token field is invalid. Should 0 for MTR or 1 for MTRG");
+			System.out.println("Token field is invalid. Should be 0 for MTR or 1 for MTRG");
 			System.exit(0);
 		}
 
@@ -122,7 +122,7 @@ public class TransactionConsole {
 		}
 
 		if (!validateToken(args[3])) {
-			System.out.println("Token field is invalid. Should 0 for MTR or 1 for MTRG");
+			System.out.println("Token field is invalid. Should be 0 for MTR or 1 for MTRG");
 			System.exit(0);
 		}
 
@@ -148,7 +148,7 @@ public class TransactionConsole {
 		}
 
 		if (!validateToken(args[3])) {
-			System.out.println("Token field is invalid. Should 0 for MTR or 1 for MTRG");
+			System.out.println("Token field is invalid. Should be 0 for MTR or 1 for MTRG");
 			System.exit(0);
 		}
 		int token = Integer.parseInt(args[3]);
@@ -181,7 +181,7 @@ public class TransactionConsole {
 		}
 
 		if (!validateToken(args[6])) {
-			System.out.println("Token field is invalid. Should 0 for MTR or 1 for MTRG");
+			System.out.println("Token field is invalid. Should be 0 for MTR or 1 for MTRG");
 			System.exit(0);
 		}
 
