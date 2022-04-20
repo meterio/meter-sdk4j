@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  */
 public class AbstractToken {
 
-	public static final AbstractToken MTR = new AbstractToken("MTR", 18);
+	
 	
 
 	protected String name;
@@ -49,5 +49,19 @@ public class AbstractToken {
 		this.precision = BigDecimal.valueOf(unit);
 		this.scale = BigDecimal.valueOf(unit);
 	}
+
+
+   public static AbstractToken getToken (int token){
+
+	if (token == 0){
+		return new AbstractToken("MTR", 18);
+	}
+
+	return new AbstractToken("MTRG", 18);
+
+   }
+	
+
+
 
 }

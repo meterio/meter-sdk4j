@@ -138,11 +138,12 @@ public class X509CertificateUtilsTest extends BaseTest {
 		byte chainTag = 0x01;
 //		byte[] blockRef = BlockchainClient.getBlockRef(Revision.BEST).toByteArray();
 		byte[] blockRef = BytesUtils.toByteArray("000007715a8c08a4");
+		int token = 0;
 		logger.info(BytesUtils.toHexString(blockRef, null));
-		Amount amount = Amount.createFromToken(AbstractToken.MTR);
+		Amount amount = Amount.createFromToken(AbstractToken.getToken(token));
 		amount.setDecimalAmount("1");
-		ToClause clause = TransactionClient.buildMTRToClause(
-				Address.fromHexString("0x7567d83b7b8d80addcb281a71d54fc7b3364ffed"), amount, ToData.ZERO);
+		ToClause clause = TransactionClient.buildTransferToClause(
+				Address.fromHexString("0x7567d83b7b8d80addcb281a71d54fc7b3364ffed"), amount, ToData.ZERO, token);
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
 				720, 30000, (byte) 0x0, "222".getBytes(), clause);
 

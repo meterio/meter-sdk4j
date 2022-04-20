@@ -43,7 +43,7 @@ public class Account implements Serializable {
      * @return
      */
     public Amount MTRBalance(){
-        Amount balance = Amount.createFromToken( AbstractToken.MTR );
+        Amount balance = Amount.createFromToken( AbstractToken.getToken(0) );
         balance.setHexAmount( this.energy );
         return balance;
     }

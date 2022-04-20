@@ -29,6 +29,7 @@ import com.meter.thorclient.utils.crypto.ECKeyPair;
 public class TransactionClient extends AbstractClient {
 
 	public final static int ContractGasLimit = 30000;
+	
 
 	/**
 	 * Get transaction by transaction Id.
@@ -198,7 +199,8 @@ public class TransactionClient extends AbstractClient {
 	 * @param data      {@link ToData} some comments maybe.
 	 * @return {@link ToClause} to clause.
 	 */
-	public static ToClause buildMTRToClause(Address toAddress, Amount amount, ToData data) {
+	public static ToClause buildTransferToClause(Address toAddress, Amount amount, ToData data, int token) {
+		
 		if (toAddress == null) {
 			throw ClientArgumentException.exception("toAddress is null");
 		}
@@ -208,9 +210,15 @@ public class TransactionClient extends AbstractClient {
 		if (data == null) {
 			throw ClientArgumentException.exception("data is null");
 		}
-		Token token =  Token.fromHexString("0x");
+
+		if (token != 0 || token != 1){
+			throw ClientArgumentException.exception("specify a valid token - 0 or 1");
+		}
+
+		Token token_ = token == 0 ?  Token.fromHexString("0x"): Token.fromHexString("0x1");
 		
-		return new ToClause(toAddress, amount, data, token);
+		
+		return new ToClause(toAddress, amount, data, token_);
 	}
 
 	/**

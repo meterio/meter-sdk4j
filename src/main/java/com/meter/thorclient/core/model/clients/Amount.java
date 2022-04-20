@@ -40,8 +40,8 @@ public class Amount {
 	 * 
 	 * @return {@link Amount}
 	 */
-	public static Amount MTR() {
-		return Amount.createFromToken(AbstractToken.MTR);
+	public static Amount NativeAmount(int token) {
+		return Amount.createFromToken(AbstractToken.getToken(token));
 	}
 
 	/**
@@ -49,12 +49,14 @@ public class Amount {
 	 * 
 	 * @return {@link Amount}
 	 */
-	public static Amount MTRG() {
-		return Amount.createFromToken(ERC20Token.MTRG);
+	public static Amount ERC20Amount(int token) {
+		return Amount.createFromToken(ERC20Token.getToken(token));
 	}
 
 	private Amount() {
 	}
+
+	
 
 	/**
 	 * Set hex string to abstractToken value.

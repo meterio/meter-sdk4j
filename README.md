@@ -21,14 +21,14 @@ Set blockchain nodes sample as follows
 
 ```
 NodeProvider nodeProvider = NodeProvider.getNodeProvider();
-nodeProvider.setProvider("https://rpc.meter.io");
+nodeProvider.setProvider("http://mainnet.meter.io");
 nodeProvider.setTimeout(10000);
 ```
 
 ## Set blockchain nodes provider (websocket)
 ```
 NodeProvider nodeProvider = NodeProvider.getNodeProvider();
-nodeProvider.setProvider("wss://ws.meter.io");
+nodeProvider.setProvider("ws://mainnet.meter.io");
 nodeProvider.setTimeout(10000);
 ```
 
@@ -266,7 +266,7 @@ Account account = AccountClient.getAccountInfo(
 	);
 logger.info("account info:" + JSON.toJSONString(account));
 account info:
-{"balance":"0x42aeda6af58002f600000","energy":"0x14234c71f08e4db8e504","hasCode":false}
+{"MTRG":"0x42aeda6af58002f600000","MTR":"0x14234c71f08e4db8e504","hasCode":false}
 
 ```
 
@@ -286,15 +286,16 @@ code:
 ### TransactionClient
 
 
-#### Sign MTR transaction:
+#### Sign Native transaction:
 
 
 ```
+int token = 0 // 0 for MTR, 1 for MTRG
 byte chainTag = BlockchainClient.getChainTag();
 byte[] blockRef = BlockchainClient.getBlockRef(Revision.BEST).toByteArray();
 Amount amount = Amount.createFromToken(AbstractToken.MTR);
 amount.setDecimalAmount("1.12");
-ToClause clause = TransactionClient.buildMTRToClause(Address.fromHexString("0xD3EF28DF6b553eD2fc47259E8134319cB1121A2A"), amount, ToData.ZERO);
+ToClause clause = TransactionClient.buildTransferToClause(Address.fromHexString("0xD3EF28DF6b553eD2fc47259E8134319cB1121A2A"), amount, ToData.ZERO, token);
 RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef, 720, 21000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
 	
 
@@ -315,15 +316,15 @@ Assert.assertEquals(txIdHex, result.getId());
 	
 ```
 
-#### Sign MTRG transaction:
+#### Sign ERC20 transaction:
 
 ```
-
+int token = 0 // 0 for MTR, 1 for MTRG
 byte chainTag = BlockchainClient.getChainTag();
 byte[] blockRef = BlockClient.getBlock(null).blockRef().toByteArray();
 Amount amount = Amount.createFromToken(ERC20Token.MTRG);
 amount.setDecimalAmount("11.12");
-ToClause clause = ERC20Contract.buildTranferToClause(ERC20Token.MTRG, Address.fromHexString("0xc71ADC46c5891a8963Ea5A5eeAF578E0A2959779"), amount);
+ToClause clause = ERC20Contract.buildERC20TranferToClause(token, Address.fromHexString("0xc71ADC46c5891a8963Ea5A5eeAF578E0A2959779"), amount, token);
 RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef, 720, 80000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
 
 String raw = BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX);
@@ -343,17 +344,18 @@ Assert.assertEquals(txIdHex, result.getId());
 
 ```
 
-#### Send MTR to account：
+#### Send Token to account using Native method：
 
 ```
+int token = 0 // 0 for MTR, 1 for MTRG
 byte chainTag = BlockchainClient.getChainTag();
 byte[] blockRef = BlockchainClient.getBlockRef( Revision.BEST).toByteArray();
 Amount amount = Amount.createFromToken( AbstractToken.MTR);
 amount.setDecimalAmount( "21.12" );
-ToClause clause = TransactionClient.buildMTRToClause(
+ToClause clause = TransactionClient.buildTransferToClause(
         Address.fromHexString( "0xc71ADC46c5891a8963Ea5A5eeAF578E0A2959779" ),  // reveiver address
         amount,                                                                 // transfer amount
-        ToData.ZERO );                                                          // The default brotherValue ToData.ZERO
+        ToData.ZERO, token );                                                          // The default brotherValue ToData.ZERO
 //construct RawTransaction
 RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction( chainTag, blockRef, 720, 21000, (byte)0x0, CryptoUtils.generateTxNonce(), clause);
 
@@ -365,25 +367,26 @@ raw=0xf902d6819a8702288058b9af928202d0f90273e094d3ef28df6b553ed2fc47259e8134319c
 
 ```
 
-#### Send MTRG to account:
+#### Send ERC20 to account:
 
 ```
+    int token = 0 // 0 for MTR, 1 for MTRG
     String toAmount = "0.1";
 		int gas = 1000000; // gasLimit
 		int expiration = 720;
 		byte gasCoef = (byte) 0x0;
 		String toAddress = "0x67E37c1896Fe00284D7dcC7fDfc61810C10C004F";
 		Address address = Address.fromHexString(toAddress);
-		Amount balance = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
+		Amount balance = ERC20ContractClient.getERC20Balance(address, token, null);
 		if (balance != null) {
-			logger.info("Get MTRG before:" + balance.getAmount());
+			logger.info("Balance before:" + balance.getAmount());
 		}
 
-		Amount amount = Amount.MTRG();
+		Amount amount = Amount.getAmount(token);
 		amount.setDecimalAmount(toAmount);
 		TransferResult result = ERC20ContractClient.transferERC20Token(
 				new Address[] { Address.fromHexString(toAddress) }, new Amount[] { amount }, gas, gasCoef, expiration,
-				ECKeyPair.create(privateKey));
+				ECKeyPair.create(privateKey), token);
 		logger.info("sendERC20Token: " + JSON.toJSONString(result));
 
 		try {
@@ -394,9 +397,9 @@ raw=0xf902d6819a8702288058b9af928202d0f90273e094d3ef28df6b553ed2fc47259e8134319c
 		Receipt receipt = TransactionClient.getTransactionReceipt(result.getId(), null);
 		logger.info("Receipt:" + JSON.toJSONString(receipt));
 
-		Amount balance2 = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
+		Amount balance2 = ERC20ContractClient.getERC20Balance(address, token, null);
 		if (balance2 != null) {
-			logger.info("Get MTRG after:" + balance2.getAmount());
+			logger.info("Balance after:" + balance2.getAmount());
 		}
 		Assert.assertEquals(0,amount.getAmount().subtract(balance2.getAmount().subtract(balance.getAmount())).longValue());
 
@@ -835,13 +838,14 @@ logger.info( "testGetMaster result:" + JSON.toJSONString( callResult ) );
 #### Set master address:
 
 ```
+int token = 1;
 String fromAddress = "0x866a849122133888214ac9fc59550077adf14975";
 String privateKey = "0x4aa49af0d1c105e70eb71d31e066d8d0f06e46927194e561ea302d57ad0c9ad1";
 ECKeyPair aECKeyPair = ECKeyPair.create(privateKey);
 TransferResult result = ProtoTypeContractClient.setMasterAddress(
 		new Address[] { Address.fromHexString(fromAddress) },
 		new Address[] { Address.fromHexString(masterAddress) }, TransactionClient.ContractGasLimit, (byte) 0x0,
-		720, aECKeyPair);
+		720, aECKeyPair, token);
 result: {"id":"0xbd4d94595b500bc9217839cc5b1987f4a277a277b6ede317a740480a28978ae2"}
 
 ```
@@ -886,11 +890,11 @@ logger.info( "Get isUser result:" + JSON.toJSONString( callResult ) );
 #### Remove user:
 
 ```
-
+int token = 1;
 TransferResult transferResult = ProtoTypeContractClient.removeUsers(
       new Address[]{Address.fromHexString( fromAddress )},
       new Address[]{Address.fromHexString( userAddress)},
-        70000, (byte)0x0, 720, ECKeyPair.create( privateKey ) );
+        70000, (byte)0x0, 720, ECKeyPair.create( privateKey ), token );
 logger.info( "Remove user:"  + JSON.toJSONString( transferResult ));
 transferResult:{"id":"0x1eb2927e48d497d70f4530471abe62aa5700086e54af75ad8523d08005eab45f"}
 
@@ -898,14 +902,15 @@ transferResult:{"id":"0x1eb2927e48d497d70f4530471abe62aa5700086e54af75ad8523d080
 #### Set Credit Plan:
 
 ```
-Amount credit = Amount.MTRG();
+int token = 1
+Amount credit = Amount.ERC20Amount(token);
 credit.setDecimalAmount("10.00");
-Amount recovery = Amount.MTRG();
+Amount recovery = Amount.ERC20Amount(token);
 recovery.setDecimalAmount("0.00001");
 
 TransferResult setCreditPlansResult = ProtoTypeContractClient.setCreditPlans(
 		new Address[] { Address.fromHexString(fromAddress) }, new Amount[] { credit },
-		new Amount[] { recovery }, TransactionClient.ContractGasLimit, (byte) 0x0, 720, aECKeyPair);
+		new Amount[] { recovery }, TransactionClient.ContractGasLimit, (byte) 0x0, 720, aECKeyPair, token);
 logger.info("set user plans:" + JSON.toJSONString(setCreditPlansResult));
 {"id":"0xafe89d896b993efc98cda84add6ded39ea264a19b8a886fcc3f769e54964e990"}
 
@@ -962,16 +967,16 @@ String userAddress = "0xba5f00a28f732f23ba946c594716496ebdc9aef5";
 String privateKey = "0xeb78d6405ba1a28ccd938a72195e0802dfbe1de463bc6e5dd491b2c7562b5e3f";
 // set expiration block
 int expirationBlock = 720;
-
+int token = 1; // 0 for MTR, 1 for MTRG
 long start = System.currentTimeMillis();
 //add user(UserAddress) to owner (fromAddress)
-TransferResult transferResult = ProtoTypeContractClient.addUser(
+TransferResult transferResult = ProtoTypeContractClient.addUsers(
 	new Address[] { Address.fromHexString(targetAddress) },   //target address to add user
 	new Address[] { Address.fromHexString(userAddress) },     //user address to be added
         TransactionClient.ContractGasLimit,                       //TransactionClient.ContractGasLimit = 70000 gas
 	(byte) 0x0,                                               //gasCoef
 	expirationBlock,                                          //720 block
-	ECKeyPair.create(privateKey));
+	ECKeyPair.create(privateKey), token);
 if (transferResult != null) {
     logger.info("Add user:" + JSON.toJSONString(transferResult));
 }
@@ -1047,7 +1052,7 @@ There is a example transaction file in src/main/resources/exchange_example.xlsx,
  
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getChainTag {blockchain-server-url}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getChainTag https://rpc.meter.io
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getChainTag http://mainnet.meter.io
 
 ChainTag:
 0x27
@@ -1060,7 +1065,7 @@ ChainTag:
 ```
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlockRef {blockchain-server-url}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlockRef https://rpc.meter.io
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlockRef http://mainnet.meter.io
 
 BlockRef:
 0x0000695540f491a5
@@ -1110,9 +1115,9 @@ The wallet created successfully and the key store is:
 #### Get block: 
 
 ```
- java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlock {blockchain-server-url}
+ java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlock {blockchain-server-url} {blockNumber}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlock https://rpc.meter.io
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlock http://mainnet.meter.io 21844233
 
 Block:
 {
@@ -1143,7 +1148,7 @@ Block:
   
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransaction {transaction-id} {blockchain-server-url}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransaction 0x19dd77d28ef70be8c924319a6c08b996dd456fa36f29f2427dbda90087a8a897 https://rpc.meter.io
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransaction 0x7c12eae79f5e058317bcf07c6c08e4ba7db1e7b75f075431cb70e191015a7ea6 http://mainnet.meter.io
 
 Transaction:
 {
@@ -1168,7 +1173,7 @@ Transaction:
   
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransactionReceipt {transaction-id} {blockchain-server-url}
   
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransactionReceipt 0x6b99c0f1ebfa3b9d93dcfc503f468104ac74271728841551aaa44115d080f5b5 https://rpc.meter.io
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransactionReceipt 0x6b99c0f1ebfa3b9d93dcfc503f468104ac74271728841551aaa44115d080f5b5 http://mainnet.meter.io
   
 Receipt:
 {
@@ -1208,7 +1213,7 @@ Subscribe to all Events from node:
 
 ```
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvent {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvent wss://ws.meter.io
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvent ws://mainnet.meter.io
 
 Event Response :{
   "address": "0x0d7365300e85fc87ef4da53ab05f1637dd4f73cc",
@@ -1235,7 +1240,7 @@ Subscribe to ERC20 System Contract Transfer Events from node:
 
 ```
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfer {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfer wss://ws.meter.io
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfer ws://mainnet.meter.io
 
  Transfer Response : {
     "address": "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3",
@@ -1260,7 +1265,7 @@ Subscribe to Native Transfers Events from node:
 
 ```
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfer {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfer wss://ws.meter.io
+e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfer ws://mainnet.meter.io
 
 Transfer Response : {
     "amount": "0x16345785d8a0000",
@@ -1278,23 +1283,25 @@ Transfer Response : {
 }
 ```
 
-#### Sign transactions: 
+#### Sign Native transactions: 
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar sign {your-file-path} {privateKey}
+//token - 0 for MTR, 1 for MTRG
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signNative {your-file-path} {privateKey} {token}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar sign src/main/resources/exchange_example.xlsx 0xe0b80216ba7b880d85966b38fcd8f7253882bb1386b68b33a8e0b60775e947c0
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signNative src/main/resources/exchange_example.xlsx 0xe0b80216ba7b880d85966b38fcd8f7253882bb1386b68b33a8e0b60775e947c0 0
   
 Raw Transaction:
 0xf8a3819a8702819f5cfc12d38202d0f842e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f80000808082a4108088f06f91293e58610dc0b84173346fba62605d510895a0d240b89a38e0b87fd8a58df2ce17075cd493e8e316528b4ed0f049cef1710936bbd4bd3af23eb3ffb3740dc0fb59db585714dbeaa001
   
 ```
-#### Sign MTRG transactions: 
+#### Sign ERC20 transactions: 
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signMTRG {your-file-path} {privateKey}
+//token - 0 for MTR, 1 for MTRG
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signERC20 {your-file-path} {privateKey} {token}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signMTRG src/main/resources/exchange_example.xlsx 0xdce1443bd2ef0c2631adc1c67e5c93f13dc23a41c18b536effbbdcbcdb96fb65
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signERC20 src/main/resources/exchange_example.xlsx 0xdce1443bd2ef0c2631adc1c67e5c93f13dc23a41c18b536effbbdcbcdb96fb65 1
   
 Raw Transaction:
 0xf9011d81c787015e41be43bb958202d0f8bcf85c940000000000000000000000000000456e6572677980b844a9059cbb000000000000000000000000d3ef28df6b553ed2fc47259e8134319cb1121a2a0000000000000000000000000000000000000000000027cf801b9d4f7d800000f85c940000000000000000000000000000456e6572677980b844a9059cbb000000000000000000000000f881a94423f22ee9a0e3e1442f515f43c966b7ed0000000000000000000000000000000000000000000027cf801b9d4f7d8000008082a41080887650b326b78e0c57c0b841fe27b8866d8a658a66a2d8241a310d1ef72e2954d397fc52aa5b4295f9686d0f6705301acc9a0aac6e9e0f93e3aa6fe0a07ff48e4e3287d0db45905d8a0756eb01
@@ -1305,9 +1312,9 @@ Raw Transaction:
 
 ```
   
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signAndSend {blockchain-server-url} {privateKey} {your-file-path}
+java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signAndSend {blockchain-server-url} {privateKey} {your-file-path}  {token}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signAndSend https://rpc.meter.io 0xe0b80216ba7b880d85966b38fcd8f7253882bb1386b68b33a8e0b60775e947c0 src/main/resources/exchange_example.xlsx
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signAndSend http://mainnet.meter.io 0xe0b80216ba7b880d85966b38fcd8f7253882bb1386b68b33a8e0b60775e947c0 src/main/resources/exchange_example.xlsx 1
   
 Send Result:
 {"id":"0xd751c50b81c1f13ebd86f4fcd0028a501b6c792fa8b5bbf64028b924a6b2efc9"}
@@ -1322,7 +1329,7 @@ Send Result:
   
 java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar sendRaw {blockchain-server-url} {raw}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar sendRaw https://rpc.meter.io 0xf8a3819a8702819f5cfc12d38202d0f842e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f80000808082a4108088f06f91293e58610dc0b84173346fba62605d510895a0d240b89a38e0b87fd8a58df2ce17075cd493e8e316528b4ed0f049cef1710936bbd4bd3af23eb3ffb3740dc0fb59db585714dbeaa001
+eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar sendRaw http://mainnet.meter.io 0xf8a3819a8702819f5cfc12d38202d0f842e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f80000808082a4108088f06f91293e58610dc0b84173346fba62605d510895a0d240b89a38e0b87fd8a58df2ce17075cd493e8e316528b4ed0f049cef1710936bbd4bd3af23eb3ffb3740dc0fb59db585714dbeaa001
   
 Send Result:
 {"id":"0xd751c50b81c1f13ebd86f4fcd0028a501b6c792fa8b5bbf64028b924a6b2efc9"}

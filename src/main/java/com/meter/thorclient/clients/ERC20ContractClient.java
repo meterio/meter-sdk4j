@@ -5,6 +5,7 @@ import com.meter.thorclient.core.model.blockchain.ContractCallResult;
 import com.meter.thorclient.core.model.blockchain.TransferResult;
 import com.meter.thorclient.core.model.clients.*;
 import com.meter.thorclient.core.model.clients.base.AbiDefinition;
+import com.meter.thorclient.core.model.clients.base.AbstractToken;
 import com.meter.thorclient.core.model.exception.ClientArgumentException;
 import com.meter.thorclient.core.model.exception.ClientIOException;
 import com.meter.thorclient.utils.Prefix;
@@ -26,9 +27,9 @@ public class ERC20ContractClient extends TransactionClient {
 	 * @throws ClientIOException
 	 *             {@link ClientIOException}
 	 */
-	public static Amount getERC20Balance(Address address, ERC20Token token, Revision revision)
+	public static Amount getERC20Balance(Address address, int token, Revision revision)
 			throws ClientIOException {
-		Address contractAddr = token.getContractAddress();
+		Address contractAddr = ERC20Token.getContractAddress(token);
 		Revision currRevision = revision;
 		if (currRevision == null) {
 			currRevision = Revision.BEST;
@@ -39,7 +40,10 @@ public class ERC20ContractClient extends TransactionClient {
 		if (contractCallResult == null) {
 			return null;
 		}
-		return contractCallResult.getBalance(token);
+        
+		ERC20Token _token = token == 0 ? ERC20Token.MTR : ERC20Token.MTRG;
+
+		return contractCallResult.getBalance(_token);
 	}
 
 	/**
@@ -61,10 +65,11 @@ public class ERC20ContractClient extends TransactionClient {
 	 * @throws ClientIOException
 	 */
 	public static TransferResult transferERC20Token(Address[] receivers, Amount[] amounts, int gas, byte gasCoef,
-			int expiration, ECKeyPair keyPair) throws ClientIOException {
+			int expiration, ECKeyPair keyPair, int token) throws ClientIOException {
 		if (receivers == null) {
 			throw ClientArgumentException.exception("receivers is null");
 		}
+		
 		if (amounts == null) {
 			throw ClientArgumentException.exception("amounts is null");
 		}
@@ -78,11 +83,11 @@ public class ERC20ContractClient extends TransactionClient {
 		}
 		ToClause[] clauses = new ToClause[receivers.length];
 		for (int index = 0; index < receivers.length; index++) {
-			if (!(amounts[index].getAbstractToken() instanceof ERC20Token)) {
-				throw ClientArgumentException.exception("Token is not ERC20");
-			}
-			ERC20Token token = (ERC20Token) amounts[index].getAbstractToken();
-			clauses[index] = ProtoTypeContract.buildToClause(token.getContractAddress(), abi,
+			
+			
+			Address contractAddr = ERC20Token.getContractAddress(token);
+			
+			clauses[index] = ProtoTypeContract.buildToClause(contractAddr, abi,token,
 			receivers[index].toHexString(Prefix.ZeroLowerX), amounts[index].toBigInteger());
 
 		}

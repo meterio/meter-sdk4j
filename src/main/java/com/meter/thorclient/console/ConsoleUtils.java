@@ -33,7 +33,7 @@ import com.meter.thorclient.utils.crypto.ECKeyPair;
 
 public class ConsoleUtils {
 
-	public static String doSignMTRTx(List<String[]> transactions, String privateKey, boolean isSend)
+	public static String doSignNativeTx(List<String[]> transactions, int token, String privateKey, boolean isSend)
 			throws IOException {
 
 		byte chainTag = 0;
@@ -41,9 +41,9 @@ public class ConsoleUtils {
 
 		List<ToClause> clauses = new ArrayList<ToClause>();
 		for (String[] transaction : transactions) {
-			Amount amount = Amount.createFromToken(AbstractToken.MTR);
+			Amount amount = Amount.createFromToken(AbstractToken.getToken(token));
 			amount.setDecimalAmount(transaction[1]);
-			clauses.add(TransactionClient.buildMTRToClause(Address.fromHexString(transaction[0]), amount, ToData.ZERO));
+			clauses.add(TransactionClient.buildTransferToClause(Address.fromHexString(transaction[0]), amount, ToData.ZERO,token));
 			chainTag = BytesUtils.toByteArray(transaction[2])[0];
 			if (transaction[3] == null) {
 				blockRef = BlockchainClient.getBlockRef(null).toByteArray();
@@ -63,7 +63,7 @@ public class ConsoleUtils {
 		}
 	}
 
-	public static String sendRawMTRTx(String rawTransaction) throws IOException {
+	public static String sendRawTx(String rawTransaction) throws IOException {
 		TransferResult result = TransactionClient.transfer(rawTransaction);
 		return JSON.toJSONString(result);
 	}
@@ -95,12 +95,12 @@ public class ConsoleUtils {
 		return results;
 	}
 
-	public static String doSignMTRGTx(List<String[]> transactions, String privateKey, boolean isSend)
+	public static String doSignERC20Tx(List<String[]> transactions, int token, String privateKey, boolean isSend)
 			throws IOException {
-		return doSignMTRGTx(transactions, privateKey, isSend, null);
+		return doSignERC20Tx(transactions, token, privateKey, isSend, null);
 	}
 
-	public static String doSignMTRGTx(List<String[]> transactions, String privateKey, boolean isSend, Integer gasLimit)
+	public static String doSignERC20Tx(List<String[]> transactions,int token, String privateKey, boolean isSend, Integer gasLimit)
 			throws IOException {
 
 		byte chainTag = 0;
@@ -108,10 +108,10 @@ public class ConsoleUtils {
 
 		List<ToClause> clauses = new ArrayList<ToClause>();
 		for (String[] transaction : transactions) {
-			Amount amount = Amount.MTRG();
+			Amount amount = Amount.ERC20Amount(token);
 			amount.setDecimalAmount(transaction[1]);
 			clauses.add(
-					ERC20Contract.buildTranferToClause(ERC20Token.MTRG, Address.fromHexString(transaction[0]), amount));
+					ERC20Contract.buildERC20TranferToClause( Address.fromHexString(transaction[0]), amount, token));
 			chainTag = BytesUtils.toByteArray(transaction[2])[0];
 			if (transaction[3] == null) {
 				blockRef = BlockchainClient.getBlockRef(null).toByteArray();

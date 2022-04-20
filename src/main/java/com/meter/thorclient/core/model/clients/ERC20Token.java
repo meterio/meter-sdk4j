@@ -8,8 +8,10 @@ import com.meter.thorclient.utils.StringUtils;
  * The token which is follow the interface of ERC20 protocol.
  */
 public final class ERC20Token extends AbstractToken {
-
+    
 	public static final ERC20Token MTRG = new ERC20Token("MTRG", Address.MTRG_Address, 18);
+	public static final ERC20Token MTR = new ERC20Token("MTR", Address.MTR_Address, 18);
+	
 	protected Address contractAddress;
 
 	/**
@@ -30,11 +32,17 @@ public final class ERC20Token extends AbstractToken {
 
 	private ERC20Token(String name, Address address, int unit) {
 		super(name, unit);
-		this.contractAddress = address;
+	
 	}
 	
 
-	public Address getContractAddress() {
-		return contractAddress;
+	public static Address getContractAddress(int token) {
+		if (token == 0){
+			 return Address.MTR_Address;
+		}
+		return Address.MTRG_Address;
+		
+
+	
 	}
 }

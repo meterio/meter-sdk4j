@@ -27,11 +27,11 @@ public class SubscribeSocket<T> {
 	}
 
 	public void close(int status, String message) {
-		// logger.info("close: {} {} {}", status, session, message);
-		// if (this.session != null) {
-		// 	CloseStatus closeStatus = new CloseStatus(status, message);
-		// 	this.session.close(closeStatus);
-		// }
+		logger.info("close: {} {} {}", status, session, message);
+		if (this.session != null) {
+			CloseStatus closeStatus = new CloseStatus(status, message);
+			this.session.close(closeStatus);
+		}
 		clean();
 	}
 

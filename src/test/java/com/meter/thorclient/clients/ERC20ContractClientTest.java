@@ -22,29 +22,43 @@ public class ERC20ContractClientTest extends BaseTest {
 	@Test
 	public void testERC20GetBalance() throws IOException {
 		Address address = Address.fromHexString(fromAddress);
-		Amount balance = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
+		int token = 1;
+		Amount balance = ERC20ContractClient.getERC20Balance(address, token, null);
 		if (balance != null) {
-			logger.info("Get MTRG:" + balance.getAmount());
+			if(token == 1){
+				logger.info("Get MTRG:" + balance.getAmount());
+			}else{
+				logger.info("Get MTR:" + balance.getAmount());
+			}
+			
+			
 		}
 
 		Assert.assertNotNull(balance);
 	}
 
 	@Test
-	public void sendERC20Token() {
+	public void testSendERC20Token() {
 		String toAmount = "0.01";
 		String toAddress = "0x67E37c1896Fe00284D7dcC7fDfc61810C10C004F";
 		Address address = Address.fromHexString(toAddress);
-		Amount balance = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
+		int token = 1;
+		Amount balance = ERC20ContractClient.getERC20Balance(address, token, null);
 		if (balance != null) {
-			logger.info("Get MTRG before:" + balance.getAmount());
+			if(token == 1){
+				logger.info("Get MTRG Before:" + balance.getAmount());
+			}else{
+				logger.info("Get MTR Before:" + balance.getAmount());
+			}
 		}
 
-		Amount amount = Amount.MTRG();
+		Amount amount = Amount.ERC20Amount(token);
 		amount.setDecimalAmount(toAmount);
 		TransferResult result = ERC20ContractClient.transferERC20Token(
 				new Address[] { Address.fromHexString(toAddress) }, new Amount[] { amount }, 1000000, (byte) 0x0, 720,
-				ECKeyPair.create(privateKey));
+				ECKeyPair.create(privateKey), token);
+		
+		
 		logger.info("sendERC20Token: " + JSON.toJSONString(result));
 
 		try {
@@ -55,9 +69,13 @@ public class ERC20ContractClientTest extends BaseTest {
 		Receipt receipt = TransactionClient.getTransactionReceipt(result.getId(), null);
 		logger.info("Receipt:" + JSON.toJSONString(receipt));
 
-		Amount balance2 = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
+		Amount balance2 = ERC20ContractClient.getERC20Balance(address, token, null);
 		if (balance2 != null) {
-			logger.info("Get MTRG after:" + balance2.getAmount());
+			if(token == 1){
+				logger.info("Get MTRG After:" + balance.getAmount());
+			}else{
+				logger.info("Get MTR After:" + balance.getAmount());
+			}
 		}
 		Assert.assertEquals(0,
 				amount.getAmount().subtract(balance2.getAmount().subtract(balance.getAmount())).longValue());

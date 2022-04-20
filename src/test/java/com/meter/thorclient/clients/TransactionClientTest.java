@@ -24,7 +24,7 @@ import java.lang.reflect.Array;
 @RunWith(JUnit4.class)
 public class TransactionClientTest extends BaseTest {
 
-	static String hexId = "0x30d4ca21549a62516ed7572aa7a2a6dad2ed934aaecad8324072ad5fadaf79d6";
+	static String hexId = "0x7c12eae79f5e058317bcf07c6c08e4ba7db1e7b75f075431cb70e191015a7ea6";
 	static String addUserTxId = "0x652b5c0f68d03fed86625969ad38e0634993f8da950126518b0c02e6e630d3de";
 	static String removeUserTxId = "0x3bec812d64615584414595e050bb52be9c0807cb1c05dc2ea9286a1e7c6a4da0";
 	static String setUserPlanTxId = "0x9dbdd7dc102eafe882f9e084ca01671ae8eebe59751ffcfbd1abfeb5cb687846";
@@ -74,23 +74,28 @@ public class TransactionClientTest extends BaseTest {
 	}
 
 	@Test
-	public void testSendMTRGTransaction() throws ClientIOException {
+	public void testSendERC20Transaction() throws ClientIOException {
 		String toAmount = "0.01";
 		int gas = 1000000;
 		int expiration = 720;
 		byte gasCoef = (byte) 0x0;
 		String toAddress = "0x67E37c1896Fe00284D7dcC7fDfc61810C10C004F";
 		Address address = Address.fromHexString(toAddress);
-		Amount balance = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
+		int token = 1;
+		Amount balance = ERC20ContractClient.getERC20Balance(address, token, null);
 		if (balance != null) {
-			logger.info("Get MTRG before:" + balance.getAmount());
+			if(token == 1){
+				logger.info("Get MTRG Before:" + balance.getAmount());
+			}else{
+				logger.info("Get MTR Before:" + balance.getAmount());
+			}
 		}
 
-		Amount amount = Amount.MTRG();
+		Amount amount = Amount.ERC20Amount(token);
 		amount.setDecimalAmount(toAmount);
 		TransferResult result = ERC20ContractClient.transferERC20Token(
 				new Address[] { Address.fromHexString(toAddress) }, new Amount[] { amount }, gas, gasCoef, expiration,
-				ECKeyPair.create(privateKey));
+				ECKeyPair.create(privateKey), token);
 		logger.info("sendERC20Token: " + JSON.toJSONString(result));
 
 		try {
@@ -101,9 +106,14 @@ public class TransactionClientTest extends BaseTest {
 		Receipt receipt = TransactionClient.getTransactionReceipt(result.getId(), null);
 		logger.info("Receipt:" + JSON.toJSONString(receipt));
 
-		Amount balance2 = ERC20ContractClient.getERC20Balance(address, ERC20Token.MTRG, null);
+		Amount balance2 = ERC20ContractClient.getERC20Balance(address, token, null);
 		if (balance2 != null) {
-			logger.info("Get MTRG after:" + balance2.getAmount());
+			if(token == 1){
+				logger.info("Get MTRG After:" + balance2.getAmount());
+			}else{
+				logger.info("Get MTR After:" + balance2.getAmount());
+			}
+			
 		}
 		Assert.assertEquals(0,amount.getAmount().subtract(balance2.getAmount().subtract(balance.getAmount())).longValue());
 
@@ -122,15 +132,16 @@ public class TransactionClientTest extends BaseTest {
 		for(int i = 0; i < size; i++){
 			k64[i]=(byte)0xff;
 		}
+		int token = 0;
 		toData.setData( BytesUtils.toHexString( k64, Prefix.ZeroLowerX ) );
-		ToClause clause = TransactionClient.buildMTRToClause(
-				Address.fromHexString("0x391ba4c2d5212871130f8e05bf9459064d6ccf5b"), Amount.ZERO, toData);
+		ToClause clause = TransactionClient.buildTransferToClause(
+				Address.fromHexString("0x391ba4c2d5212871130f8e05bf9459064d6ccf5b"), Amount.ZERO, toData, token);
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
 				720, 4000000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
-		logger.info("SendMTR Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
+		logger.info("Send Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
 		logger.info( "SignHash raw:" +  BytesUtils.toHexString( CryptoUtils.blake2b( rawTransaction.encode()) , Prefix.ZeroLowerX));
 		TransferResult result = TransactionClient.signThenTransfer(rawTransaction, ECKeyPair.create(privateKey));
-		logger.info("SendMTR result:" + JSON.toJSONString(result));
+		logger.info("Send result:" + JSON.toJSONString(result));
 		Assert.assertNotNull(result);
 		String hexAddress = ECKeyPair.create(privateKey).getHexAddress();
 		String txIdHex = BlockchainUtils.generateTransactionId(rawTransaction, Address.fromHexString(hexAddress));
@@ -141,22 +152,23 @@ public class TransactionClientTest extends BaseTest {
 
 
 	@Test
-	public void testSendMTRTransaction() throws ClientIOException {
+	public void testSendNativeTransaction() throws ClientIOException {
 		byte chainTag = BlockchainClient.getChainTag();
 		byte[] blockRef = BlockchainClient.getBlockRef(Revision.BEST).toByteArray();
-		Amount amount = Amount.createFromToken(AbstractToken.MTR);
-		amount.setDecimalAmount("0.1");
+		int token = 0;
+		Amount amount = Amount.createFromToken(AbstractToken.getToken(token));
+		amount.setDecimalAmount("0.01");
 		
 		
-		ToClause clause = TransactionClient.buildMTRToClause(
-				Address.fromHexString("0x67E37c1896Fe00284D7dcC7fDfc61810C10C004F"), amount, ToData.ZERO);
+		ToClause clause = TransactionClient.buildTransferToClause(
+				Address.fromHexString("0x67E37c1896Fe00284D7dcC7fDfc61810C10C004F"), amount, ToData.ZERO,token);
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
 				720, 30000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
-		logger.info("SendMTR Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
+		logger.info("Send Raw:" + BytesUtils.toHexString(rawTransaction.encode(), Prefix.ZeroLowerX));
 		logger.info( "SignHash raw:" +  BytesUtils.toHexString( CryptoUtils.blake2b( rawTransaction.encode()) , Prefix.ZeroLowerX));
 		
 		TransferResult result = TransactionClient.signThenTransfer(rawTransaction, ECKeyPair.create(privateKey));
-		logger.info("SendMTR result:" + JSON.toJSONString(result));
+		logger.info("Send result:" + JSON.toJSONString(result));
 		Assert.assertNotNull(result);
 		String hexAddress = ECKeyPair.create(privateKey).getHexAddress();
 		String txIdHex = BlockchainUtils.generateTransactionId(rawTransaction, Address.fromHexString(hexAddress));
@@ -165,25 +177,30 @@ public class TransactionClientTest extends BaseTest {
 		hexId = result.getId();
 	}
 
-	private static RawTransaction generatingMTRRawTxn() {
+	private static RawTransaction generatingNativeRawTxn() {
 		byte chainTag = BlockchainClient.getChainTag();
 		byte[] blockRef = BlockchainClient.getBlockRef(Revision.BEST).toByteArray();
-		Amount amount = Amount.createFromToken(AbstractToken.MTR);
+		int token = 0;
+		Amount amount = Amount.createFromToken(AbstractToken.getToken(token));
+		
 		amount.setDecimalAmount("100");
-		ToClause clause = TransactionClient.buildMTRToClause(
-				Address.fromHexString("0x000000002beadb038203be21ed5ce7c9b1bff602"), amount, ToData.ZERO);
+		ToClause clause = TransactionClient.buildTransferToClause(
+				Address.fromHexString("0x000000002beadb038203be21ed5ce7c9b1bff602"), amount, ToData.ZERO, token);
 		return RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef, 720, 31000, (byte) 0x0,
 				CryptoUtils.generateTxNonce(), clause);
 	}
 
-	private static RawTransaction generatingMTRhorRawTxn() {
+	
+
+	private static RawTransaction generatingERC20RawTxn() {
 		byte chainTag = BlockchainClient.getChainTag();
 		byte[] blockRef = BlockClient.getBlock(null).blockRef().toByteArray();
 		Amount amount = Amount.createFromToken(ERC20Token.MTRG);
+		int token = 1;
 		amount.setDecimalAmount("10000");
 
-		ToClause clause = ERC20Contract.buildTranferToClause(ERC20Token.MTRG,
-				Address.fromHexString("0x000000002beadb038203be21ed5ce7c9b1bff602"), amount);
+		ToClause clause = ERC20Contract.buildERC20TranferToClause(
+			Address.fromHexString("0x000000002beadb038203be21ed5ce7c9b1bff602"), amount,token);
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
 				720, 80000, (byte) 0x0, CryptoUtils.generateTxNonce(), clause);
 		return rawTransaction;
@@ -197,7 +214,7 @@ public class TransactionClientTest extends BaseTest {
 	@Test
 	public void testRecoverAddressAndCalcTxId() throws ClientIOException {
 
-		RawTransaction rawTransaction = generatingMTRRawTxn();
+		RawTransaction rawTransaction = generatingNativeRawTxn();
 		RawTransaction signedRawTxn = TransactionClient.sign(rawTransaction, ECKeyPair.create(privateKey));
 		String rawTxHex = rlpEncodedRawTxHex(signedRawTxn);
 		logger.info("Tx raw hex:" + rawTxHex);
@@ -210,7 +227,7 @@ public class TransactionClientTest extends BaseTest {
 		String txIdHex = BlockchainUtils.generateTransactionId(newRawTransaction, Address.fromHexString(hexAddress));
 		TransferResult transferResult = TransactionClient.transfer(rawTxHex);
 		logger.info("Calculate transaction TxId:" + txIdHex);
-		logger.info("SendMTR result:" + JSON.toJSONString(transferResult));
+		logger.info("Send result:" + JSON.toJSONString(transferResult));
 		Assert.assertNotNull(transferResult);
 		Assert.assertEquals(txIdHex, transferResult.getId());
 
@@ -219,7 +236,7 @@ public class TransactionClientTest extends BaseTest {
 	@Test
 	public void testRecoverAddressAndCalcTxId2() throws ClientIOException {
 
-		RawTransaction rawTransaction = generatingMTRhorRawTxn();
+		RawTransaction rawTransaction = generatingERC20RawTxn();
 		RawTransaction signedRawTxn = TransactionClient.sign(rawTransaction, ECKeyPair.create(privateKey));
 		String rawTxHex = rlpEncodedRawTxHex(signedRawTxn);
 		logger.info("Tx raw hex:" + rawTxHex);
@@ -234,7 +251,7 @@ public class TransactionClientTest extends BaseTest {
 		String txIdHex = BlockchainUtils.generateTransactionId(newRawTransaction, Address.fromHexString(hexAddress));
 		TransferResult transferResult = TransactionClient.transfer(rawTxHex);
 		logger.info("Calculate transaction TxId:" + txIdHex);
-		logger.info("Send MTRhor result:" + JSON.toJSONString(transferResult));
+		logger.info("Send result:" + JSON.toJSONString(transferResult));
 		Assert.assertNotNull(transferResult);
 		Assert.assertEquals(txIdHex, transferResult.getId());
 
@@ -242,7 +259,7 @@ public class TransactionClientTest extends BaseTest {
 
 	@Test
 	public void testDelegatorSignAndTransfer() throws ClientIOException{
-		RawTransaction rawTransaction = generatingMTRRawTxn();
+		RawTransaction rawTransaction = generatingNativeRawTxn();
 		TransactionReserved reserved = new TransactionReserved();
 		reserved.setDelegationFeature(true);
 		rawTransaction.setReserved(reserved);

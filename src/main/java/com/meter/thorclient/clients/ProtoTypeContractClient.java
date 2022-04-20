@@ -72,7 +72,7 @@ public class ProtoTypeContractClient extends TransactionClient {
      * @return {@link TransferResult}
      * @throws ClientIOException network error.
      */
-    public static TransferResult setMasterAddress(Address[] targets, Address[] newMasters, int gas, byte gasCoef, int expiration , ECKeyPair keyPair) throws ClientIOException {
+    public static TransferResult setMasterAddress(Address[] targets, Address[] newMasters, int gas, byte gasCoef, int expiration , ECKeyPair keyPair, int token) throws ClientIOException {
         if(targets == null){
             throw ClientArgumentException.exception( "targets is null" );
         }
@@ -89,7 +89,7 @@ public class ProtoTypeContractClient extends TransactionClient {
         }
         ToClause[] clauses = new ToClause[targets.length];
         for(int index = 0; index < targets.length; index ++){
-            clauses[index] = ProtoTypeContract.buildToClause( ProtoTypeContract.ContractAddress, abi, targets[index].toHexString( Prefix.ZeroLowerX ),newMasters[index].toHexString( Prefix.ZeroLowerX ));
+            clauses[index] = ProtoTypeContract.buildToClause( ProtoTypeContract.ContractAddress, abi, token,targets[index].toHexString( Prefix.ZeroLowerX ),newMasters[index].toHexString( Prefix.ZeroLowerX ));
 
         }
         return invokeContractMethod( clauses,gas,gasCoef,expiration, keyPair );
@@ -106,7 +106,7 @@ public class ProtoTypeContractClient extends TransactionClient {
      * @return {@link TransferResult}
      * @throws ClientIOException network error.
      */
-    public static TransferResult addUsers(Address[] targets, Address[] users, int gas, byte gasCoef, int expiration , ECKeyPair keyPair) throws ClientIOException{
+    public static TransferResult addUsers(Address[] targets, Address[] users, int gas, byte gasCoef, int expiration , ECKeyPair keyPair, int token) throws ClientIOException{
         if(targets == null){
             throw ClientArgumentException.exception( "targets is null" );
         }
@@ -125,6 +125,7 @@ public class ProtoTypeContractClient extends TransactionClient {
             clauses[index] = ProtoTypeContract.buildToClause(
                     ProtoTypeContract.ContractAddress,
                     abi,
+                    token,
                     targets[index].toHexString( Prefix.ZeroLowerX ),
                     users[index].toHexString( Prefix.ZeroLowerX ));
 
@@ -144,7 +145,7 @@ public class ProtoTypeContractClient extends TransactionClient {
      * @return {@link TransferResult}
      * @throws ClientIOException network error.
      */
-    public  static TransferResult removeUsers(Address[] targets, Address[] users, int gas, byte gasCoef, int expiration , ECKeyPair keyPair) throws ClientIOException {
+    public  static TransferResult removeUsers(Address[] targets, Address[] users, int gas, byte gasCoef, int expiration , ECKeyPair keyPair, int token) throws ClientIOException {
         if(targets == null){
             throw ClientArgumentException.exception( "targets is null" );
         }
@@ -163,6 +164,7 @@ public class ProtoTypeContractClient extends TransactionClient {
             clauses[index] = ProtoTypeContract.buildToClause(
                     ProtoTypeContract.ContractAddress,
                     abi,
+                    token,
                     targets[index].toHexString( Prefix.ZeroLowerX ),
                     users[index].toHexString( Prefix.ZeroLowerX ));
 
@@ -180,7 +182,7 @@ public class ProtoTypeContractClient extends TransactionClient {
      */
     public static TransferResult setCreditPlans( Address[] targets,
                                       Amount[] credits, Amount[] recoveryRates,
-                                      int gas, byte gasCoef, int expiration , ECKeyPair keyPair
+                                      int gas, byte gasCoef, int expiration , ECKeyPair keyPair, int token
     ) throws ClientIOException {
 
         if(targets == null){
@@ -204,6 +206,7 @@ public class ProtoTypeContractClient extends TransactionClient {
             clauses[index] = ProtoTypeContract.buildToClause(
                     ProtoTypeContract.ContractAddress,
                     abi,
+                    token,
                     targets[index].toHexString( Prefix.ZeroLowerX ),
                     credits[index].toBigInteger(),
                     recoveryRates[index].toBigInteger());
@@ -289,7 +292,7 @@ public class ProtoTypeContractClient extends TransactionClient {
      * @return {@link TransferResult}
      * @throws ClientIOException network error.
      */
-    public static TransferResult sponsor(Address[] targets,  int gas, byte gasCoef, int expiration , ECKeyPair keyPair)throws ClientIOException{
+    public static TransferResult sponsor(Address[] targets,  int gas, byte gasCoef, int expiration , ECKeyPair keyPair, int token)throws ClientIOException{
         if(targets == null){
             throw ClientArgumentException.exception( "targets is null" );
         }
@@ -303,6 +306,7 @@ public class ProtoTypeContractClient extends TransactionClient {
             clauses[index] = ProtoTypeContract.buildToClause(
                     ProtoTypeContract.ContractAddress,
                     abi,
+                    token,
                     targets[index].toHexString( Prefix.ZeroLowerX )
 
                     );
@@ -320,10 +324,14 @@ public class ProtoTypeContractClient extends TransactionClient {
      * @return {@link TransferResult}
      * @throws ClientIOException network error.
      */
-    public static TransferResult unsponsor(Address[] targets,  int gas, byte gasCoef, int expiration , ECKeyPair keyPair)throws ClientIOException{
+    public static TransferResult unsponsor(Address[] targets,  int gas, byte gasCoef, int expiration , ECKeyPair keyPair, int token)throws ClientIOException{
         if(targets == null){
             throw ClientArgumentException.exception( "targets is null" );
         }
+
+        if (token != 0 || token != 1){
+			throw ClientArgumentException.exception("specify a valid token - 0 or 1");
+		}
         AbiDefinition abi = ProtoTypeContract.defaultContract.findAbiDefinition( "unsponsor" );
         if(abi == null){
             throw new IllegalArgumentException( "Can not find abi master method" );
@@ -334,6 +342,7 @@ public class ProtoTypeContractClient extends TransactionClient {
             clauses[index] = ProtoTypeContract.buildToClause(
                     ProtoTypeContract.ContractAddress,
                     abi,
+                    token,
                     targets[index].toHexString( Prefix.ZeroLowerX )
             );
         }
@@ -351,13 +360,17 @@ public class ProtoTypeContractClient extends TransactionClient {
      * @return {@link TransferResult}
      * throw ClientIOException network error.
      */
-    public static TransferResult selectSponsor(Address[] targets, Address[] sponsors, int gas, byte gasCoef, int expiration , ECKeyPair keyPair)throws ClientIOException{
+    public static TransferResult selectSponsor(Address[] targets, Address[] sponsors, int gas, byte gasCoef, int expiration , ECKeyPair keyPair, int token)throws ClientIOException{
         if (targets == null){
             throw ClientArgumentException.exception( "targets is null" );
         }
         if (sponsors == null){
             throw ClientArgumentException.exception( "sponsors is null" );
         }
+
+        if (token != 0 || token != 1){
+			throw ClientArgumentException.exception("specify a valid token - 0 or 1");
+		}
 
         AbiDefinition abi = ProtoTypeContract.defaultContract.findAbiDefinition( "selectSponsor" );
         if(abi == null){
@@ -369,6 +382,7 @@ public class ProtoTypeContractClient extends TransactionClient {
             clauses[index] = ProtoTypeContract.buildToClause(
                     ProtoTypeContract.ContractAddress,
                     abi,
+                    token,
                     targets[index].toHexString( Prefix.ZeroLowerX ),
                     sponsors[index].toHexString( Prefix.ZeroLowerX )
             );

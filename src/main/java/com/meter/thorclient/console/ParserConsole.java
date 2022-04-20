@@ -10,22 +10,35 @@ import com.meter.thorclient.utils.Prefix;
 import com.meter.thorclient.utils.RLPUtils;
 
 public class ParserConsole {
+
+    
+	public static boolean validateToken(String token){
+		return token == "0" || token == "1";
+   
+	}
+
     public static void parse(String[] args) throws Exception {
-        if(args.length != 3){
-            System.out.println( "parse [MTR|erc20] [raw transaction hex string]" );
+        if(args.length != 4){
+            System.out.println( "parse [Native|erc20] [raw transaction hex string]" );
             return;
         }
-        if(args[1].equalsIgnoreCase( "MTR" )){
-            parseMTR(args[2]);
-        }else if(args[1].equalsIgnoreCase( "erc20" )||args[1].equalsIgnoreCase( "MTRG" )){
-            parseERC20(args[2]);
+        if (!validateToken(args[3])){
+			System.out.println("Token field is invalid. Should 0 for MTR or 1 for MTRG");
+			System.exit(0);
+		}
+        int token = Integer.parseInt(args[3]);
+        if(token == 0){
+            parseNative(args[2], token);
+        }else if(token == 1){
+            parseERC20(args[2], token);
         }else{
-            System.out.println( "parse [MTR|erc20] [raw transaction hex string]" );
+            System.out.println( "parse [Native|erc20] [raw transaction hex string]" );
             throw new Exception( "un-support tx type" );
         }
     }
 
-    public static void parseMTR(String hexRawTxn) {
+    public static void parseNative(String hexRawTxn, int token) {
+        
         RawTransaction rawTransaction =  RLPUtils.decode(hexRawTxn );
         RawClause[] rawClauses = rawTransaction.getClauses();
         int index = 1;
@@ -37,7 +50,7 @@ public class ParserConsole {
         for(RawClause rawClause : rawClauses){
             byte[] addressBytes = rawClause.getTo();
             byte[] valueBytes = rawClause.getValue();
-            Amount amount = Amount.MTR();
+            Amount amount = Amount.NativeAmount(token);
             if (valueBytes == null || valueBytes.length == 0){
                 amount.setHexAmount( "0x00" );
             }else{
@@ -53,7 +66,7 @@ public class ParserConsole {
         System.out.println( "----------------------------------------------------------" );
     }
 
-    public static void parseERC20(String hexRawTxn) throws Exception {
+    public static void parseERC20(String hexRawTxn, int token) throws Exception {
         RawTransaction rawTransaction =  RLPUtils.decode(hexRawTxn );
         RawClause[] rawClauses = rawTransaction.getClauses();
         int index = 1;
@@ -82,7 +95,7 @@ public class ParserConsole {
             if(!methodIdHex.equalsIgnoreCase( transferMethodId)){
                 throw new Exception( "the method id is not transfer" );
             }
-            Amount erc2Amount = Amount.MTRG();
+            Amount erc2Amount = Amount.ERC20Amount(token);
             erc2Amount.setHexAmount( BytesUtils.toHexString( value, Prefix.ZeroLowerX ) );
             System.out.println( "ERC20 Contract:" + BytesUtils.toHexString( addressBytes, Prefix.ZeroLowerX ) );
             System.out.println( "To Address:" + BytesUtils.toHexString( address, Prefix.ZeroLowerX ) );

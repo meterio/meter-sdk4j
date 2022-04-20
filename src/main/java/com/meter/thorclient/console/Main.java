@@ -6,15 +6,15 @@ import com.meter.thorclient.utils.StringUtils;
 
 public class Main {
 
-	private static final String SIGN = "sign";
+	private static final String SIGN_NATIVE = "signNative";
 
 	private static final String CREATE_WALLET = "createWallet";
 
 	private static final String SEND = "signAndSend";
 
-	private static final String TRANSFER_MTR = "transferMTR";
+	private static final String TRANSFER_NATIVE = "transferNative";
 
-	private static final String TRANSFER_MTRG = "transferMTRG";
+	private static final String TRANSFER_ERC20 = "transferERC20";
 
 	private static final String CHAIN_TAG = "getChainTag";
 
@@ -28,7 +28,7 @@ public class Main {
 
 	private static final String SEND_RAW = "sendRaw";
 
-	private static final String SIGN_MTRG = "signMTRG";
+	private static final String SIGN_ERC20 = "signERC20";
 
 	private static final String PARSE = "parse";
 
@@ -44,7 +44,7 @@ public class Main {
 
 		try {
 			if (args.length == 0) {
-				System.out.println("找不到有效的参数~");
+				System.out.println("No arguments specified");
 				System.exit(0);
 			}
 
@@ -55,14 +55,14 @@ public class Main {
 			} else if (args[0].equals(GET_TRANSACTION_RECEIPT)) {
 				// args=getTransaction txId providerUrl
 				TransactionConsole.getTransactionRecipient(args);
-			} else if (args[0].equals(SIGN)) {
-				TransactionConsole.signMTRTxn(args);
-			} else if (args[0].equals(SIGN_MTRG)) {
-				TransactionConsole.signMTRGTxn(args);
-			} else if (args[0].equals(TRANSFER_MTR)) {
-				TransactionConsole.transferMTR(args);
-			} else if (args[0].equals(TRANSFER_MTRG)) {
-				TransactionConsole.transferMTRG(args);
+			} else if (args[0].equals(SIGN_NATIVE)) {
+				TransactionConsole.signNativeTxn(args);
+			} else if (args[0].equals(SIGN_ERC20)) {
+				TransactionConsole.signERC20Txn(args);
+			} else if (args[0].equals(TRANSFER_NATIVE)) {
+				TransactionConsole.transferNative(args);
+			} else if (args[0].equals(TRANSFER_ERC20)) {
+				TransactionConsole.transferERC20(args);
 			} else if (args[0].equals(BALANCE)) {
 				TransactionConsole.getBalance(args);
 			} else if (args[0].equals(CHAIN_TAG)) {
@@ -114,7 +114,7 @@ public class Main {
 		String nodeProviderUrl = null;
 		String wsProviderUrl = null;
 		if (args[0].equals(CHAIN_TAG) || args[0].equals(BLOCK_REF) || args[0].equals(GET_BLOCK) || args[0].equals(SEND)
-				|| args[0].equals(SEND_RAW) || args[0].equals(TRANSFER_MTR) || args[0].equals(TRANSFER_MTRG)
+				|| args[0].equals(SEND_RAW) || args[0].equals(TRANSFER_NATIVE) || args[0].equals(TRANSFER_ERC20)
 				|| args[0].equals(BALANCE)) {
 
 			if (args.length > 1 && !StringUtils.isBlank(args[1]) && args[1].startsWith("http")) {

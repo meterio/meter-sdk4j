@@ -198,10 +198,8 @@ public class ERC20Contract extends AbstractContract {
      * @param amount amount
      * @return
      */
-    public static ToClause buildTranferToClause(ERC20Token token, Address toAddress, Amount amount){
-        if(token == null){
-            throw  new IllegalArgumentException( "token is null" );
-        }
+    public static ToClause buildERC20TranferToClause( Address toAddress, Amount amount,int token){
+       
         if(toAddress == null){
             throw new IllegalArgumentException( "toAddress is null" );
         }
@@ -219,9 +217,9 @@ public class ERC20Contract extends AbstractContract {
         toData.setData( data );
         
       
-    
+        Token tokenAddress = token == 0 ? Token.MTR_TOKEN : Token.MTRG_TOKEN;
      
-        return new ToClause(toAddress, amount, toData, Token.MTRG_TOKEN);
+        return new ToClause(toAddress, amount, toData, tokenAddress);
     }
 
 

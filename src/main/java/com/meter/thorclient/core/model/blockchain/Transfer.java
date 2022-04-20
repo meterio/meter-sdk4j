@@ -6,6 +6,7 @@ public class Transfer implements Serializable {
     private  String sender;
     private String  recipient;
     private String amount;
+    private int token;
 
     public String getSender() {
         return sender;
@@ -29,5 +30,13 @@ public class Transfer implements Serializable {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public int getToken() {
+        return token;
+    }
+
+    public void setToken(int token) {
+        this.token = token;
     }
 }

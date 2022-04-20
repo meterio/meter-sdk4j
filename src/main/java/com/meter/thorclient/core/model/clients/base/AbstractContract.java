@@ -118,11 +118,12 @@ public class AbstractContract {
 	 *            {@link String}
 	 * @return {@link ToClause}
 	 */
-	public static ToClause buildToClause(Address toAddress, AbiDefinition abiDefinition, Object... hexArguments) {
+	public static ToClause buildToClause(Address toAddress, AbiDefinition abiDefinition, int token, Object... hexArguments) {
 		ToData toData = new ToData();
 		String data = buildData(abiDefinition, hexArguments);
 		toData.setData(data);
-		return new ToClause(toAddress, Amount.ZERO, toData, Token.MTRG_TOKEN);
+		Token token_ = token == 0 ?  Token.fromHexString("0x"): Token.fromHexString("0x1");
+		return new ToClause(toAddress, Amount.ZERO, toData, token_);
 	}
 
 	/**
