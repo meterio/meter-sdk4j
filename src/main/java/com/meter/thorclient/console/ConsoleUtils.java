@@ -43,7 +43,8 @@ public class ConsoleUtils {
 		for (String[] transaction : transactions) {
 			Amount amount = Amount.createFromToken(AbstractToken.getToken(token));
 			amount.setDecimalAmount(transaction[1]);
-			clauses.add(TransactionClient.buildTransferToClause(Address.fromHexString(transaction[0]), amount, ToData.ZERO,token));
+			clauses.add(TransactionClient.buildTransferToClause(Address.fromHexString(transaction[0]),
+					amount, ToData.ZERO, token));
 			chainTag = BytesUtils.toByteArray(transaction[2])[0];
 			if (transaction[3] == null) {
 				blockRef = BlockchainClient.getBlockRef(null).toByteArray();
@@ -52,10 +53,12 @@ public class ConsoleUtils {
 			}
 		}
 		int gas = clauses.size() * 30000;
-		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
+		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag,
+				blockRef,
 				720, gas, (byte) 0x0, CryptoUtils.generateTxNonce(), clauses.toArray(new ToClause[0]));
 		if (isSend) {
-			TransferResult result = TransactionClient.signThenTransfer(rawTransaction, ECKeyPair.create(privateKey));
+			TransferResult result = TransactionClient.signThenTransfer(rawTransaction,
+					ECKeyPair.create(privateKey));
 			return JSON.toJSONString(result);
 		} else {
 			RawTransaction result = TransactionClient.sign(rawTransaction, ECKeyPair.create(privateKey));
@@ -77,6 +80,8 @@ public class ConsoleUtils {
 		DataFormatter dataFormatter = new DataFormatter();
 		sheet.forEach(row -> {
 			int rowNum = row.getRowNum();
+			System.out.println("row num:");
+			System.out.println(rowNum);
 			if (rowNum > 1) {
 				int length = row.getLastCellNum();
 				List<String> rowData = new ArrayList<String>(length);
@@ -92,6 +97,7 @@ public class ConsoleUtils {
 			}
 		});
 		workbook.close();
+		System.out.println("READ FILE");
 		return results;
 	}
 
@@ -100,7 +106,8 @@ public class ConsoleUtils {
 		return doSignERC20Tx(transactions, token, privateKey, isSend, null);
 	}
 
-	public static String doSignERC20Tx(List<String[]> transactions,int token, String privateKey, boolean isSend, Integer gasLimit)
+	public static String doSignERC20Tx(List<String[]> transactions, int token, String privateKey, boolean isSend,
+			Integer gasLimit)
 			throws IOException {
 
 		byte chainTag = 0;
@@ -111,7 +118,8 @@ public class ConsoleUtils {
 			Amount amount = Amount.ERC20Amount(token);
 			amount.setDecimalAmount(transaction[1]);
 			clauses.add(
-					ERC20Contract.buildERC20TranferToClause( Address.fromHexString(transaction[0]), amount, token));
+					ERC20Contract.buildERC20TranferToClause(Address.fromHexString(transaction[0]),
+							amount, token));
 			chainTag = BytesUtils.toByteArray(transaction[2])[0];
 			if (transaction[3] == null) {
 				blockRef = BlockchainClient.getBlockRef(null).toByteArray();
@@ -123,10 +131,12 @@ public class ConsoleUtils {
 			gasLimit = 80000;
 		}
 		int gas = clauses.size() * gasLimit;
-		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag, blockRef,
+		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag,
+				blockRef,
 				720, gas, (byte) 0x0, CryptoUtils.generateTxNonce(), clauses.toArray(new ToClause[0]));
 		if (isSend) {
-			TransferResult result = TransactionClient.signThenTransfer(rawTransaction, ECKeyPair.create(privateKey));
+			TransferResult result = TransactionClient.signThenTransfer(rawTransaction,
+					ECKeyPair.create(privateKey));
 			return JSON.toJSONString(result);
 		} else {
 			RawTransaction result = TransactionClient.sign(rawTransaction, ECKeyPair.create(privateKey));

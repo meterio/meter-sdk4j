@@ -53,7 +53,6 @@ public class Main {
 				// args=getTransaction txId providerUrl
 				TransactionConsole.getTransaction(args);
 			} else if (args[0].equals(GET_TRANSACTION_RECEIPT)) {
-				// args=getTransaction txId providerUrl
 				TransactionConsole.getTransactionRecipient(args);
 			} else if (args[0].equals(SIGN_NATIVE)) {
 				TransactionConsole.signNativeTxn(args);
@@ -81,20 +80,16 @@ public class Main {
 				TransactionConsole.sendRawTransaction(args);
 			} else if (args[0].equals(PARSE)) {
 				ParserConsole.parse(args);
-			}
-			else if (args[0].equals(SUBCRIBE_EVENTS)) {
+			} else if (args[0].equals(SUBCRIBE_EVENTS)) {
 				// events subscription
 				SubscribeClientConsole.subcribeEvent();
-			}
-			else if (args[0].equals(SUBCRIBE_TRANSFERS)) {
+			} else if (args[0].equals(SUBCRIBE_TRANSFERS)) {
 				// transfers subscription
 				SubscribeClientConsole.subcribeTransfer();
-			}
-			else if (args[0].equals(SUBCRIBE_SYS_CONTRACT_TRANSFERS)) {
+			} else if (args[0].equals(SUBCRIBE_SYS_CONTRACT_TRANSFERS)) {
 				// transfers subscription
 				SubscribeClientConsole.subscribeSysContractTransfer();
-			}
-			else {
+			} else {
 				System.out.println("Incorrect Command");
 			}
 		} catch (Exception e) {
@@ -106,15 +101,17 @@ public class Main {
 	 * Process console input arguments
 	 * 
 	 * @param args
-	 *            input arguments
+	 *             input arguments
 	 * @return
 	 */
 	private static String processConsoleArguments(String[] args) {
 		String privateKey = null;
 		String nodeProviderUrl = null;
 		String wsProviderUrl = null;
-		if (args[0].equals(CHAIN_TAG) || args[0].equals(BLOCK_REF) || args[0].equals(GET_BLOCK) || args[0].equals(SEND)
-				|| args[0].equals(SEND_RAW) || args[0].equals(TRANSFER_NATIVE) || args[0].equals(TRANSFER_ERC20)
+		if (args[0].equals(CHAIN_TAG) || args[0].equals(BLOCK_REF) || args[0].equals(GET_BLOCK)
+				|| args[0].equals(SEND)
+				|| args[0].equals(SEND_RAW) || args[0].equals(TRANSFER_NATIVE)
+				|| args[0].equals(TRANSFER_ERC20)
 				|| args[0].equals(BALANCE)) {
 
 			if (args.length > 1 && !StringUtils.isBlank(args[1]) && args[1].startsWith("http")) {
@@ -139,7 +136,8 @@ public class Main {
 			nodeProvider.setSocketTimeout(5000);
 		}
 
-		if (args[0].equals(SUBCRIBE_EVENTS) || args[0].equals(SUBCRIBE_TRANSFERS) || args[0].equals(SUBCRIBE_SYS_CONTRACT_TRANSFERS)){
+		if (args[0].equals(SUBCRIBE_EVENTS) || args[0].equals(SUBCRIBE_TRANSFERS)
+				|| args[0].equals(SUBCRIBE_SYS_CONTRACT_TRANSFERS)) {
 			NodeProvider nodeProvider = NodeProvider.getNodeProvider();
 			if (args.length > 1 && !StringUtils.isBlank(args[1]) && args[1].startsWith("ws")) {
 				wsProviderUrl = args[1];

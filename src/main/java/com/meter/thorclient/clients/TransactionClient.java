@@ -29,7 +29,6 @@ import com.meter.thorclient.utils.crypto.ECKeyPair;
 public class TransactionClient extends AbstractClient {
 
 	public final static int ContractGasLimit = 30000;
-	
 
 	/**
 	 * Get transaction by transaction Id.
@@ -40,7 +39,8 @@ public class TransactionClient extends AbstractClient {
 	 * @return Transaction {@link Transaction}
 	 * @throws ClientIOException
 	 */
-	public static Transaction getTransaction(String txId, boolean isRaw, Revision revision) throws ClientIOException {
+	public static Transaction getTransaction(String txId, boolean isRaw, Revision revision)
+			throws ClientIOException {
 		if (!BlockchainUtils.isId(txId)) {
 			throw ClientArgumentException.exception("Tx id is invalid");
 		}
@@ -50,7 +50,8 @@ public class TransactionClient extends AbstractClient {
 		}
 		HashMap<String, String> uriParams = parameters(new String[] { "id" }, new String[] { txId });
 		HashMap<String, String> queryParams = parameters(new String[] { "head", "raw" },
-				new String[] { currRevision == null ? null : currRevision.toString(), Boolean.toString(isRaw) });
+				new String[] { currRevision == null ? null : currRevision.toString(),
+						Boolean.toString(isRaw) });
 		return sendGetRequest(Path.GetTransactionPath, uriParams, queryParams, Transaction.class);
 	}
 
@@ -72,7 +73,8 @@ public class TransactionClient extends AbstractClient {
 		}
 		HashMap<String, String> uriParams = parameters(new String[] { "id" }, new String[] { txId });
 		return sendGetRequest(Path.GetTransactionReceipt, uriParams, currRevision == null ? null
-				: parameters(new String[] { "head" }, new String[] { currRevision.toString() }), Receipt.class);
+				: parameters(new String[] { "head" }, new String[] { currRevision.toString() }),
+				Receipt.class);
 	}
 
 	/**
@@ -167,7 +169,8 @@ public class TransactionClient extends AbstractClient {
 		byte[] delegationSignature = signatureData.toByteArray();
 		if (delegationSignature != null) {
 			byte[] signature = rawTransaction.getSignature();
-			byte[] concatenatingSignature = BlockchainUtils.concatenateSignature(signature, delegationSignature);
+			byte[] concatenatingSignature = BlockchainUtils.concatenateSignature(signature,
+					delegationSignature);
 			rawTransaction.setSignature(concatenatingSignature);
 			return rawTransaction;
 		} else {
@@ -200,7 +203,7 @@ public class TransactionClient extends AbstractClient {
 	 * @return {@link ToClause} to clause.
 	 */
 	public static ToClause buildTransferToClause(Address toAddress, Amount amount, ToData data, int token) {
-		
+
 		if (toAddress == null) {
 			throw ClientArgumentException.exception("toAddress is null");
 		}
@@ -211,13 +214,12 @@ public class TransactionClient extends AbstractClient {
 			throw ClientArgumentException.exception("data is null");
 		}
 
-		if (token != 0 || token != 1){
+		if (token != 0 && token != 1) {
 			throw ClientArgumentException.exception("specify a valid token - 0 or 1");
 		}
 
-		Token token_ = token == 0 ?  Token.fromHexString("0x"): Token.fromHexString("0x1");
-		
-		
+		Token token_ = token == 0 ? Token.fromHexString("0x") : Token.fromHexString("0x1");
+
 		return new ToClause(toAddress, amount, data, token_);
 	}
 
@@ -268,7 +270,8 @@ public class TransactionClient extends AbstractClient {
 	 * @return
 	 * @throws ClientIOException
 	 */
-	protected static TransferResult invokeContractMethod(ToClause[] toClauses, int gas, byte gasCoef, int expiration,
+	protected static TransferResult invokeContractMethod(ToClause[] toClauses, int gas, byte gasCoef,
+			int expiration,
 			ECKeyPair keyPair) throws ClientIOException {
 
 		if (keyPair == null) {
@@ -296,7 +299,8 @@ public class TransactionClient extends AbstractClient {
 			throw new ClientIOException("Get chainTag: " + chainTag + " BlockRef: " + bestRef);
 		}
 		RawTransaction rawTransaction = RawTransactionFactory.getInstance().createRawTransaction(chainTag,
-				bestRef.toByteArray(), expiration, gas, gasCoef, CryptoUtils.generateTxNonce(), toClauses);
+				bestRef.toByteArray(), expiration, gas, gasCoef, CryptoUtils.generateTxNonce(),
+				toClauses);
 		return TransactionClient.signThenTransfer(rawTransaction, keyPair);
 	}
 

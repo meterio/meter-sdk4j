@@ -7,25 +7,22 @@ public class ToClause {
     /**
      * {@link Address} a address instance to use.
      */
-    private  Address to;
+    private Address to;
 
     /**
      * {@link Amount} a amount instance for to-clause to use.
      */
-    private  Amount value;
+    private Amount value;
 
     /**
      * {@link ToData} a data instance for to-clause to use.
      */
-    private  ToData data;
+    private ToData data;
 
-      /**
+    /**
      * {@link Token} a token instance for to-clause to use.
      */
-    private  Token token;
-
-
-
+    private Token token;
 
     public Address getTo() {
         return to;
@@ -61,17 +58,17 @@ public class ToClause {
 
     /**
      * Constructor to new a instance.
-     * @param to {@link Address}
+     * 
+     * @param to    {@link Address}
      * @param value {@link Amount}
-     * @param data {@link ToData}
+     * @param data  {@link ToData}
      * @param token {@link Token}
      */
-    public ToClause(Address to, Amount value, ToData data, Token token){
+    public ToClause(Address to, Amount value, ToData data, Token token) {
         this.to = to;
         this.value = value;
         this.data = data;
         this.token = token;
     }
-
 
 }

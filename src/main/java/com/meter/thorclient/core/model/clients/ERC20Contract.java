@@ -5,8 +5,7 @@ import com.meter.thorclient.core.model.clients.base.AbstractContract;
 import com.meter.thorclient.utils.BytesUtils;
 
 public class ERC20Contract extends AbstractContract {
-    private static final String ERC20ABIString =
-            "[\n" +
+    private static final String ERC20ABIString = "[\n" +
             " {\n" +
             "  \"constant\": false,\n" +
             "  \"inputs\": [\n" +
@@ -182,46 +181,41 @@ public class ERC20Contract extends AbstractContract {
             " }\n" +
             "]";
 
-
-    public ERC20Contract(){
+    public ERC20Contract() {
         super(ERC20ABIString);
     }
 
-
-
-    
-
     /**
      * Build transfer to clause.
-     * @param token required token to transfer.
+     * 
+     * @param token     required token to transfer.
      * @param toAddress transfer to address.
-     * @param amount amount
+     * @param amount    amount
      * @return
      */
-    public static ToClause buildERC20TranferToClause( Address toAddress, Amount amount,int token){
-       
-        if(toAddress == null){
-            throw new IllegalArgumentException( "toAddress is null" );
+    public static ToClause buildERC20TranferToClause(Address toAddress, Amount amount, int token) {
+
+        if (toAddress == null) {
+            throw new IllegalArgumentException("toAddress is null");
         }
-        if(amount == null){
-            throw new IllegalArgumentException( "amount is null" );
+        if (amount == null) {
+            throw new IllegalArgumentException("amount is null");
         }
 
-        AbiDefinition abiDefinition = defaultERC20Contract.findAbiDefinition( "transfer" );
-        if(abiDefinition == null){
-            throw new RuntimeException( "can not find transfer abi method" );
+        AbiDefinition abiDefinition = defaultERC20Contract.findAbiDefinition("transfer");
+        if (abiDefinition == null) {
+            throw new RuntimeException("can not find transfer abi method");
         }
-		String data = buildData( abiDefinition, toAddress.toHexString( null ), amount.toBigInteger() );
+        String data = buildData(abiDefinition, toAddress.toHexString(null), amount.toBigInteger());
 
         ToData toData = new ToData();
-        toData.setData( data );
-        
-      
-        Token tokenAddress = token == 0 ? Token.MTR_TOKEN : Token.MTRG_TOKEN;
-     
-        return new ToClause(toAddress, amount, toData, tokenAddress);
-    }
+        toData.setData(data);
 
+        Token tokenAddress = token == 0 ? Token.MTR_TOKEN : Token.MTRG_TOKEN;
+
+        Address sysContractAddr = token == 0 ? Address.MTR_Address : Address.MTRG_Address;
+        return new ToClause(sysContractAddr, Amount.ZERO, toData, tokenAddress);
+    }
 
     public static final ERC20Contract defaultERC20Contract = new ERC20Contract();
 
