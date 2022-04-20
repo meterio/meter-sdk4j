@@ -1,1 +1,1 @@
-Main-Class: com.meter.thorclient.console.Main
+Main-Class: com.meter.sdk.console.Main

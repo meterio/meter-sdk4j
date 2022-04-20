@@ -50,8 +50,8 @@ var actiMTRableTab = "actiMTRableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../com/meter/thorclient/clients/LogsClient.html" title="com.meter.thorclient.clients中的类"><span class="typeNameLink">上一个类</span></a></li>
-<li><a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.thorclient.clients中的类"><span class="typeNameLink">下一个类</span></a></li>
+<li><a href="../../../../com/meter/thorclient/clients/LogsClient.html" title="com.meter.sdk.clients中的类"><span class="typeNameLink">上一个类</span></a></li>
+<li><a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.sdk.clients中的类"><span class="typeNameLink">下一个类</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?com/meter/thorclient/clients/ProtoTypeContractClient.html" target="_top">框架</a></li>
@@ -75,8 +75,8 @@ var actiMTRableTab = "actiMTRableTab";
 <div>
 <ul class="subNavList">
 <li>概要:&nbsp;</li>
-<li><a href="#nested.classes.inherited.from.class.com.meter.thorclient.clients.base.AbstractClient">嵌套</a>&nbsp;|&nbsp;</li>
-<li><a href="#fields.inherited.from.class.com.meter.thorclient.clients.TransactionClient">字段</a>&nbsp;|&nbsp;</li>
+<li><a href="#nested.classes.inherited.from.class.com.meter.sdk.clients.base.AbstractClient">嵌套</a>&nbsp;|&nbsp;</li>
+<li><a href="#fields.inherited.from.class.com.meter.sdk.clients.TransactionClient">字段</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">构造器</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">方法</a></li>
 </ul>
@@ -93,7 +93,7 @@ var actiMTRableTab = "actiMTRableTab";
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">com.meter.thorclient.clients</div>
+<div class="subTitle">com.meter.sdk.clients</div>
 <h2 title="类 ProtoTypeContractClient" class="title">类 ProtoTypeContractClient</h2>
 </div>
 <div class="contentContainer">
@@ -101,13 +101,13 @@ var actiMTRableTab = "actiMTRableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html" title="com.meter.thorclient.clients.base中的类">com.meter.thorclient.clients.base.AbstractClient</a></li>
+<li><a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html" title="com.meter.sdk.clients.base中的类">com.meter.sdk.clients.base.AbstractClient</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.thorclient.clients中的类">com.meter.thorclient.clients.TransactionClient</a></li>
+<li><a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.sdk.clients中的类">com.meter.sdk.clients.TransactionClient</a></li>
 <li>
 <ul class="inheritance">
-<li>com.meter.thorclient.clients.ProtoTypeContractClient</li>
+<li>com.meter.sdk.clients.ProtoTypeContractClient</li>
 </ul>
 </li>
 </ul>
@@ -121,7 +121,7 @@ var actiMTRableTab = "actiMTRableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">ProtoTypeContractClient</span>
-extends <a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.thorclient.clients中的类">TransactionClient</a></pre>
+extends <a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.sdk.clients中的类">TransactionClient</a></pre>
 <div class="block">ProtoType Contract is a native contract for user to do multiple parties payment(mpp).
  <a href="https://github.com/meter/thor/wiki/Prototype(CN)">Prototype</a>
  <br>What is ProtoType for?</br>
@@ -130,20 +130,20 @@ extends <a href="../../../../com/meter/thorclient/clients/TransactionClient.html
  the sender A need to pay the transaction fee(gas).
 
  However, for some realistic reason, the target A want to pay the transaction fee. Then the mpp can do such a thing.
- The sender A can be a user of target B(<a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#addUsers-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">addUsers(Address[], Address[], int, byte, int, ECKeyPair)</a>),
+ The sender A can be a user of target B(<a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#addUsers-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">addUsers(Address[], Address[], int, byte, int, ECKeyPair)</a>),
  then the target B can set user plan (credit and recovery) for all senders.
  After all the things is done, then the sender A do transaction to target B, if the fee is less than the credit,
  the ProtoType native contract is going to book fee(gas) from target B's account.
 
  <br>How to use ProtoType?</br>
- First, you must be the master of the to address. By call <a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#setMasterAddress-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-"><code>setMasterAddress(com.meter.thorclient.core.model.clients.Address[], com.meter.thorclient.core.model.clients.Address[], int, byte, int, com.meter.thorclient.utils.crypto.ECKeyPair)</code></a>, then you can query the master by
- <a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#getMasterAddress-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-"><code>getMasterAddress(Address, Revision)</code></a>
+ First, you must be the master of the to address. By call <a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#setMasterAddress-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-"><code>setMasterAddress(com.meter.sdk.core.model.clients.Address[], com.meter.sdk.core.model.clients.Address[], int, byte, int, com.meter.sdk.utils.crypto.ECKeyPair)</code></a>, then you can query the master by
+ <a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#getMasterAddress-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-"><code>getMasterAddress(Address, Revision)</code></a>
 
  Second, you as a Master, you can set add user to user plan. This step is to set candidate, the one you want to give
- credit. <a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#addUsers-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-"><code>addUsers(Address[], Address[], int, byte, int, ECKeyPair)</code></a>
+ credit. <a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#addUsers-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-"><code>addUsers(Address[], Address[], int, byte, int, ECKeyPair)</code></a>
 
  Third, set a user plan to target address for all users on the users list.
- <a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#setCreditPlans-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Amount:A-com.meter.thorclient.core.model.clients.Amount:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-"><code>setCreditPlans(Address[], Amount[], Amount[], int, byte, int, ECKeyPair)</code></a></div>
+ <a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#setCreditPlans-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Amount:A-com.meter.sdk.core.model.clients.Amount:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-"><code>setCreditPlans(Address[], Amount[], Amount[], int, byte, int, ECKeyPair)</code></a></div>
 </li>
 </ul>
 </div>
@@ -157,11 +157,11 @@ extends <a href="../../../../com/meter/thorclient/clients/TransactionClient.html
 </a>
 <h3>嵌套类概要</h3>
 <ul class="blockList">
-<li class="blockList"><a name="nested.classes.inherited.from.class.com.meter.thorclient.clients.base.AbstractClient">
+<li class="blockList"><a name="nested.classes.inherited.from.class.com.meter.sdk.clients.base.AbstractClient">
 <!--   -->
 </a>
-<h3>从类继承的嵌套类/接口&nbsp;com.meter.thorclient.clients.base.<a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html" title="com.meter.thorclient.clients.base中的类">AbstractClient</a></h3>
-<code><a href="../../../../com/meter/thorclient/clients/base/AbstractClient.Path.html" title="com.meter.thorclient.clients.base中的枚举">AbstractClient.Path</a></code></li>
+<h3>从类继承的嵌套类/接口&nbsp;com.meter.sdk.clients.base.<a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html" title="com.meter.sdk.clients.base中的类">AbstractClient</a></h3>
+<code><a href="../../../../com/meter/thorclient/clients/base/AbstractClient.Path.html" title="com.meter.sdk.clients.base中的枚举">AbstractClient.Path</a></code></li>
 </ul>
 </li>
 </ul>
@@ -172,10 +172,10 @@ extends <a href="../../../../com/meter/thorclient/clients/TransactionClient.html
 </a>
 <h3>字段概要</h3>
 <ul class="blockList">
-<li class="blockList"><a name="fields.inherited.from.class.com.meter.thorclient.clients.TransactionClient">
+<li class="blockList"><a name="fields.inherited.from.class.com.meter.sdk.clients.TransactionClient">
 <!--   -->
 </a>
-<h3>从类继承的字段&nbsp;com.meter.thorclient.clients.<a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.thorclient.clients中的类">TransactionClient</a></h3>
+<h3>从类继承的字段&nbsp;com.meter.sdk.clients.<a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.sdk.clients中的类">TransactionClient</a></h3>
 <code><a href="../../../../com/meter/thorclient/clients/TransactionClient.html#ContractGasLimit">ContractGasLimit</a></code></li>
 </ul>
 </li>
@@ -210,140 +210,140 @@ extends <a href="../../../../com/meter/thorclient/clients/TransactionClient.html
 <th class="colLast" scope="col">方法和说明</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#addUsers-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">addUsers</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
-        <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;users,
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#addUsers-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">addUsers</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
+        <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;users,
         int&nbsp;gas,
         byte&nbsp;gasCoef,
         int&nbsp;expiration,
-        <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
+        <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
 <div class="block">Add user to user plan, the caller must be the owner or master of target addresses.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#getCreditPlan-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">getCreditPlan</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-             <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#getCreditPlan-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">getCreditPlan</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+             <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
 <div class="block">Get user plan</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#getCurrentSponsor-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">getCurrentSponsor</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-                 <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#getCurrentSponsor-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">getCurrentSponsor</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+                 <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
 <div class="block">Get current sponsor from target address.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#getMasterAddress-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">getMasterAddress</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-                <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#getMasterAddress-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">getMasterAddress</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+                <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
 <div class="block">Get a master address from target address.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#getUserCredit-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">getUserCredit</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-             <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;user,
-             <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#getUserCredit-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">getUserCredit</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+             <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;user,
+             <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
 <div class="block">Get user credit from target address by some block revision.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#isSponsor-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">isSponsor</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-         <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;sponsor,
-         <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#isSponsor-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">isSponsor</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+         <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;sponsor,
+         <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
 <div class="block">Get boolean brotherValue if the sponsor address sponsored the target address.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#isUser-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">isUser</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-      <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;user,
-      <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#isUser-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">isUser</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+      <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;user,
+      <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)</code>
 <div class="block">Check if user address is a user of target address.</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#removeUsers-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">removeUsers</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
-           <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;users,
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#removeUsers-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">removeUsers</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
+           <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;users,
            int&nbsp;gas,
            byte&nbsp;gasCoef,
            int&nbsp;expiration,
-           <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
+           <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
 <div class="block">Remove user from target addresses, the caller must be the owner or master of target addresses.</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#selectSponsor-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">selectSponsor</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
-             <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;sponsors,
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#selectSponsor-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">selectSponsor</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
+             <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;sponsors,
              int&nbsp;gas,
              byte&nbsp;gasCoef,
              int&nbsp;expiration,
-             <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
+             <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
 <div class="block">Select sponsors for targets addresses, the caller must be the owner or master of target addresses.</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#setCreditPlans-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Amount:A-com.meter.thorclient.core.model.clients.Amount:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">setCreditPlans</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
-              <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.thorclient.core.model.clients中的类">Amount</a>[]&nbsp;credits,
-              <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.thorclient.core.model.clients中的类">Amount</a>[]&nbsp;recoveryRates,
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#setCreditPlans-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Amount:A-com.meter.sdk.core.model.clients.Amount:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">setCreditPlans</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
+              <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.sdk.core.model.clients中的类">Amount</a>[]&nbsp;credits,
+              <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.sdk.core.model.clients中的类">Amount</a>[]&nbsp;recoveryRates,
               int&nbsp;gas,
               byte&nbsp;gasCoef,
               int&nbsp;expiration,
-              <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
+              <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
 <div class="block">Set user plan, the caller must be the owner or master of target addresses.</div>
 </td>
 </tr>
 <tr id="i10" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#setMasterAddress-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">setMasterAddress</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
-                <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;newMasters,
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#setMasterAddress-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">setMasterAddress</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
+                <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;newMasters,
                 int&nbsp;gas,
                 byte&nbsp;gasCoef,
                 int&nbsp;expiration,
-                <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
+                <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
 <div class="block">Set master user, the caller must be the owner or master of target addresses.</div>
 </td>
 </tr>
 <tr id="i11" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#sponsor-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">sponsor</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#sponsor-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">sponsor</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
        int&nbsp;gas,
        byte&nbsp;gasCoef,
        int&nbsp;expiration,
-       <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
+       <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
 <div class="block">Sponsor the address, any address can sponsor target addresses.</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#unsponsor-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">unsponsor</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
+<td class="colFirst"><code>static <a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/meter/thorclient/clients/ProtoTypeContractClient.html#unsponsor-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">unsponsor</a></span>(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
          int&nbsp;gas,
          byte&nbsp;gasCoef,
          int&nbsp;expiration,
-         <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
+         <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)</code>
 <div class="block">Unsponsor the address, only sponsor can invoke this method.</div>
 </td>
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.com.meter.thorclient.clients.TransactionClient">
+<li class="blockList"><a name="methods.inherited.from.class.com.meter.sdk.clients.TransactionClient">
 <!--   -->
 </a>
-<h3>从类继承的方法&nbsp;com.meter.thorclient.clients.<a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.thorclient.clients中的类">TransactionClient</a></h3>
-<code><a href="../../../../com/meter/thorclient/clients/TransactionClient.html#buildDeployClause-java.lang.String-">buildDeployClause</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#buildTransferToClause-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Amount-com.meter.thorclient.core.model.clients.ToData-">buildTransferToClause</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#deployContract-java.lang.String-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">deployContract</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#getTransaction-java.lang.String-boolean-com.meter.thorclient.core.model.clients.Revision-">getTransaction</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#getTransactionReceipt-java.lang.String-com.meter.thorclient.core.model.clients.Revision-">getTransactionReceipt</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#sign-com.meter.thorclient.core.model.clients.RawTransaction-com.meter.thorclient.utils.crypto.ECKeyPair-">sign</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#signThenTransfer-com.meter.thorclient.core.model.clients.RawTransaction-com.meter.thorclient.utils.crypto.ECKeyPair-">signThenTransfer</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#transfer-byte:A-">transfer</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#transfer-com.meter.thorclient.core.model.clients.RawTransaction-">transfer</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#transfer-java.lang.String-">transfer</a></code></li>
+<h3>从类继承的方法&nbsp;com.meter.sdk.clients.<a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.sdk.clients中的类">TransactionClient</a></h3>
+<code><a href="../../../../com/meter/thorclient/clients/TransactionClient.html#buildDeployClause-java.lang.String-">buildDeployClause</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#buildTransferToClause-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Amount-com.meter.sdk.core.model.clients.ToData-">buildTransferToClause</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#deployContract-java.lang.String-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">deployContract</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#getTransaction-java.lang.String-boolean-com.meter.sdk.core.model.clients.Revision-">getTransaction</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#getTransactionReceipt-java.lang.String-com.meter.sdk.core.model.clients.Revision-">getTransactionReceipt</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#sign-com.meter.sdk.core.model.clients.RawTransaction-com.meter.sdk.utils.crypto.ECKeyPair-">sign</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#signThenTransfer-com.meter.sdk.core.model.clients.RawTransaction-com.meter.sdk.utils.crypto.ECKeyPair-">signThenTransfer</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#transfer-byte:A-">transfer</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#transfer-com.meter.sdk.core.model.clients.RawTransaction-">transfer</a>, <a href="../../../../com/meter/thorclient/clients/TransactionClient.html#transfer-java.lang.String-">transfer</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.com.meter.thorclient.clients.base.AbstractClient">
+<li class="blockList"><a name="methods.inherited.from.class.com.meter.sdk.clients.base.AbstractClient">
 <!--   -->
 </a>
-<h3>从类继承的方法&nbsp;com.meter.thorclient.clients.base.<a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html" title="com.meter.thorclient.clients.base中的类">AbstractClient</a></h3>
-<code><a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html#callContract-com.meter.thorclient.core.model.blockchain.ContractCall-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">callContract</a>, <a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html#sendGetRequest-com.meter.thorclient.clients.base.AbstractClient.Path-java.util.HashMap-java.util.HashMap-java.lang.Class-">sendGetRequest</a>, <a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html#sendPostRequest-com.meter.thorclient.clients.base.AbstractClient.Path-java.util.HashMap-java.util.HashMap-java.lang.Object-java.lang.Class-">sendPostRequest</a></code></li>
+<h3>从类继承的方法&nbsp;com.meter.sdk.clients.base.<a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html" title="com.meter.sdk.clients.base中的类">AbstractClient</a></h3>
+<code><a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html#callContract-com.meter.sdk.core.model.blockchain.ContractCall-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">callContract</a>, <a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html#sendGetRequest-com.meter.sdk.clients.base.AbstractClient.Path-java.util.HashMap-java.util.HashMap-java.lang.Class-">sendGetRequest</a>, <a href="../../../../com/meter/thorclient/clients/base/AbstractClient.html#sendPostRequest-com.meter.sdk.clients.base.AbstractClient.Path-java.util.HashMap-java.util.HashMap-java.lang.Object-java.lang.Class-">sendPostRequest</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -383,335 +383,335 @@ extends <a href="../../../../com/meter/thorclient/clients/TransactionClient.html
 <!--   -->
 </a>
 <h3>方法详细资料</h3>
-<a name="getMasterAddress-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">
+<a name="getMasterAddress-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getMasterAddress</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a>&nbsp;getMasterAddress(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-                                                  <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)
-                                           throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a>&nbsp;getMasterAddress(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+                                                  <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)
+                                           throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Get a master address from target address.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>target</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> target address, means transfer to address.</dd>
-<dd><code>revision</code> - optional can be null <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类"><code>Revision</code></a> block revision.</dd>
+<dd><code>target</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> target address, means transfer to address.</dd>
+<dd><code>revision</code> - optional can be null <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类"><code>Revision</code></a> block revision.</dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd>Contract call result <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类"><code>Revision</code></a></dd>
+<dd>Contract call result <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类"><code>Revision</code></a></dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code></dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code></dd>
 </dl>
 </li>
 </ul>
-<a name="setMasterAddress-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">
+<a name="setMasterAddress-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setMasterAddress</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a>&nbsp;setMasterAddress(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
-                                              <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;newMasters,
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a>&nbsp;setMasterAddress(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
+                                              <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;newMasters,
                                               int&nbsp;gas,
                                               byte&nbsp;gasCoef,
                                               int&nbsp;expiration,
-                                              <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
-                                       throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+                                              <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
+                                       throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Set master user, the caller must be the owner or master of target addresses.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>targets</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> arrays as target address.</dd>
-<dd><code>newMasters</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> arrays as new master address.</dd>
+<dd><code>targets</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> arrays as target address.</dd>
+<dd><code>newMasters</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> arrays as new master address.</dd>
 <dd><code>gas</code> - contract invoker gas</dd>
 <dd><code>gasCoef</code> - gas coef</dd>
 <dd><code>expiration</code> - expiration, suggest 720</dd>
-<dd><code>keyPair</code> - private key <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类"><code>ECKeyPair</code></a></dd>
+<dd><code>keyPair</code> - private key <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类"><code>ECKeyPair</code></a></dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
 </dl>
 </li>
 </ul>
-<a name="addUsers-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">
+<a name="addUsers-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>addUsers</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a>&nbsp;addUsers(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
-                                      <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;users,
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a>&nbsp;addUsers(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
+                                      <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;users,
                                       int&nbsp;gas,
                                       byte&nbsp;gasCoef,
                                       int&nbsp;expiration,
-                                      <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
-                               throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+                                      <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
+                               throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Add user to user plan, the caller must be the owner or master of target addresses.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>targets</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> arrays.</dd>
-<dd><code>users</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> arrays.</dd>
+<dd><code>targets</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> arrays.</dd>
+<dd><code>users</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> arrays.</dd>
 <dd><code>gas</code> - a contract invoker gas</dd>
 <dd><code>gasCoef</code> - gas coef</dd>
 <dd><code>expiration</code> - expiration, suggest it is 720.</dd>
-<dd><code>keyPair</code> - <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类"><code>ECKeyPair</code></a></dd>
+<dd><code>keyPair</code> - <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类"><code>ECKeyPair</code></a></dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
 </dl>
 </li>
 </ul>
-<a name="removeUsers-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">
+<a name="removeUsers-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>removeUsers</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a>&nbsp;removeUsers(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
-                                         <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;users,
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a>&nbsp;removeUsers(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
+                                         <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;users,
                                          int&nbsp;gas,
                                          byte&nbsp;gasCoef,
                                          int&nbsp;expiration,
-                                         <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
-                                  throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+                                         <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
+                                  throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Remove user from target addresses, the caller must be the owner or master of target addresses.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>targets</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> arrays.</dd>
-<dd><code>users</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> arrays.</dd>
+<dd><code>targets</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> arrays.</dd>
+<dd><code>users</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> arrays.</dd>
 <dd><code>gas</code> - a contract invoker gas</dd>
 <dd><code>gasCoef</code> - gas coef</dd>
 <dd><code>expiration</code> - expiration, suggest it is 720.</dd>
-<dd><code>keyPair</code> - <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类"><code>ECKeyPair</code></a></dd>
+<dd><code>keyPair</code> - <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类"><code>ECKeyPair</code></a></dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
 </dl>
 </li>
 </ul>
-<a name="setCreditPlans-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Amount:A-com.meter.thorclient.core.model.clients.Amount:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">
+<a name="setCreditPlans-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Amount:A-com.meter.sdk.core.model.clients.Amount:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setCreditPlans</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a>&nbsp;setCreditPlans(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
-                                            <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.thorclient.core.model.clients中的类">Amount</a>[]&nbsp;credits,
-                                            <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.thorclient.core.model.clients中的类">Amount</a>[]&nbsp;recoveryRates,
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a>&nbsp;setCreditPlans(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
+                                            <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.sdk.core.model.clients中的类">Amount</a>[]&nbsp;credits,
+                                            <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.sdk.core.model.clients中的类">Amount</a>[]&nbsp;recoveryRates,
                                             int&nbsp;gas,
                                             byte&nbsp;gasCoef,
                                             int&nbsp;expiration,
-                                            <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
-                                     throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+                                            <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
+                                     throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Set user plan, the caller must be the owner or master of target addresses.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>targets</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> array.</dd>
-<dd><code>credits</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.thorclient.core.model.clients中的类"><code>Amount</code></a> array.</dd>
-<dd><code>recoveryRates</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.thorclient.core.model.clients中的类"><code>Amount</code></a> array. thor per seconds.</dd>
+<dd><code>targets</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> array.</dd>
+<dd><code>credits</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.sdk.core.model.clients中的类"><code>Amount</code></a> array.</dd>
+<dd><code>recoveryRates</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Amount.html" title="com.meter.sdk.core.model.clients中的类"><code>Amount</code></a> array. thor per seconds.</dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
 </dl>
 </li>
 </ul>
-<a name="isUser-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">
+<a name="isUser-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>isUser</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a>&nbsp;isUser(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-                                        <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;user,
-                                        <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)
-                                 throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a>&nbsp;isUser(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+                                        <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;user,
+                                        <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)
+                                 throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Check if user address is a user of target address.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>target</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> the target address.</dd>
-<dd><code>user</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> the user address.</dd>
-<dd><code>revision</code> - optional <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类"><code>Revision</code></a>.</dd>
+<dd><code>target</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> the target address.</dd>
+<dd><code>user</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> the user address.</dd>
+<dd><code>revision</code> - optional <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类"><code>Revision</code></a>.</dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>ContractCallResult</code></a></dd>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>ContractCallResult</code></a></dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
 </dl>
 </li>
 </ul>
-<a name="getCreditPlan-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">
+<a name="getCreditPlan-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getCreditPlan</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a>&nbsp;getCreditPlan(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-                                               <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)
-                                        throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a>&nbsp;getCreditPlan(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+                                               <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)
+                                        throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Get user plan</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>target</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a></dd>
+<dd><code>target</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a></dd>
 <dd><code>revision</code> - optional</dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>ContractCallResult</code></a></dd>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>ContractCallResult</code></a></dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
 </dl>
 </li>
 </ul>
-<a name="getUserCredit-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">
+<a name="getUserCredit-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getUserCredit</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a>&nbsp;getUserCredit(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-                                               <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;user,
-                                               <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)
-                                        throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a>&nbsp;getUserCredit(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+                                               <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;user,
+                                               <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)
+                                        throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Get user credit from target address by some block revision.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>target</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> target address.</dd>
-<dd><code>user</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> user address.</dd>
-<dd><code>revision</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类"><code>Revision</code></a> revision.</dd>
+<dd><code>target</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> target address.</dd>
+<dd><code>user</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> user address.</dd>
+<dd><code>revision</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类"><code>Revision</code></a> revision.</dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>ContractCallResult</code></a></dd>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>ContractCallResult</code></a></dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
 </dl>
 </li>
 </ul>
-<a name="sponsor-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">
+<a name="sponsor-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>sponsor</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a>&nbsp;sponsor(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a>&nbsp;sponsor(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
                                      int&nbsp;gas,
                                      byte&nbsp;gasCoef,
                                      int&nbsp;expiration,
-                                     <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
-                              throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+                                     <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
+                              throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Sponsor the address, any address can sponsor target addresses.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>targets</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> the targets address</dd>
+<dd><code>targets</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> the targets address</dd>
 <dd><code>gas</code> - required int gas</dd>
 <dd><code>gasCoef</code> - required byte gas coef</dd>
 <dd><code>expiration</code> - required int expiration</dd>
-<dd><code>keyPair</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a></dd>
+<dd><code>keyPair</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a></dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
 </dl>
 </li>
 </ul>
-<a name="unsponsor-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">
+<a name="unsponsor-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>unsponsor</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a>&nbsp;unsponsor(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a>&nbsp;unsponsor(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
                                        int&nbsp;gas,
                                        byte&nbsp;gasCoef,
                                        int&nbsp;expiration,
-                                       <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
-                                throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+                                       <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
+                                throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Unsponsor the address, only sponsor can invoke this method.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>targets</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> the targets address</dd>
+<dd><code>targets</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> the targets address</dd>
 <dd><code>gas</code> - required int gas</dd>
 <dd><code>gasCoef</code> - required byte gas coef</dd>
 <dd><code>expiration</code> - required int expiration</dd>
-<dd><code>keyPair</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a></dd>
+<dd><code>keyPair</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a></dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>TransferResult</code></a></dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code> - network error.</dd>
 </dl>
 </li>
 </ul>
-<a name="selectSponsor-com.meter.thorclient.core.model.clients.Address:A-com.meter.thorclient.core.model.clients.Address:A-int-byte-int-com.meter.thorclient.utils.crypto.ECKeyPair-">
+<a name="selectSponsor-com.meter.sdk.core.model.clients.Address:A-com.meter.sdk.core.model.clients.Address:A-int-byte-int-com.meter.sdk.utils.crypto.ECKeyPair-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>selectSponsor</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类">TransferResult</a>&nbsp;selectSponsor(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;targets,
-                                           <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>[]&nbsp;sponsors,
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类">TransferResult</a>&nbsp;selectSponsor(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;targets,
+                                           <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>[]&nbsp;sponsors,
                                            int&nbsp;gas,
                                            byte&nbsp;gasCoef,
                                            int&nbsp;expiration,
-                                           <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
-                                    throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+                                           <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类">ECKeyPair</a>&nbsp;keyPair)
+                                    throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Select sponsors for targets addresses, the caller must be the owner or master of target addresses.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>targets</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> array</dd>
-<dd><code>sponsors</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> array</dd>
+<dd><code>targets</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> array</dd>
+<dd><code>sponsors</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> array</dd>
 <dd><code>gas</code> - required int gas</dd>
 <dd><code>gasCoef</code> - required byte gasCoef</dd>
 <dd><code>expiration</code> - required int recommendation brotherValue is 720</dd>
-<dd><code>keyPair</code> - required <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.thorclient.utils.crypto中的类"><code>ECKeyPair</code></a></dd>
+<dd><code>keyPair</code> - required <a href="../../../../com/meter/thorclient/utils/crypto/ECKeyPair.html" title="com.meter.sdk.utils.crypto中的类"><code>ECKeyPair</code></a></dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>TransferResult</code></a>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/TransferResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>TransferResult</code></a>
  throw ClientIOException network error.</dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code></dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code></dd>
 </dl>
 </li>
 </ul>
-<a name="getCurrentSponsor-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">
+<a name="getCurrentSponsor-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getCurrentSponsor</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a>&nbsp;getCurrentSponsor(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-                                                   <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)
-                                            throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a>&nbsp;getCurrentSponsor(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+                                                   <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)
+                                            throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Get current sponsor from target address.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>target</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a></dd>
-<dd><code>revision</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类"><code>Revision</code></a></dd>
+<dd><code>target</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a></dd>
+<dd><code>revision</code> - <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类"><code>Revision</code></a></dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>ContractCallResult</code></a>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>ContractCallResult</code></a>
  throw ClientIOException network error.</dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code></dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code></dd>
 </dl>
 </li>
 </ul>
-<a name="isSponsor-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Address-com.meter.thorclient.core.model.clients.Revision-">
+<a name="isSponsor-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Address-com.meter.sdk.core.model.clients.Revision-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>isSponsor</h4>
-<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类">ContractCallResult</a>&nbsp;isSponsor(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;target,
-                                           <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类">Address</a>&nbsp;sponsor,
-                                           <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类">Revision</a>&nbsp;revision)
-                                    throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></pre>
+<pre>public static&nbsp;<a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类">ContractCallResult</a>&nbsp;isSponsor(<a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;target,
+                                           <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类">Address</a>&nbsp;sponsor,
+                                           <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类">Revision</a>&nbsp;revision)
+                                    throws <a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></pre>
 <div class="block">Get boolean brotherValue if the sponsor address sponsored the target address.</div>
 <dl>
 <dt><span class="paramLabel">参数:</span></dt>
-<dd><code>target</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> target address.</dd>
-<dd><code>sponsor</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.thorclient.core.model.clients中的类"><code>Address</code></a> sponsor</dd>
-<dd><code>revision</code> - optional <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.thorclient.core.model.clients中的类"><code>Revision</code></a> block revision</dd>
+<dd><code>target</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> target address.</dd>
+<dd><code>sponsor</code> - required <a href="../../../../com/meter/thorclient/core/model/clients/Address.html" title="com.meter.sdk.core.model.clients中的类"><code>Address</code></a> sponsor</dd>
+<dd><code>revision</code> - optional <a href="../../../../com/meter/thorclient/core/model/clients/Revision.html" title="com.meter.sdk.core.model.clients中的类"><code>Revision</code></a> block revision</dd>
 <dt><span class="returnLabel">返回:</span></dt>
-<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.thorclient.core.model.blockchain中的类"><code>ContractCallResult</code></a>
+<dd><a href="../../../../com/meter/thorclient/core/model/blockchain/ContractCallResult.html" title="com.meter.sdk.core.model.blockchain中的类"><code>ContractCallResult</code></a>
  throw ClientIOException network error.</dd>
 <dt><span class="throwsLabel">抛出:</span></dt>
-<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.thorclient.core.model.exception中的类">ClientIOException</a></code></dd>
+<dd><code><a href="../../../../com/meter/thorclient/core/model/exception/ClientIOException.html" title="com.meter.sdk.core.model.exception中的类">ClientIOException</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -743,8 +743,8 @@ extends <a href="../../../../com/meter/thorclient/clients/TransactionClient.html
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../com/meter/thorclient/clients/LogsClient.html" title="com.meter.thorclient.clients中的类"><span class="typeNameLink">上一个类</span></a></li>
-<li><a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.thorclient.clients中的类"><span class="typeNameLink">下一个类</span></a></li>
+<li><a href="../../../../com/meter/thorclient/clients/LogsClient.html" title="com.meter.sdk.clients中的类"><span class="typeNameLink">上一个类</span></a></li>
+<li><a href="../../../../com/meter/thorclient/clients/TransactionClient.html" title="com.meter.sdk.clients中的类"><span class="typeNameLink">下一个类</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?com/meter/thorclient/clients/ProtoTypeContractClient.html" target="_top">框架</a></li>
@@ -768,8 +768,8 @@ extends <a href="../../../../com/meter/thorclient/clients/TransactionClient.html
 <div>
 <ul class="subNavList">
 <li>概要:&nbsp;</li>
-<li><a href="#nested.classes.inherited.from.class.com.meter.thorclient.clients.base.AbstractClient">嵌套</a>&nbsp;|&nbsp;</li>
-<li><a href="#fields.inherited.from.class.com.meter.thorclient.clients.TransactionClient">字段</a>&nbsp;|&nbsp;</li>
+<li><a href="#nested.classes.inherited.from.class.com.meter.sdk.clients.base.AbstractClient">嵌套</a>&nbsp;|&nbsp;</li>
+<li><a href="#fields.inherited.from.class.com.meter.sdk.clients.TransactionClient">字段</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">构造器</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">方法</a></li>
 </ul>

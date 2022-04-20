@@ -107,7 +107,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>com.meter.thorclient.console.Main</mainClass>
+							<mainClass>com.meter.sdk.console.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -117,7 +117,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.meter.thorclient.console.Main</mainClass>
+							<mainClass>com.meter.sdk.console.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
@@ -201,7 +201,7 @@
 							</descriptorRefs>
 							<archive>
 								<manifest>
-									<mainClass>com.meter.thorclient.console.Main</mainClass>
+									<mainClass>com.meter.sdk.console.Main</mainClass>
 								</manifest>
 							</archive>
 						</configuration>
