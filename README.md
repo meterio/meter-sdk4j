@@ -1308,7 +1308,32 @@ Raw Transaction:
   
 ```
 
+#### Transfer native transactions: 
+
+```bash
+java -jar target/thor-client-sdk4j-0.0.10-jar-with-dependencies.jar transferNative {blockchain-server-url} {toAddress} {amount} {chainTag} {privateKey} {token}
+
+eg. java -jar target/thor-client-sdk4j-0.0.10-jar-with-dependencies.jar transferNative http://mainnet.meter.io 0xbF85ef4216340eB5cD3c57B550aae7A2712D48d2 0.01 0x52 $PRIV_KEY 0
+
+Send Result:
+{"id":"0xd751c50b81c1f13ebd86f4fcd0028a501b6c792fa8b5bbf64028b924a6b2efc9"}
+
+```
+
+#### Transfer system contract transactions: 
+
+```bash
+java -jar target/thor-client-sdk4j-0.0.10-jar-with-dependencies.jar transferERC20 {blockchain-server-url} {toAddress} {amount} {chainTag} {privateKey} {token}
+
+eg. java -jar target/thor-client-sdk4j-0.0.10-jar-with-dependencies.jar transferNative http://mainnet.meter.io 0xbF85ef4216340eB5cD3c57B550aae7A2712D48d2 0.01 0x52 $PRIV_KEY 0
+
+Send Result:
+{"id":"0xd751c50b81c1f13ebd86f4fcd0028a501b6c792fa8b5bbf64028b924a6b2efc9"}
+
+```
+
 #### Send and Sign transactions:
+
 
 ```
   
