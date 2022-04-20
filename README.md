@@ -1,7 +1,7 @@
-# Thor Java Client SDK
-[![Build Status](https://travis-ci.org/meter/thor-client-sdk4j.svg?branch=master)](https://travis-ci.org/meter/thor-client-sdk4j.svg?branch=master)
+# Meter Java Client SDK
+[![Build Status](https://travis-ci.org/meter/meter-sdk4j.svg?branch=master)](https://travis-ci.org/meter/meter-sdk4j.svg?branch=master)
 
-A SDK toolkit for client to call Meter Restful API and Websocket based on thor-client-sdk4j.
+A SDK toolkit for client to call Meter Restful API and Websocket based on meter-sdk4j.
 
 - - - -
 Requires JDK8.
@@ -13,7 +13,7 @@ latest version 0.0.10
 default package jar without dependencies,use -Pall to build all in one jar
 
 ## License
-Thor Java Client SDK is licensed under the MIT LICENSE, also included in LICENSE file in the repository.
+Meter Java Client SDK is licensed under the MIT LICENSE, also included in LICENSE file in the repository.
 - - - -
 
 ## Set blockchain nodes provider (http)
@@ -33,9 +33,9 @@ nodeProvider.setTimeout(10000);
 ```
 
 ##  You can find the clients toolkit under the directory :
- **src/main/java/com/meter/thorclients/clients**
+ **src/main/java/com/meter/sdk/clients**
 
-There are some SDK specifications <a href="https://github.com/meter/thor-client-sdk4j/blob/dev/doc"> sdk4j doc </a>
+There are some SDK specifications <a href="https://github.com/meterio/meter-sdk4j/blob/dev/doc"> sdk4j doc </a>
 
 For JUnit Test example: there are some required parameters in config.properties file to support JUnit Test running. 
 
@@ -1027,7 +1027,7 @@ Package the jar with maven
 ```
 mvn clean package -Dmaven.test.skip=true
 
-The maven will generate the jar file in folder target: thor-client-sdk4j-0.0.10.jar
+The maven will generate the jar file in folder target: meter-sdk4j-0.0.1.jar
 
 ```
 
@@ -1036,7 +1036,7 @@ Clean assembly packages and build the jar with the dependencies
 ```
 mvn clean assembly:assembly -Dmaven.test.skip=true 
 
-The maven will generate the jar file in folder target: thor-client-sdk4j-0.0.10-jar-with-dependencies.jar
+The maven will generate the jar file in folder target: meter-sdk4j-0.0.1-jar-with-dependencies.jar
 
 ```
 
@@ -1050,9 +1050,9 @@ There is a example transaction file in src/main/resources/exchange_example.xlsx,
 
 ```
  
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getChainTag {blockchain-server-url}
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar getChainTag {blockchain-server-url}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getChainTag http://mainnet.meter.io
+eg. java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar getChainTag http://mainnet.meter.io
 
 ChainTag:
 0x27
@@ -1063,9 +1063,9 @@ ChainTag:
 #### Get blockRef: 
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlockRef {blockchain-server-url}
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar getBlockRef {blockchain-server-url}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlockRef http://mainnet.meter.io
+eg. java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar getBlockRef http://mainnet.meter.io
 
 BlockRef:
 0x0000695540f491a5
@@ -1075,9 +1075,9 @@ BlockRef:
 #### Create wallet: 
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar createWallet {wallet-password} {keystore-file-path}(optional, defalut: ./keystore.json)
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar createWallet {wallet-password} {keystore-file-path}(optional, defalut: ./keystore.json)
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar createWallet <your password> <keystore-file-path>
+eg. java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar createWallet <your password> <keystore-file-path>
 
 The keystore.json file will generate in current folder.
 
@@ -1115,9 +1115,9 @@ The wallet created successfully and the key store is:
 #### Get block: 
 
 ```
- java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlock {blockchain-server-url} {blockNumber}
+ java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar getBlock {blockchain-server-url} {blockNumber}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getBlock http://mainnet.meter.io 21844233
+eg. java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar getBlock http://mainnet.meter.io 21844233
 
 Block:
 {
@@ -1146,9 +1146,9 @@ Block:
 
 ```
   
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransaction {transaction-id} {blockchain-server-url}
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar getTransaction {transaction-id} {blockchain-server-url}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransaction 0x7c12eae79f5e058317bcf07c6c08e4ba7db1e7b75f075431cb70e191015a7ea6 http://mainnet.meter.io
+eg. java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar getTransaction 0x7c12eae79f5e058317bcf07c6c08e4ba7db1e7b75f075431cb70e191015a7ea6 http://mainnet.meter.io
 
 Transaction:
 {
@@ -1171,9 +1171,9 @@ Transaction:
 
 ```
   
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransactionReceipt {transaction-id} {blockchain-server-url}
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar getTransactionReceipt {transaction-id} {blockchain-server-url}
   
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar getTransactionReceipt 0x6b99c0f1ebfa3b9d93dcfc503f468104ac74271728841551aaa44115d080f5b5 http://mainnet.meter.io
+eg. java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar getTransactionReceipt 0x6b99c0f1ebfa3b9d93dcfc503f468104ac74271728841551aaa44115d080f5b5 http://mainnet.meter.io
   
 Receipt:
 {
@@ -1212,8 +1212,8 @@ Receipt:
 Subscribe to all Events from node:
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvent {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeEvent ws://mainnet.meter.io
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar subscribeEvent {blockchain-websocket-url}
+e.g java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar subscribeEvent ws://mainnet.meter.io
 
 Event Response :{
   "address": "0x0d7365300e85fc87ef4da53ab05f1637dd4f73cc",
@@ -1239,8 +1239,8 @@ Event Response :{
 Subscribe to ERC20 System Contract Transfer Events from node:
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfer {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysContractTransfer ws://mainnet.meter.io
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar subscribeSysContractTransfer {blockchain-websocket-url}
+e.g java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar subscribeSysContractTransfer ws://mainnet.meter.io
 
  Transfer Response : {
     "address": "0x228ebbee999c6a7ad74a6130e81b12f9fe237ba3",
@@ -1264,8 +1264,8 @@ e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeSysCon
 Subscribe to Native Transfers Events from node:
 
 ```
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfer {blockchain-websocket-url}
-e.g java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar subscribeTransfer ws://mainnet.meter.io
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar subscribeTransfer {blockchain-websocket-url}
+e.g java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar subscribeTransfer ws://mainnet.meter.io
 
 Transfer Response : {
     "amount": "0x16345785d8a0000",
@@ -1287,9 +1287,9 @@ Transfer Response : {
 
 ```
 //token - 0 for MTR, 1 for MTRG
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signNative {your-file-path} {privateKey} {token}
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar signNative {your-file-path} {privateKey} {token}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signNative src/main/resources/exchange_example.xlsx 0xe0b80216ba7b880d85966b38fcd8f7253882bb1386b68b33a8e0b60775e947c0 0
+eg. java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar signNative src/main/resources/exchange_example.xlsx 0xe0b80216ba7b880d85966b38fcd8f7253882bb1386b68b33a8e0b60775e947c0 0
   
 Raw Transaction:
 0xf8a3819a8702819f5cfc12d38202d0f842e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f80000808082a4108088f06f91293e58610dc0b84173346fba62605d510895a0d240b89a38e0b87fd8a58df2ce17075cd493e8e316528b4ed0f049cef1710936bbd4bd3af23eb3ffb3740dc0fb59db585714dbeaa001
@@ -1299,9 +1299,9 @@ Raw Transaction:
 
 ```
 //token - 0 for MTR, 1 for MTRG
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signERC20 {your-file-path} {privateKey} {token}
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar signERC20 {your-file-path} {privateKey} {token}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signERC20 src/main/resources/exchange_example.xlsx 0xdce1443bd2ef0c2631adc1c67e5c93f13dc23a41c18b536effbbdcbcdb96fb65 1
+eg. java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar signERC20 src/main/resources/exchange_example.xlsx 0xdce1443bd2ef0c2631adc1c67e5c93f13dc23a41c18b536effbbdcbcdb96fb65 1
   
 Raw Transaction:
 0xf9011d81c787015e41be43bb958202d0f8bcf85c940000000000000000000000000000456e6572677980b844a9059cbb000000000000000000000000d3ef28df6b553ed2fc47259e8134319cb1121a2a0000000000000000000000000000000000000000000027cf801b9d4f7d800000f85c940000000000000000000000000000456e6572677980b844a9059cbb000000000000000000000000f881a94423f22ee9a0e3e1442f515f43c966b7ed0000000000000000000000000000000000000000000027cf801b9d4f7d8000008082a41080887650b326b78e0c57c0b841fe27b8866d8a658a66a2d8241a310d1ef72e2954d397fc52aa5b4295f9686d0f6705301acc9a0aac6e9e0f93e3aa6fe0a07ff48e4e3287d0db45905d8a0756eb01
@@ -1311,9 +1311,9 @@ Raw Transaction:
 #### Transfer native transactions: 
 
 ```bash
-java -jar target/thor-client-sdk4j-0.0.10-jar-with-dependencies.jar transferNative {blockchain-server-url} {toAddress} {amount} {chainTag} {privateKey} {token}
+java -jar target/meter-sdk4j-0.0.1-jar-with-dependencies.jar transferNative {blockchain-server-url} {toAddress} {amount} {chainTag} {privateKey} {token}
 
-eg. java -jar target/thor-client-sdk4j-0.0.10-jar-with-dependencies.jar transferNative http://mainnet.meter.io 0xbF85ef4216340eB5cD3c57B550aae7A2712D48d2 0.01 0x52 $PRIV_KEY 0
+eg. java -jar target/meter-sdk4j-0.0.1-jar-with-dependencies.jar transferNative http://mainnet.meter.io 0xbF85ef4216340eB5cD3c57B550aae7A2712D48d2 0.01 0x52 $PRIV_KEY 0
 
 Send Result:
 {"id":"0xd751c50b81c1f13ebd86f4fcd0028a501b6c792fa8b5bbf64028b924a6b2efc9"}
@@ -1323,9 +1323,9 @@ Send Result:
 #### Transfer system contract transactions: 
 
 ```bash
-java -jar target/thor-client-sdk4j-0.0.10-jar-with-dependencies.jar transferERC20 {blockchain-server-url} {toAddress} {amount} {chainTag} {privateKey} {token}
+java -jar target/meter-sdk4j-0.0.1-jar-with-dependencies.jar transferERC20 {blockchain-server-url} {toAddress} {amount} {chainTag} {privateKey} {token}
 
-eg. java -jar target/thor-client-sdk4j-0.0.10-jar-with-dependencies.jar transferNative http://mainnet.meter.io 0xbF85ef4216340eB5cD3c57B550aae7A2712D48d2 0.01 0x52 $PRIV_KEY 0
+eg. java -jar target/meter-sdk4j-0.0.1-jar-with-dependencies.jar transferNative http://mainnet.meter.io 0xbF85ef4216340eB5cD3c57B550aae7A2712D48d2 0.01 0x52 $PRIV_KEY 0
 
 Send Result:
 {"id":"0xd751c50b81c1f13ebd86f4fcd0028a501b6c792fa8b5bbf64028b924a6b2efc9"}
@@ -1337,9 +1337,9 @@ Send Result:
 
 ```
   
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signAndSend {blockchain-server-url} {privateKey} {your-file-path}  {token}
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar signAndSend {blockchain-server-url} {privateKey} {your-file-path}  {token}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar signAndSend http://mainnet.meter.io 0xe0b80216ba7b880d85966b38fcd8f7253882bb1386b68b33a8e0b60775e947c0 src/main/resources/exchange_example.xlsx 1
+eg. java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar signAndSend http://mainnet.meter.io 0xe0b80216ba7b880d85966b38fcd8f7253882bb1386b68b33a8e0b60775e947c0 src/main/resources/exchange_example.xlsx 1
   
 Send Result:
 {"id":"0xd751c50b81c1f13ebd86f4fcd0028a501b6c792fa8b5bbf64028b924a6b2efc9"}
@@ -1352,9 +1352,9 @@ Send Result:
 
 ```
   
-java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar sendRaw {blockchain-server-url} {raw}
+java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar sendRaw {blockchain-server-url} {raw}
 
-eg. java -jar thor-client-sdk4j-0.0.10-jar-with-dependencies.jar sendRaw http://mainnet.meter.io 0xf8a3819a8702819f5cfc12d38202d0f842e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f80000808082a4108088f06f91293e58610dc0b84173346fba62605d510895a0d240b89a38e0b87fd8a58df2ce17075cd493e8e316528b4ed0f049cef1710936bbd4bd3af23eb3ffb3740dc0fb59db585714dbeaa001
+eg. java -jar meter-sdk4j-0.0.1-jar-with-dependencies.jar sendRaw http://mainnet.meter.io 0xf8a3819a8702819f5cfc12d38202d0f842e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f8000080e094d3ef28df6b553ed2fc47259e8134319cb1121a2a89364200111c48f80000808082a4108088f06f91293e58610dc0b84173346fba62605d510895a0d240b89a38e0b87fd8a58df2ce17075cd493e8e316528b4ed0f049cef1710936bbd4bd3af23eb3ffb3740dc0fb59db585714dbeaa001
   
 Send Result:
 {"id":"0xd751c50b81c1f13ebd86f4fcd0028a501b6c792fa8b5bbf64028b924a6b2efc9"}

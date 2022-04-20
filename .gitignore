@@ -43,5 +43,5 @@ gen
 /target/
 /.settings/
 /logs/
-/thor-client-sdk4j.iml
+/meter-sdk4j.iml
 /.vscode/
